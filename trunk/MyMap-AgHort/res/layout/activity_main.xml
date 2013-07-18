@@ -39,10 +39,11 @@
 		    android:text="Scan" />
 
     	<Button
-    	    android:id="@+id/ChangeMapButton"
+    	    android:id="@+id/btnoptions"
     	    android:layout_width="wrap_content"
     	    android:layout_height="wrap_content"
     	    android:text="Change map" />
+
 
     </LinearLayout>
 	<com.brian.android.mymap.MapView
@@ -62,6 +63,6 @@
 	    android:layout_height="wrap_content"
 	    android:layout_above="@+id/map"
 	    android:layout_alignParentRight="true"
-	    android:text="TextView" />
+	     />
 
 </RelativeLayout>
