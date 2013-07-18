@@ -5,11 +5,4 @@
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
     
-    <string-array name="spinnervalue">
-        <item>map</item>
-        <item>map1</item>
-        <item>map3</item>
-
-    </string-array>
-
 </resources>

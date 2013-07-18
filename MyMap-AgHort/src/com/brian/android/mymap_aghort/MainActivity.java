@@ -6,10 +6,15 @@ import android.net.ConnectivityManager;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.view.ContextMenu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 import com.brian.android.mymap.MapView;
 import com.brian.android.util.ImageUtil;
 
@@ -18,6 +23,7 @@ public class MainActivity extends Activity {
 	protected MapView map;
 	private StringBuffer sb = new StringBuffer();
 	private Button ScanButton;
+	private Button btn;
 	TextView textBssid;
 	
 	@Override
@@ -25,12 +31,47 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
+		btn = (Button)findViewById(R.id.btnoptions);
+		registerForContextMenu(btn);
+		btn.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				openContextMenu(v);		
+			}
+		});
+		
 		
         map = (MapView) findViewById(R.id.map);
-        map.setMapImage(ImageUtil.loadBitmapFromResource(getResources(), R.drawable.map2));
-       // mWifiAdmin = new WifiAdmin(MainActivity.this);
+        map.setMapImage(ImageUtil.loadBitmapFromResource(getResources(), R.drawable.map3));
         textBssid = (TextView)findViewById(R.id.Bssid);
         addListenerOnButton();
+	}
+	
+	@Override
+	public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo){
+		super.onCreateContextMenu(menu, v, menuInfo);
+		getMenuInflater().inflate(R.menu.contextmenu, menu);
+		menu.setHeaderTitle("Select the Level");
+	}
+	
+	@Override
+	public boolean onContextItemSelected(MenuItem item){
+		switch(item.getItemId()) {
+		case R.id.AgHort_1:
+			map = (MapView) findViewById(R.id.map);
+	        map.setMapImage(ImageUtil.loadBitmapFromResource(getResources(), R.drawable.map1));
+		return true;
+		case R.id.AgHort_2:
+			map = (MapView) findViewById(R.id.map);
+	        map.setMapImage(ImageUtil.loadBitmapFromResource(getResources(), R.drawable.map2));
+		return true;
+		case R.id.AgHort_3:
+			map = (MapView) findViewById(R.id.map);
+	        map.setMapImage(ImageUtil.loadBitmapFromResource(getResources(), R.drawable.map3));
+		return true;
+		}
+		return super.onContextItemSelected(item);
 	}
 	
 	private void addListenerOnButton() {
@@ -41,7 +82,6 @@ public class MainActivity extends Activity {
 				
 				@Override
 				public void onClick(View view){
-						//getAllNetWorkList();
 						DisplayWifiState();
 				}
 			});
@@ -115,4 +155,7 @@ private void DisplayWifiState(){
 	  textBssid.setText(myWifiInfo.getBSSID());
 	  
 }
+
+
+
 }
