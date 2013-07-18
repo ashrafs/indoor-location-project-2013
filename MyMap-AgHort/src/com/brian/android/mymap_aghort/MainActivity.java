@@ -153,6 +153,18 @@ private void DisplayWifiState(){
 	    WifiManager myWifiManager = (WifiManager)getSystemService(Context.WIFI_SERVICE);
 	  WifiInfo myWifiInfo = myWifiManager.getConnectionInfo();
 	  textBssid.setText(myWifiInfo.getBSSID());
+	  //textBssid.setText("a0:21:b7:70:b4:cc");
+	  String CurrentMac = "a0:21:b7:70:b4:cc";
+	  String SearchedMac = textBssid.getText().toString();
+	  
+	  if (SearchedMac.equals(CurrentMac)){
+		  Toast toast = Toast.makeText(getApplicationContext(),"Matches", Toast.LENGTH_SHORT);
+		  toast.show();
+	  }else
+	  {
+		  Toast toast = Toast.makeText(getApplicationContext(),"Noooo", Toast.LENGTH_SHORT);
+		  toast.show();
+	  }
 	  
 }
 
