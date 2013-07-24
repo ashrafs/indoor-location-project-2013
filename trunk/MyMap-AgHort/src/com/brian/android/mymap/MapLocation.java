@@ -39,10 +39,10 @@ public class MapLocation extends ImageView {
 	
 	/**
 	 * Constructor.
-	 * @param context
+	 * @param onClickListener
 	 */
-	public MapLocation(Context context) {
-		super(context);
+	public MapLocation(Context onClickListener) {
+		super(onClickListener);
 		
 		// Set layout to wrap content.
 		LayoutParams params = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
