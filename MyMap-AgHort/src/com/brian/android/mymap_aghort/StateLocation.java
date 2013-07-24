@@ -23,7 +23,7 @@ public class StateLocation extends MapLocation {
 	 * @param title
 	 */
 	public StateLocation(Context context, int x, int y, String title) {
-		super(context, x, y);
+		super(context);
 		setTitleAndOnClick(title);
 	}
 	

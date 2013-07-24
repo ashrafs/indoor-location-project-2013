@@ -6,7 +6,7 @@
 	<TextView
 	    android:layout_width="fill_parent" 
 	    android:layout_height="wrap_content" 
-	    android:text="Current Mac Address"
+	    android:text="C"
 	    android:id="@+id/text"
 	    />
 	<LinearLayout 
@@ -42,8 +42,7 @@
     	    android:id="@+id/btnoptions"
     	    android:layout_width="wrap_content"
     	    android:layout_height="wrap_content"
-    	    android:text="Change map" />
-
+    	    android:text="Change Map" />
 
     </LinearLayout>
 	<com.brian.android.mymap.MapView
@@ -58,11 +57,12 @@
 	</com.brian.android.mymap.MapView>
 
 	<TextView
-	    android:id="@+id/Bssid"
+	    android:id="@+id/allNetWork"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
 	    android:layout_above="@+id/map"
 	    android:layout_alignParentRight="true"
+	    android:text="1"
 	     />
 
 </RelativeLayout>
