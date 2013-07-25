@@ -1,68 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    >
-	<TextView
-	    android:layout_width="fill_parent" 
-	    android:layout_height="wrap_content" 
-	    android:text="C"
-	    android:id="@+id/text"
-	    />
-	<LinearLayout 
-	    android:id="@+id/menu"
-	    android:orientation="horizontal"
-	    android:layout_width="fill_parent"
-	    android:layout_height="wrap_content"
-	    android:layout_alignParentBottom="true"
-	    >
+    android:layout_height="fill_parent" >
 
-    	<Button
-    	    android:layout_width="58dp"
-    	    android:layout_height="wrap_content"
-    	    android:onClick="zoomIn"
-    	    android:text="In" />
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Your current location is" />
 
-    	<Button
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		    android:text="Out"
-		    android:onClick="zoomOut"
-    	/>
-    	
-    	<Button
-		    android:id="@+id/ScanButton"
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		    android:layout_alignParentBottom="true"
-		    android:layout_alignParentLeft="true"
-		    android:text="Scan" />
-
-    	<Button
-    	    android:id="@+id/btnoptions"
-    	    android:layout_width="wrap_content"
-    	    android:layout_height="wrap_content"
-    	    android:text="Change Map" />
-
+    <LinearLayout
+        android:id="@+id/menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="top"
+        android:orientation="horizontal" >
     </LinearLayout>
-	<com.brian.android.mymap.MapView
-	    android:layout_width="fill_parent"
-	    android:layout_height="wrap_content"
-	    android:background="@android:color/white"
-	    android:id="@+id/map"
-	    android:layout_above="@id/menu"
-	    android:layout_below="@id/text"
-	    >
 
-	</com.brian.android.mymap.MapView>
+    <com.brian.android.mymap.MapView
+        android:id="@+id/map"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/menu"
+        android:layout_below="@id/text"
+        android:background="@android:color/white" >
 
-	<TextView
-	    android:id="@+id/allNetWork"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:layout_above="@+id/map"
-	    android:layout_alignParentRight="true"
-	    android:text="1"
-	     />
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="58dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:drawableTop="@drawable/zoom_out"
+            android:onClick="zoomIn"
+            android:text="+" />
+
+		<Button
+            android:id="@+id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@+id/button1"
+            android:drawableTop="@drawable/zoom_in"
+            android:onClick="zoomOut" 
+            android:text="-"
+            />
+		        
+        <Button
+            android:id="@+id/ScanButton"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:text="0" />
+
+        
+
+        <TextView
+            android:id="@+id/allNetWork"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1" />
+    </com.brian.android.mymap.MapView>
+
+    <Button
+        android:id="@+id/takeMe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:text="Take Me" />
 
 </RelativeLayout>
