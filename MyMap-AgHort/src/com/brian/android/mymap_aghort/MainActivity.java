@@ -5,7 +5,8 @@ import java.util.List;
 import android.app.Activity;
 import android.net.wifi.ScanResult;
 import android.os.Bundle;
-import android.view.ContextMenu;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -15,16 +16,13 @@ import android.widget.Toast;
 import com.brian.android.mymap.MapView;
 import com.brian.android.util.ImageUtil;
 import com.brian.android.mymap_aghort.WifiAdmin;
-import com.brian.android.mymap.MapLocation;
 import com.brian.android.mymap_aghort.R;
-import com.brian.android.mymap_aghort.StateLocation;
 
 public class MainActivity extends Activity {
 
 	protected MapView map;
 	private StringBuffer sb = new StringBuffer();
 	private Button ScanButton;
-	private Button btn;
 	private TextView allNetWork;
 	private WifiAdmin mWifiAdmin;
 	private List<ScanResult> list;
@@ -34,19 +32,7 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
-		btn = (Button) findViewById(R.id.btnoptions);
-		registerForContextMenu(btn);
 		mWifiAdmin = new WifiAdmin(MainActivity.this);
-		btn.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-
-				openContextMenu(v);
-			}
-		});
-
 		map = (MapView) findViewById(R.id.map);
 		map.setMapImage(ImageUtil.loadBitmapFromResource(getResources(),
 				R.drawable.map3));
@@ -55,6 +41,43 @@ public class MainActivity extends Activity {
 		addListenerOnButton();
 
 	}
+	
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getMenuInflater();
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
+	
+	public boolean onOptionsItemSelected(MenuItem item) {
+		if(item.getItemId()==R.id.AgHort_1){
+			map = (MapView) findViewById(R.id.map);
+			map.setMapImage(ImageUtil.loadBitmapFromResource(getResources(),
+					R.drawable.map1));
+			return true;
+		}else if(item.getItemId()==R.id.AgHort_2){
+			map = (MapView) findViewById(R.id.map);
+			map.setMapImage(ImageUtil.loadBitmapFromResource(getResources(),
+					R.drawable.map2));
+			return true;
+		}else if(item.getItemId()==R.id.AgHort_3){
+			map = (MapView) findViewById(R.id.map);
+			map.setMapImage(ImageUtil.loadBitmapFromResource(getResources(),
+					R.drawable.map3));
+			return true;
+			}
+		return super.onOptionsItemSelected(item);
+	/*	if(item.getItemId()==R.id.AgHort_1){
+			Toast.makeText(getApplicationContext(), "1",
+					Toast.LENGTH_SHORT).show();
+		}else if(item.getItemId()==R.id.AgHort_2){
+			Toast.makeText(getApplicationContext(), "2",
+					Toast.LENGTH_SHORT).show();
+		}else if(item.getItemId()==R.id.AgHort_3){
+			Toast.makeText(getApplicationContext(), "3",
+					Toast.LENGTH_SHORT).show();
+		}*/
+		
+	}
 
 	/*
 	 * private MapLocation[] createLocations() { MapLocation[] locations = new
@@ -62,7 +85,7 @@ public class MainActivity extends Activity {
 	 * locations; }
 	 */
 
-	@Override
+/*	@Override
 	public void onCreateContextMenu(ContextMenu menu, View v,
 			ContextMenu.ContextMenuInfo menuInfo) {
 		super.onCreateContextMenu(menu, v, menuInfo);
@@ -91,7 +114,7 @@ public class MainActivity extends Activity {
 		}
 		return super.onContextItemSelected(item);
 	}
-
+*/
 	private void addListenerOnButton() {
 
 		ScanButton = (Button) findViewById(R.id.ScanButton);

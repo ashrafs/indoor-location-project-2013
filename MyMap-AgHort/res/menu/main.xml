@@ -5,7 +5,20 @@
         android:orderInCategory="100"
         android:showAsAction="never"
         android:title="@string/action_settings"/>
-    
-
+    <item
+        android:id="@+id/btnoptions"
+        android:title="Change Map">
+        <menu>
+            <item
+                android:id="@+id/AgHort_1"
+                android:title="AgHort Level 1"/>
+            <item
+                android:id="@+id/AgHort_2"
+                android:title="AgHort Level 2"/>
+            <item
+                android:id="@+id/AgHort_3"
+                android:title="AgHort Level 3"/>
+        </menu>
+    </item>
 
 </menu>
