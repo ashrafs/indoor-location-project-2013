@@ -218,7 +218,7 @@ public class MainActivity extends Activity {
 						.append(mScanResult.frequency + "Hz" + "   ")
 						.append(mScanResult.level + "dBm" + "\n\n");
 
-				if (mScanResult.level < -75) {
+				if (mScanResult.level < -65) {
 
 					  if (mScanResult.SSID.toString().equals("MUStudents")) {	  
 					  if (mScanResult.BSSID.toString().equals("ac:16:2d:e7:f4:02") 
