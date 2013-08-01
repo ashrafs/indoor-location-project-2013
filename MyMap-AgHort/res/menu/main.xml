@@ -1,11 +1,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:showAsAction="never"
-        android:title="@string/action_settings"/>
-    <item
         android:id="@+id/btnoptions"
         android:title="Change Map">
         <menu>
@@ -20,5 +15,16 @@
                 android:title="AgHort Level 3"/>
         </menu>
     </item>
+    
+    <item
+        android:id="@+id/direction"
+        android:title="Set Destination">
+        <menu>
+            <group android:id="@+id/group1" android:menuCategory="container">
+                <item android:id="@+id/SCLocation" android:title="Current Location"/>
+                <item android:id="@+id/SDestination" android:title="Destination"/>
+            </group>
+        </menu>
 
-</menu>
+        </item>
+ </menu>
