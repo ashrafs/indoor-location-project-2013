@@ -15,7 +15,6 @@ import android.view.GestureDetector.OnGestureListener;
 import android.widget.RelativeLayout;
 
 import com.brian.android.util.ImageUtil;
-
 /**
  * Map view class.
  * <p>

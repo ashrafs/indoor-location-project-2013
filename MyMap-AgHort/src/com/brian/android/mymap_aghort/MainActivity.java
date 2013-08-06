@@ -3,6 +3,8 @@ package com.brian.android.mymap_aghort;
 import java.util.List;
 
 import android.app.Activity;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.net.wifi.ScanResult;
 import android.os.Bundle;
 import android.view.Menu;
@@ -11,14 +13,22 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.brian.android.mymap.MapView;
 import com.brian.android.util.ImageUtil;
 import com.brian.android.mymap_aghort.WifiAdmin;
 import com.brian.android.mymap_aghort.R;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
+import android.view.animation.Animation;
+import android.view.animation.RotateAnimation;
+import android.widget.ImageView;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements SensorEventListener {
 
 	protected MapView map;
 	private StringBuffer sb = new StringBuffer();
@@ -28,11 +38,17 @@ public class MainActivity extends Activity {
 	private List<ScanResult> list;
 	private ScanResult mScanResult, mScanResult1,mScanResult2,HScanResult1,HScanResult2;
 	boolean Rcheck, Rcheck1, Rcheck2, Hcheck1, Hcheck2;
+	
+	private ImageView image;
+	private float currentDegree = 0f;
+	private SensorManager mSensorManager;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		image = (ImageView) findViewById(R.id.main_iv);
+		mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
 		mWifiAdmin = new WifiAdmin(MainActivity.this);
 		map = (MapView) findViewById(R.id.map);
 		map.setMapImage(ImageUtil.loadBitmapFromResource(getResources(),
@@ -179,6 +195,47 @@ public class MainActivity extends Activity {
 			newRatio = 1;
 		}
 		map.zoom(newRatio);
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		// 为系统的方向传感器注册监听器
+		mSensorManager.registerListener(this,
+				mSensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION),
+				SensorManager.SENSOR_DELAY_GAME);
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		// 取消注册
+		mSensorManager.unregisterListener(this);
+	}
+
+	@Override
+	public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+	}
+
+	@Override
+	public void onSensorChanged(SensorEvent event) {
+		// 如果真机上触发event的传感器类型为水平传感器类型
+		if (event.sensor.getType() == Sensor.TYPE_ORIENTATION) {
+			// 获取绕Z轴转过的角度
+			float degree = event.values[0];
+			// 创建旋转动画（反向转过degree度）
+			RotateAnimation ra = new RotateAnimation(currentDegree, -degree,
+					Animation.RELATIVE_TO_SELF, 0.5f,
+					Animation.RELATIVE_TO_SELF, 0.5f);
+			// 设置动画的持续时间
+			ra.setDuration(200);
+			// 设置动画结束后的保留状态
+			ra.setFillAfter(true);
+			// 启动动画
+			image.startAnimation(ra);
+			currentDegree = -degree;
+		}
 	}
 
 	/**
