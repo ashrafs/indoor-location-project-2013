@@ -32,7 +32,6 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
-            android:drawableTop="@drawable/zoom_out"
             android:onClick="zoomIn"
             android:text="+" />
 
@@ -42,7 +41,6 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_toRightOf="@+id/button1"
-            android:drawableTop="@drawable/zoom_in"
             android:onClick="zoomOut" 
             android:text="-"
             />
@@ -62,6 +60,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="1" />
+
     </com.brian.android.mymap.MapView>
 
     <Button
@@ -71,5 +70,14 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:text="Take Me" />
+
+    <ImageView
+        android:id="@+id/main_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="67dp"
+        android:src="@drawable/znz1" />
 
 </RelativeLayout>
