@@ -51,9 +51,7 @@
             android:layout_height="40dp"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:text="0" />
-
-        
+            android:text="0" />        
 
         <TextView
             android:id="@+id/allNetWork"
@@ -75,9 +73,8 @@
         android:id="@+id/main_iv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginRight="67dp"
-        android:src="@drawable/znz1" />
+        android:layout_alignTop="@+id/map"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/pointer" />
 
 </RelativeLayout>

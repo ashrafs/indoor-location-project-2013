@@ -3,6 +3,8 @@ package com.brian.android.mymap_aghort;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.net.wifi.ScanResult;
@@ -32,13 +34,14 @@ public class MainActivity extends Activity implements SensorEventListener {
 
 	protected MapView map;
 	private StringBuffer sb = new StringBuffer();
-	private Button ScanButton;
+	private Button ScanButton, TakeButton;
 	private TextView allNetWork;
 	private WifiAdmin mWifiAdmin;
 	private List<ScanResult> list;
-	private ScanResult mScanResult, mScanResult1,mScanResult2,HScanResult1,HScanResult2;
+	private ScanResult mScanResult, mScanResult1, mScanResult2, HScanResult1,
+			HScanResult2;
 	boolean Rcheck, Rcheck1, Rcheck2, Hcheck1, Hcheck2;
-	
+
 	private ImageView image;
 	private float currentDegree = 0f;
 	private SensorManager mSensorManager;
@@ -56,6 +59,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 
 		allNetWork = (TextView) findViewById(R.id.allNetWork);
 		addListenerOnButton();
+		addListenerOnButton1();
 
 	}
 
@@ -66,59 +70,54 @@ public class MainActivity extends Activity implements SensorEventListener {
 	}
 
 	public boolean onOptionsItemSelected(MenuItem item) {
-		
-		//Handle item selection
-		switch (item.getItemId()){
+
+		// Handle item selection
+		switch (item.getItemId()) {
 		case R.id.AgHort_1:
 			map = (MapView) findViewById(R.id.map);
 			map.setMapImage(ImageUtil.loadBitmapFromResource(getResources(),
 					R.drawable.map1));
 			return true;
-			
+
 		case R.id.AgHort_2:
 			map = (MapView) findViewById(R.id.map);
 			map.setMapImage(ImageUtil.loadBitmapFromResource(getResources(),
 					R.drawable.map2));
 			return true;
-			
+
 		case R.id.AgHort_3:
 			map = (MapView) findViewById(R.id.map);
 			map.setMapImage(ImageUtil.loadBitmapFromResource(getResources(),
 					R.drawable.map3));
 			return true;
-			
+
 		case R.id.SCLocation:
-			
 			return true;
 		case R.id.SDestination:
 			return true;
-			
-		default: return super.onOptionsItemSelected(item);
+
+		default:
+			return super.onOptionsItemSelected(item);
 		}
 		/*
-		if (item.getItemId() == R.id.AgHort_1) {
-			map = (MapView) findViewById(R.id.map);
-			map.setMapImage(ImageUtil.loadBitmapFromResource(getResources(),
-					R.drawable.map1));
-			return true;
-		} else if (item.getItemId() == R.id.AgHort_2) {
-			map = (MapView) findViewById(R.id.map);
-			map.setMapImage(ImageUtil.loadBitmapFromResource(getResources(),
-					R.drawable.map2));
-			return true;
-		} else if (item.getItemId() == R.id.AgHort_3) {
-			map = (MapView) findViewById(R.id.map);
-			map.setMapImage(ImageUtil.loadBitmapFromResource(getResources(),
-					R.drawable.map3));
-			return true;
-		} else if (item.getItemId() == R.id.SCLocation){
-			
-		} else if (item.getItemId() == R.id.SDestination){
-			
-		}
-		
-		return super.onOptionsItemSelected(item);
-		*/
+		 * if (item.getItemId() == R.id.AgHort_1) { map = (MapView)
+		 * findViewById(R.id.map);
+		 * map.setMapImage(ImageUtil.loadBitmapFromResource(getResources(),
+		 * R.drawable.map1)); return true; } else if (item.getItemId() ==
+		 * R.id.AgHort_2) { map = (MapView) findViewById(R.id.map);
+		 * map.setMapImage(ImageUtil.loadBitmapFromResource(getResources(),
+		 * R.drawable.map2)); return true; } else if (item.getItemId() ==
+		 * R.id.AgHort_3) { map = (MapView) findViewById(R.id.map);
+		 * map.setMapImage(ImageUtil.loadBitmapFromResource(getResources(),
+		 * R.drawable.map3)); return true; } else if (item.getItemId() ==
+		 * R.id.SCLocation){
+		 * 
+		 * } else if (item.getItemId() == R.id.SDestination){
+		 * 
+		 * }
+		 * 
+		 * return super.onOptionsItemSelected(item);
+		 */
 		/*
 		 * if(item.getItemId()==R.id.AgHort_1){
 		 * Toast.makeText(getApplicationContext(), "1",
@@ -169,6 +168,23 @@ public class MainActivity extends Activity implements SensorEventListener {
 		});
 	}
 
+	private void addListenerOnButton1() {
+
+		final Context context = this;
+
+		TakeButton = (Button) findViewById(R.id.takeMe);
+
+		TakeButton.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent(context, SettingDActivity.class);
+				startActivity(intent);
+			}
+		});
+	}
+
 	/**
 	 * Called when user clicks Zoom out button.
 	 * 
@@ -196,7 +212,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 		}
 		map.zoom(newRatio);
 	}
-	
+
 	@Override
 	protected void onResume() {
 		super.onResume();
@@ -220,21 +236,72 @@ public class MainActivity extends Activity implements SensorEventListener {
 
 	@Override
 	public void onSensorChanged(SensorEvent event) {
+
 		// 如果真机上触发event的传感器类型为水平传感器类型
 		if (event.sensor.getType() == Sensor.TYPE_ORIENTATION) {
 			// 获取绕Z轴转过的角度
 			float degree = event.values[0];
-			// 创建旋转动画（反向转过degree度）
-			RotateAnimation ra = new RotateAnimation(currentDegree, -degree,
-					Animation.RELATIVE_TO_SELF, 0.5f,
-					Animation.RELATIVE_TO_SELF, 0.5f);
-			// 设置动画的持续时间
-			ra.setDuration(200);
-			// 设置动画结束后的保留状态
-			ra.setFillAfter(true);
-			// 启动动画
-			image.startAnimation(ra);
-			currentDegree = -degree;
+
+			if (currentDegree <= 150 && currentDegree >= 100) {
+
+				currentDegree = 360;
+				// 创建旋转动画（反向转过degree度）
+				RotateAnimation ra = new RotateAnimation(currentDegree,
+						-degree, Animation.RELATIVE_TO_SELF, 0.5f,
+						Animation.RELATIVE_TO_SELF, 0.5f);
+				// 设置动画的持续时间
+				ra.setDuration(200);
+				// 设置动画结束后的保留状态
+				ra.setFillAfter(true);
+				// 启动动画
+				image.startAnimation(ra);
+				currentDegree = -degree;
+			} else {
+
+				// 创建旋转动画（反向转过degree度）
+				RotateAnimation ra = new RotateAnimation(currentDegree,
+						-degree, Animation.RELATIVE_TO_SELF, 0.5f,
+						Animation.RELATIVE_TO_SELF, 0.5f);
+				// 设置动画的持续时间
+				ra.setDuration(200);
+				// 设置动画结束后的保留状态
+				ra.setFillAfter(true);
+				// 启动动画
+				image.startAnimation(ra);
+				currentDegree = -degree;
+			}
+
+			if (currentDegree <= 360 && currentDegree >= 300) {
+
+				currentDegree = 360;
+				// 创建旋转动画（反向转过degree度）
+				RotateAnimation ra = new RotateAnimation(currentDegree,
+						-degree, Animation.RELATIVE_TO_SELF, 0.5f,
+						Animation.RELATIVE_TO_SELF, 0.5f);
+				// 设置动画的持续时间
+				ra.setDuration(200);
+				// 设置动画结束后的保留状态
+				ra.setFillAfter(true);
+				// 启动动画
+				image.startAnimation(ra);
+				currentDegree = -degree;
+			} 
+			/*
+			else {
+
+				// 创建旋转动画（反向转过degree度）
+				RotateAnimation ra = new RotateAnimation(currentDegree,
+						-degree, Animation.RELATIVE_TO_SELF, 0.5f,
+						Animation.RELATIVE_TO_SELF, 0.5f);
+				// 设置动画的持续时间
+				ra.setDuration(200);
+				// 设置动画结束后的保留状态
+				ra.setFillAfter(true);
+				// 启动动画
+				image.startAnimation(ra);
+				currentDegree = -degree;
+			}
+			*/
 		}
 	}
 
@@ -277,158 +344,198 @@ public class MainActivity extends Activity implements SensorEventListener {
 
 				if (mScanResult.level < -65) {
 
-					  if (mScanResult.SSID.toString().equals("MUStudents")) {	  
-					  if (mScanResult.BSSID.toString().equals("ac:16:2d:e7:f4:02") 
-					  || mScanResult.BSSID.toString().equals( "ac:16:2d:e7:e4:e2")
-					  || mScanResult.BSSID.toString().equals( "ac:16:2d:e7:e4:41")) 
-					  { 
-						  Rcheck = true; 
-						  if(mScanResult1.SSID.toString().equals("MUStaff")) {
-							  if (mScanResult1.BSSID.toString().equals("ac:16:2d:e7:e4:40")) {
-								  Rcheck1 = true; 
-								  if (mScanResult2.SSID.toString().equals("EduRoam")) { 
-									  if (mScanResult2.BSSID.toString().equals( "ac:16:2d:e7:e4:43")) { 
-										  Rcheck2 = true; 
-										  } 
-									  }
-								  } 
-							  }
-						  } 
-					  } 
-					  
-					  if (mScanResult.SSID.toString().equals("MUStaff")) 
-					  {	  
-						  if (mScanResult.BSSID.toString().equals("ac:16:2d:e7:e4:40")) { 
-							  Rcheck = true; 
-							  if(mScanResult1.SSID.toString().equals("EduRoam")) {
-								  if (mScanResult1.BSSID.toString().equals("ac:16:2d:e7:e4:43")) {
-									  Rcheck1 = true; 
-									  if (mScanResult2.SSID.toString().equals("MUStudents")) {	  
-										  if (mScanResult2.BSSID.toString().equals("ac:16:2d:e7:f4:02") 
-										  || mScanResult2.BSSID.toString().equals( "ac:16:2d:e7:e4:e2")
-										  || mScanResult2.BSSID.toString().equals( "ac:16:2d:e7:e4:41")) 
-										  { 
-											  Rcheck2 = true; 
-											  } 
-										  }
-									  } 
-								  }
-							  } 
-						  } 
-					  
-					  if(mScanResult.SSID.toString().equals("EduRoam")) {
-						  if (mScanResult.BSSID.toString().equals("ac:16:2d:e7:e4:43")) {
-							  Rcheck = true; 
-							  if (mScanResult1.SSID.toString().equals("MUStudents")) {	  
-								  if (mScanResult1.BSSID.toString().equals("ac:16:2d:e7:f4:02") 
-								  || mScanResult1.BSSID.toString().equals( "ac:16:2d:e7:e4:e2")
-								  || mScanResult1.BSSID.toString().equals( "ac:16:2d:e7:e4:41")) 
-								  {
-									  Rcheck1 = true; 
-									  if (mScanResult2.SSID.toString().equals("MUStaff")) 
-									  {	  
-										  if (mScanResult2.BSSID.toString().equals("ac:16:2d:e7:e4:40")) { 
-											  Rcheck2 = true; 
-											  } 
-										  }
-									  } 
-								  }
-							  } 
-						  } 
-					 /* if(mScanResult1.SSID.toString().equals("MUStaff")) {
-						  if (mScanResult1.BSSID.toString().equals("ac:16:2d:e7:e4:40")) {
-							  Rcheck1 = true; 
-							  } 
-						  }
-					  
-					  if (mScanResult2.SSID.toString().equals("EduRoam")) { 
-						  if (mScanResult2.BSSID.toString().equals( "ac:16:2d:e7:e4:43")) { 
-							  Rcheck2 = true; 
-							  } 
-						  }
-						  
-						  */
-					  
-					  if (Rcheck == true || Rcheck1 == true || Rcheck2 == true)
-					  { 
-						  // check MUStudent found or MUStaff found or EduRoam found
-					  allNetWork.setText("You are around Room 3.65"); 
-					  map = (MapView) findViewById(R.id.map);
-					  map.setMapImage(ImageUtil.loadBitmapFromResource(getResources(), R.drawable.map4)); 
-					  Toast.makeText(getApplicationContext(),"Locate by either MUStudent or MUStaff or EduRoam",Toast.LENGTH_SHORT).show();
-					  } 
-					  else{	
-						  	if (Rcheck == true && Rcheck1 == true || Rcheck2 == true) { 
-						  // check MUStudent found and MUStaff found or EduRoam found
-						  		allNetWork.setText("You are around Room 3.65"); 
-						  		map = (MapView) findViewById(R.id.map);
-						  		map.setMapImage(ImageUtil.loadBitmapFromResource(getResources(), R.drawable.map4));
-						  		Toast.makeText(getApplicationContext(), "Locate by MUStudent and MUStaff or EduRoam",Toast.LENGTH_SHORT).show();
-						  		}
-						  		else{					  
-						  			if (Rcheck == true || Rcheck1 == true && Rcheck2 == true){ 
-						  				// check MUStudent found or MUStaff found and EduRoam found
-					  	  				allNetWork.setText("You are around Room 3.65"); 
-					  	  				map = (MapView) findViewById(R.id.map);
-					  	  				map.setMapImage(ImageUtil.loadBitmapFromResource(getResources(), R.drawable.map4));
-					  	  				Toast.makeText(getApplicationContext(), "Locate by MUStudent or MUStaff and EduRoam",Toast.LENGTH_SHORT).show();
-						  				} 
-						  				else{
-						  						if (Rcheck == true && Rcheck1 == true && Rcheck2 == true) { // check MUStudent found and MUStaff found and EduRoam found
-						  							allNetWork.setText("You are around Room 3.65"); 
-						  							map = (MapView) findViewById(R.id.map);
-						  							map.setMapImage(ImageUtil.loadBitmapFromResource(getResources(), R.drawable.map4));
-						  							Toast.makeText(getApplicationContext(), "Locate by MUStudent, MUStaff and EduRoam",Toast.LENGTH_SHORT).show(); 
-						  							} else {
-						  									allNetWork.setText("You are not around Room 3.65 "); //end  of  scan  check 
-						  									}
-						  					}
-						  			}
-					  		}
-				}
-				else { // if signal strength is greater than -85dB
-				  Toast.makeText(getApplicationContext(),
-				  "No Wifi for 3.65", Toast.LENGTH_SHORT).show();// end of Room check 3.65 
-				  }
-					 
-					//For Home Use
-					if (HScanResult1.SSID.toString().equals("Vodafone0BF3")
-							|| HScanResult2.SSID.toString()
-									.equals("NETGEAR_18")) // Check
-					// Vodafone
-					{
-						Hcheck1 = true;
-
-						if (HScanResult1.SSID.toString().equals("NETGEAR_18")
-								|| HScanResult2.SSID.toString().equals(
-										"Vodafone0BF3")) // Check
-						// NETGEAR
-						{
-							Hcheck2 = true;
+					if (mScanResult.SSID.toString().equals("MUStudents")) {
+						if (mScanResult.BSSID.toString().equals(
+								"ac:16:2d:e7:f4:02")
+								|| mScanResult.BSSID.toString().equals(
+										"ac:16:2d:e7:e4:e2")
+								|| mScanResult.BSSID.toString().equals(
+										"ac:16:2d:e7:e4:41")) {
+							Rcheck = true;
+							if (mScanResult1.SSID.toString().equals("MUStaff")) {
+								if (mScanResult1.BSSID.toString().equals(
+										"ac:16:2d:e7:e4:40")) {
+									Rcheck1 = true;
+									if (mScanResult2.SSID.toString().equals(
+											"EduRoam")) {
+										if (mScanResult2.BSSID.toString()
+												.equals("ac:16:2d:e7:e4:43")) {
+											Rcheck2 = true;
+										}
+									}
+								}
+							}
 						}
 					}
 
-					if (Hcheck1 == true && Hcheck2 == true) {
-						allNetWork.setText("You are around home");
-						Toast.makeText(getApplicationContext(),
-								"Locate by NETGEAR_18 and Vodafone",
+					if (mScanResult.SSID.toString().equals("MUStaff")) {
+						if (mScanResult.BSSID.toString().equals(
+								"ac:16:2d:e7:e4:40")) {
+							Rcheck = true;
+							if (mScanResult1.SSID.toString().equals("EduRoam")) {
+								if (mScanResult1.BSSID.toString().equals(
+										"ac:16:2d:e7:e4:43")) {
+									Rcheck1 = true;
+									if (mScanResult2.SSID.toString().equals(
+											"MUStudents")) {
+										if (mScanResult2.BSSID.toString()
+												.equals("ac:16:2d:e7:f4:02")
+												|| mScanResult2.BSSID
+														.toString()
+														.equals("ac:16:2d:e7:e4:e2")
+												|| mScanResult2.BSSID
+														.toString()
+														.equals("ac:16:2d:e7:e4:41")) {
+											Rcheck2 = true;
+										}
+									}
+								}
+							}
+						}
+					}
+
+					if (mScanResult.SSID.toString().equals("EduRoam")) {
+						if (mScanResult.BSSID.toString().equals(
+								"ac:16:2d:e7:e4:43")) {
+							Rcheck = true;
+							if (mScanResult1.SSID.toString().equals(
+									"MUStudents")) {
+								if (mScanResult1.BSSID.toString().equals(
+										"ac:16:2d:e7:f4:02")
+										|| mScanResult1.BSSID.toString()
+												.equals("ac:16:2d:e7:e4:e2")
+										|| mScanResult1.BSSID.toString()
+												.equals("ac:16:2d:e7:e4:41")) {
+									Rcheck1 = true;
+									if (mScanResult2.SSID.toString().equals(
+											"MUStaff")) {
+										if (mScanResult2.BSSID.toString()
+												.equals("ac:16:2d:e7:e4:40")) {
+											Rcheck2 = true;
+										}
+									}
+								}
+							}
+						}
+					}
+					/*
+					 * if(mScanResult1.SSID.toString().equals("MUStaff")) { if
+					 * (mScanResult1
+					 * .BSSID.toString().equals("ac:16:2d:e7:e4:40")) { Rcheck1
+					 * = true; } }
+					 * 
+					 * if (mScanResult2.SSID.toString().equals("EduRoam")) { if
+					 * (mScanResult2.BSSID.toString().equals(
+					 * "ac:16:2d:e7:e4:43")) { Rcheck2 = true; } }
+					 */
+
+					if (Rcheck == true || Rcheck1 == true || Rcheck2 == true) {
+						// check MUStudent found or MUStaff found or EduRoam
+						// found
+						allNetWork.setText("You are around Room 3.65");
+						map = (MapView) findViewById(R.id.map);
+						map.setMapImage(ImageUtil.loadBitmapFromResource(
+								getResources(), R.drawable.map4));
+						Toast.makeText(
+								getApplicationContext(),
+								"Locate by either MUStudent or MUStaff or EduRoam",
 								Toast.LENGTH_SHORT).show();
 					} else {
-
-						if (Hcheck1 == true || Hcheck2 == true) {
-							allNetWork.setText("You are around home");
-							Toast.makeText(getApplicationContext(),
-									"Locate by NETGEAR_18 or Vodafone",
+						if (Rcheck == true && Rcheck1 == true
+								|| Rcheck2 == true) {
+							// check MUStudent found and MUStaff found or
+							// EduRoam found
+							allNetWork.setText("You are around Room 3.65");
+							map = (MapView) findViewById(R.id.map);
+							map.setMapImage(ImageUtil.loadBitmapFromResource(
+									getResources(), R.drawable.map4));
+							Toast.makeText(
+									getApplicationContext(),
+									"Locate by MUStudent and MUStaff or EduRoam",
 									Toast.LENGTH_SHORT).show();
 						} else {
-							allNetWork.setText("You are not around Home ");
+							if (Rcheck == true || Rcheck1 == true
+									&& Rcheck2 == true) {
+								// check MUStudent found or MUStaff found and
+								// EduRoam found
+								allNetWork.setText("You are around Room 3.65");
+								map = (MapView) findViewById(R.id.map);
+								map.setMapImage(ImageUtil
+										.loadBitmapFromResource(getResources(),
+												R.drawable.map4));
+								Toast.makeText(
+										getApplicationContext(),
+										"Locate by MUStudent or MUStaff and EduRoam",
+										Toast.LENGTH_SHORT).show();
+							} else {
+								if (Rcheck == true && Rcheck1 == true
+										&& Rcheck2 == true) { // check MUStudent
+																// found and
+																// MUStaff found
+																// and EduRoam
+																// found
+									allNetWork
+											.setText("You are around Room 3.65");
+									map = (MapView) findViewById(R.id.map);
+									map.setMapImage(ImageUtil
+											.loadBitmapFromResource(
+													getResources(),
+													R.drawable.map4));
+									Toast.makeText(
+											getApplicationContext(),
+											"Locate by MUStudent, MUStaff and EduRoam",
+											Toast.LENGTH_SHORT).show();
+								} else {
+									allNetWork
+											.setText("You are not around Room 3.65 "); // end
+																						// of
+																						// scan
+																						// check
+								}
+							}
 						}
+					}
+				} else { // if signal strength is greater than -85dB
+					Toast.makeText(getApplicationContext(), "No Wifi for 3.65",
+							Toast.LENGTH_SHORT).show();// end of Room check 3.65
+				}
+
+				// For Home Use
+				if (HScanResult1.SSID.toString().equals("Vodafone0BF3")
+						|| HScanResult2.SSID.toString().equals("NETGEAR_18")) // Check
+				// Vodafone
+				{
+					Hcheck1 = true;
+
+					if (HScanResult1.SSID.toString().equals("NETGEAR_18")
+							|| HScanResult2.SSID.toString().equals(
+									"Vodafone0BF3")) // Check
+					// NETGEAR
+					{
+						Hcheck2 = true;
+					}
+				}
+
+				if (Hcheck1 == true && Hcheck2 == true) {
+					allNetWork.setText("You are around home");
+					Toast.makeText(getApplicationContext(),
+							"Locate by NETGEAR_18 and Vodafone",
+							Toast.LENGTH_SHORT).show();
+				} else {
+
+					if (Hcheck1 == true || Hcheck2 == true) {
+						allNetWork.setText("You are around home");
+						Toast.makeText(getApplicationContext(),
+								"Locate by NETGEAR_18 or Vodafone",
+								Toast.LENGTH_SHORT).show();
+					} else {
+						allNetWork.setText("You are not around Home ");
 					}
 				}
 			}
 		}
 	}
-
+}
 
 /*
  * private void DisplayWifiState() {
