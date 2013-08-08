@@ -4,5 +4,15 @@
     <string name="app_name">MyMap-AgHort</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    <string-array name="levelvalue">
+        <item>Level 3</item>
+    </string-array>
+    
+     <string-array name="roomvalue">
+        <item>Room 3.64</item>
+        <item>Room 3.70</item>
+        <item>Room 3.83</item>
+    </string-array>
+    
     
 </resources>
