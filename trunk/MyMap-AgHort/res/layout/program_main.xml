@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:columnCount="1" >
+
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="0"
+            android:layout_gravity="left|bottom"
+            android:layout_row="1"
+            android:text="OK" />
+
+            <Button
+                android:id="@+id/return_button"
+                android:layout_width="115dp"
+                android:layout_height="wrap_content"
+                android:layout_column="0"
+                android:layout_gravity="right|bottom"
+                android:layout_row="1"
+                android:text="Return" />
+
+            <ToggleButton
+                android:id="@+id/pointN_toggleButton"
+                android:layout_column="0"
+                android:layout_gravity="right|top"
+                android:layout_row="1"
+                android:text="ToggleButton" />
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_column="0"
+                android:layout_gravity="left|top"
+                android:layout_row="1"
+                android:text="Point North"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+
+    </GridLayout>
+
+</LinearLayout>
