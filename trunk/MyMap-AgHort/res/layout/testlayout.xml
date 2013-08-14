@@ -47,12 +47,33 @@
         android:layout_alignParentTop="true"
         android:text="0" />
 
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="58dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:onClick="zoomIn"
+        android:text="+" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/button1"
+        android:onClick="zoomOut"
+        android:text="-" />
+
     <TextView
         android:id="@+id/allNetWork"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:text="______________________" />
+        android:layout_above="@+id/takeMe"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="19dp"
+        android:layout_toLeftOf="@+id/ScanButton"
+        android:text="" />
 
 </RelativeLayout>

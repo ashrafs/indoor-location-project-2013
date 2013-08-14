@@ -5,6 +5,9 @@ import java.util.List;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.RectF;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.net.wifi.ScanResult;
@@ -29,6 +32,10 @@ import com.brian.android.mymap.MapView;
 import com.brian.android.util.ImageUtil;
 import com.brian.android.mymap_aghort.WifiAdmin;
 import com.brian.android.mymap_aghort.R;
+import com.imagezoom.ImageAttacher;
+import com.imagezoom.ImageAttacher.OnMatrixChangedListener;
+import com.imagezoom.ImageAttacher.OnPhotoTapListener;
+
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -40,7 +47,8 @@ import android.webkit.WebSettings;
 
 public class MainActivity extends Activity implements SensorEventListener{
 
-	protected MapView map;
+	//protected MapView map;
+	protected ImageView map;
 	//private ImageView image;
 	private StringBuffer sb = new StringBuffer();
 	private Button ScanButton, TakeButton;
@@ -59,6 +67,7 @@ public class MainActivity extends Activity implements SensorEventListener{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		//setContentView(R.layout.testlayout);
 		
 		
 		// compass
@@ -67,9 +76,18 @@ public class MainActivity extends Activity implements SensorEventListener{
 		mWifiAdmin = new WifiAdmin(MainActivity.this);
 		
 		// map
-		map = (MapView) findViewById(R.id.map);
-		map.setMapImage(ImageUtil.loadBitmapFromResource(getResources(),
-				R.drawable.map3));
+		//map = (MapView) findViewById(R.id.map);
+		//map.setMapImage(ImageUtil.loadBitmapFromResource(getResources(),R.drawable.map3));
+		map = (ImageView) findViewById(R.id.mapTest);
+		
+		Bitmap bimtBitmap = BitmapFactory.decodeResource(getResources(),R.drawable.map3);
+		map.setImageBitmap(bimtBitmap);
+
+        /**
+         * Use Simple ImageView
+         */
+        usingSimpleImage(map);
+		
 		
 		// Zoom
 		//map.setBuiltInZoomControls(true);
@@ -92,21 +110,31 @@ public class MainActivity extends Activity implements SensorEventListener{
 		// Handle item selection
 		switch (item.getItemId()) {
 		case R.id.AgHort_1:
-			map = (MapView) findViewById(R.id.map);
-			map.setMapImage(ImageUtil.loadBitmapFromResource(getResources(),
-					R.drawable.map1));
+			//map = (MapView) findViewById(R.id.map);
+			//map.setMapImage(ImageUtil.loadBitmapFromResource(getResources(),R.drawable.map1));
+			
+			map = (ImageView) findViewById(R.id.mapTest);
+			
+			Bitmap bimtBitmap = BitmapFactory.decodeResource(getResources(),R.drawable.map1);
+			map.setImageBitmap(bimtBitmap);
 			return true;
 
 		case R.id.AgHort_2:
-			map = (MapView) findViewById(R.id.map);
-			map.setMapImage(ImageUtil.loadBitmapFromResource(getResources(),
-					R.drawable.map2));
+			//map = (MapView) findViewById(R.id.map);
+			//map.setMapImage(ImageUtil.loadBitmapFromResource(getResources(),R.drawable.map2));
+			
+			map = (ImageView) findViewById(R.id.mapTest);
+			Bitmap bimtBitmap1 = BitmapFactory.decodeResource(getResources(),R.drawable.map2);
+			map.setImageBitmap(bimtBitmap1);
 			return true;
 
 		case R.id.AgHort_3:
-			map = (MapView) findViewById(R.id.map);
-			map.setMapImage(ImageUtil.loadBitmapFromResource(getResources(),
-					R.drawable.map3));
+			//map = (MapView) findViewById(R.id.map);
+			//map.setMapImage(ImageUtil.loadBitmapFromResource(getResources(),R.drawable.map3));
+			
+			map = (ImageView) findViewById(R.id.mapTest);
+			Bitmap bimtBitmap3 = BitmapFactory.decodeResource(getResources(),R.drawable.map3);
+			map.setImageBitmap(bimtBitmap3);
 			return true;
 			
 		case R.id.Sensor_On:
@@ -215,29 +243,53 @@ public class MainActivity extends Activity implements SensorEventListener{
 	 * 
 	 * @param v
 	 */
-	public void zoomOut(View v) {
+/*	public void zoomOut(View v) {
 		float oldRatio = map.getZoomRatio();
-		float newRatio = oldRatio - .1f;
-		if (newRatio < 0.01f) {
-			newRatio = 0.01f;
+		float newRatio = oldRatio - .4f;
+		if (newRatio < 0.4f) {
+			newRatio = 0.4f;
 		}
 		map.zoom(newRatio);
 	}
-
+*/
 	/**
 	 * Called when user clicks Zoom in button.
 	 * 
 	 * @param v
 	 */
-	public void zoomIn(View v) {
+/*	public void zoomIn(View v) {
 		float oldRatio = map.getZoomRatio();
-		float newRatio = oldRatio + .1f;
-		if (newRatio > 1) {
-			newRatio = 1;
+		float newRatio = oldRatio + .4f;
+		if (newRatio > 0.8) {
+			newRatio = 0.8f;
 		}
 		map.zoom(newRatio);
 	}
-	
+	*/
+    public void usingSimpleImage(ImageView imageView) {
+        ImageAttacher mAttacher = new ImageAttacher(imageView);
+        ImageAttacher.MAX_ZOOM = 4.0f; // Double the current Size
+        ImageAttacher.MIN_ZOOM = 0.5f; // Half the current Size
+        MatrixChangeListener mMaListener = new MatrixChangeListener();
+        mAttacher.setOnMatrixChangeListener(mMaListener);
+        PhotoTapListener mPhotoTap = new PhotoTapListener();
+        mAttacher.setOnPhotoTapListener(mPhotoTap);
+    }
+
+    private class PhotoTapListener implements OnPhotoTapListener {
+
+        @Override
+        public void onPhotoTap(View view, float x, float y) {
+        }
+    }
+
+    private class MatrixChangeListener implements OnMatrixChangedListener {
+
+        @Override
+        public void onMatrixChanged(RectF rect) {
+
+        }
+    }
 
 
 	@Override
@@ -454,9 +506,8 @@ public class MainActivity extends Activity implements SensorEventListener{
 						// check MUStudent found or MUStaff found or EduRoam
 						// found
 						allNetWork.setText("You are around Room 3.65");
-						map = (MapView) findViewById(R.id.map);
-						map.setMapImage(ImageUtil.loadBitmapFromResource(
-								getResources(), R.drawable.map4));
+						//map = (MapView) findViewById(R.id.map);
+						//map.setMapImage(ImageUtil.loadBitmapFromResource(getResources(), R.drawable.map4));
 						Toast.makeText(
 								getApplicationContext(),
 								"Locate by either MUStudent or MUStaff or EduRoam",
