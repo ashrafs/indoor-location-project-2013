@@ -3,11 +3,17 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
 
+    
+    
     <TextView
         android:id="@+id/text"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
         android:text="Your current location is" />
+    
+    
 
     <LinearLayout
         android:id="@+id/menu"
@@ -17,49 +23,26 @@
         android:gravity="top"
         android:orientation="horizontal" >
     </LinearLayout>
+    
+	<com.brian.android.mymap.MapView
+	    android:id="@+id/map"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_above="@+id/takeMe"
+	    android:layout_below="@id/text"
+	    android:background="@android:color/white" >
 
-    <com.brian.android.mymap.MapView
-        android:id="@+id/map"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/menu"
-        android:layout_below="@id/text"
-        android:background="@android:color/white" >
-
-        <Button
-            android:id="@+id/button1"
-            android:layout_width="58dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:onClick="zoomIn"
-            android:text="+" />
-
-		<Button
-            android:id="@+id/button2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_toRightOf="@+id/button1"
-            android:onClick="zoomOut" 
-            android:text="-"
-            />
-		        
-        <Button
-            android:id="@+id/ScanButton"
-            android:layout_width="50dp"
-            android:layout_height="40dp"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:text="0" />        
-
-        <TextView
-            android:id="@+id/allNetWork"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="1" />
+		<RelativeLayout
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_alignParentLeft="true"
+		    android:layout_alignParentTop="true"
+		    android:layout_marginLeft="77dp"
+		    android:layout_marginTop="20dp" >
+		</RelativeLayout>
 
     </com.brian.android.mymap.MapView>
+    
 
     <Button
         android:id="@+id/takeMe"
@@ -69,12 +52,41 @@
         android:layout_alignParentRight="true"
         android:text="Take Me" />
 
-    <ImageView
-        android:id="@+id/main_iv"
+    <Button
+        android:id="@+id/ScanButton"
+        android:layout_width="50dp"
+        android:layout_height="40dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:text="0" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="58dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:onClick="zoomIn"
+        android:text="+" />
+
+    <Button
+        android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/map"
-        android:layout_centerHorizontal="true"
-        android:src="@drawable/pointer" />
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/button1"
+        android:onClick="zoomOut"
+        android:text="-" />
+
+    <TextView
+        android:id="@+id/allNetWork"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_above="@+id/map"
+        android:layout_marginRight="19dp"
+        android:layout_toLeftOf="@+id/ScanButton"
+        android:text="" />
 
 </RelativeLayout>

@@ -18,6 +18,13 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ZoomButtonsController;
+
+//import com.google.android.maps.GeoPoint;
+//import com.google.android.maps.MapActivity;
+//import com.google.android.maps.MapController;
+//import com.google.android.maps.MapView;
+
 import com.brian.android.mymap.MapView;
 import com.brian.android.util.ImageUtil;
 import com.brian.android.mymap_aghort.WifiAdmin;
@@ -29,10 +36,12 @@ import android.hardware.SensorManager;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
+import android.webkit.WebSettings;
 
-public class MainActivity extends Activity implements SensorEventListener {
+public class MainActivity extends Activity implements SensorEventListener{
 
 	protected MapView map;
+	//private ImageView image;
 	private StringBuffer sb = new StringBuffer();
 	private Button ScanButton, TakeButton;
 	private TextView allNetWork;
@@ -42,21 +51,30 @@ public class MainActivity extends Activity implements SensorEventListener {
 			HScanResult2;
 	boolean Rcheck, Rcheck1, Rcheck2, Hcheck1, Hcheck2;
 
-	private ImageView image;
 	private float currentDegree = 0f;
 	private SensorManager mSensorManager;
+	public ZoomButtonsController zoomy;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		image = (ImageView) findViewById(R.id.main_iv);
+		
+		
+		// compass
+		//image = (ImageView) findViewById(R.id.main_iv);
 		mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
 		mWifiAdmin = new WifiAdmin(MainActivity.this);
+		
+		// map
 		map = (MapView) findViewById(R.id.map);
 		map.setMapImage(ImageUtil.loadBitmapFromResource(getResources(),
 				R.drawable.map3));
+		
+		// Zoom
+		//map.setBuiltInZoomControls(true);
 
+		// location
 		allNetWork = (TextView) findViewById(R.id.allNetWork);
 		addListenerOnButton();
 		addListenerOnButton1();
@@ -90,12 +108,19 @@ public class MainActivity extends Activity implements SensorEventListener {
 			map.setMapImage(ImageUtil.loadBitmapFromResource(getResources(),
 					R.drawable.map3));
 			return true;
-
-		case R.id.SCLocation:
+			
+		case R.id.Sensor_On:
+			mSensorManager.registerListener(this,mSensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION),SensorManager.SENSOR_DELAY_GAME);
 			return true;
-		case R.id.SDestination:
+			
+		case R.id.Sensor_Off:
+			mSensorManager.unregisterListener(this);
 			return true;
-
+	/*		
+		case R.id.settings:
+			startActivity(new Intent(MainActivity.this, SettingPActivity.class));
+			return true;
+*/
 		default:
 			return super.onOptionsItemSelected(item);
 		}
@@ -212,14 +237,14 @@ public class MainActivity extends Activity implements SensorEventListener {
 		}
 		map.zoom(newRatio);
 	}
+	
+
 
 	@Override
 	protected void onResume() {
 		super.onResume();
 		// 为系统的方向传感器注册监听器
-		mSensorManager.registerListener(this,
-				mSensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION),
-				SensorManager.SENSOR_DELAY_GAME);
+		mSensorManager.registerListener(this,mSensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION),SensorManager.SENSOR_DELAY_GAME);
 	}
 
 	@Override
@@ -246,31 +271,35 @@ public class MainActivity extends Activity implements SensorEventListener {
 
 				currentDegree = 360;
 				// 创建旋转动画（反向转过degree度）
-				RotateAnimation ra = new RotateAnimation(currentDegree,
-						-degree, Animation.RELATIVE_TO_SELF, 0.5f,
-						Animation.RELATIVE_TO_SELF, 0.5f);
+				RotateAnimation ra = new RotateAnimation(currentDegree,-degree, Animation.RELATIVE_TO_SELF, 0.5f,Animation.RELATIVE_TO_SELF, 0.5f);
 				// 设置动画的持续时间
 				ra.setDuration(200);
 				// 设置动画结束后的保留状态
 				ra.setFillAfter(true);
 				// 启动动画
-				image.startAnimation(ra);
+				// compass rotate
+				//image.startAnimation(ra);
+				
+				// map rotate
+				map.startAnimation(ra);
 				currentDegree = -degree;
 			} else {
 
 				// 创建旋转动画（反向转过degree度）
-				RotateAnimation ra = new RotateAnimation(currentDegree,
-						-degree, Animation.RELATIVE_TO_SELF, 0.5f,
-						Animation.RELATIVE_TO_SELF, 0.5f);
+				RotateAnimation ra = new RotateAnimation(currentDegree,-degree, Animation.RELATIVE_TO_SELF, 0.5f,Animation.RELATIVE_TO_SELF, 0.5f);
 				// 设置动画的持续时间
 				ra.setDuration(200);
 				// 设置动画结束后的保留状态
 				ra.setFillAfter(true);
 				// 启动动画
-				image.startAnimation(ra);
+				// compass rotate
+				//image.startAnimation(ra);
+				
+				// map rotate
+				map.startAnimation(ra);
 				currentDegree = -degree;
 			}
-
+/*
 			if (currentDegree <= 360 && currentDegree >= 300) {
 
 				currentDegree = 360;
@@ -286,6 +315,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 				image.startAnimation(ra);
 				currentDegree = -degree;
 			} 
+*/
 			/*
 			else {
 
@@ -358,8 +388,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 									Rcheck1 = true;
 									if (mScanResult2.SSID.toString().equals(
 											"EduRoam")) {
-										if (mScanResult2.BSSID.toString()
-												.equals("ac:16:2d:e7:e4:43")) {
+										if (mScanResult2.BSSID.toString().equals("ac:16:2d:e7:e4:43")) {
 											Rcheck2 = true;
 										}
 									}
@@ -378,14 +407,9 @@ public class MainActivity extends Activity implements SensorEventListener {
 									Rcheck1 = true;
 									if (mScanResult2.SSID.toString().equals(
 											"MUStudents")) {
-										if (mScanResult2.BSSID.toString()
-												.equals("ac:16:2d:e7:f4:02")
-												|| mScanResult2.BSSID
-														.toString()
-														.equals("ac:16:2d:e7:e4:e2")
-												|| mScanResult2.BSSID
-														.toString()
-														.equals("ac:16:2d:e7:e4:41")) {
+										if (mScanResult2.BSSID.toString().equals("ac:16:2d:e7:f4:02")
+												|| mScanResult2.BSSID.toString().equals("ac:16:2d:e7:e4:e2")
+												|| mScanResult2.BSSID.toString().equals("ac:16:2d:e7:e4:41")) {
 											Rcheck2 = true;
 										}
 									}
@@ -402,15 +426,12 @@ public class MainActivity extends Activity implements SensorEventListener {
 									"MUStudents")) {
 								if (mScanResult1.BSSID.toString().equals(
 										"ac:16:2d:e7:f4:02")
-										|| mScanResult1.BSSID.toString()
-												.equals("ac:16:2d:e7:e4:e2")
-										|| mScanResult1.BSSID.toString()
-												.equals("ac:16:2d:e7:e4:41")) {
+										|| mScanResult1.BSSID.toString().equals("ac:16:2d:e7:e4:e2")
+										|| mScanResult1.BSSID.toString().equals("ac:16:2d:e7:e4:41")) {
 									Rcheck1 = true;
 									if (mScanResult2.SSID.toString().equals(
 											"MUStaff")) {
-										if (mScanResult2.BSSID.toString()
-												.equals("ac:16:2d:e7:e4:40")) {
+										if (mScanResult2.BSSID.toString().equals("ac:16:2d:e7:e4:40")) {
 											Rcheck2 = true;
 										}
 									}
@@ -440,7 +461,9 @@ public class MainActivity extends Activity implements SensorEventListener {
 								getApplicationContext(),
 								"Locate by either MUStudent or MUStaff or EduRoam",
 								Toast.LENGTH_SHORT).show();
-					} else {
+					} 
+					/*
+					else {
 						if (Rcheck == true && Rcheck1 == true
 								|| Rcheck2 == true) {
 							// check MUStudent found and MUStaff found or
@@ -460,8 +483,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 								// EduRoam found
 								allNetWork.setText("You are around Room 3.65");
 								map = (MapView) findViewById(R.id.map);
-								map.setMapImage(ImageUtil
-										.loadBitmapFromResource(getResources(),
+								map.setMapImage(ImageUtil.loadBitmapFromResource(getResources(),
 												R.drawable.map4));
 								Toast.makeText(
 										getApplicationContext(),
@@ -474,20 +496,16 @@ public class MainActivity extends Activity implements SensorEventListener {
 																// MUStaff found
 																// and EduRoam
 																// found
-									allNetWork
-											.setText("You are around Room 3.65");
+									allNetWork.setText("You are around Room 3.65");
 									map = (MapView) findViewById(R.id.map);
-									map.setMapImage(ImageUtil
-											.loadBitmapFromResource(
-													getResources(),
+									map.setMapImage(ImageUtil.loadBitmapFromResource(getResources(),
 													R.drawable.map4));
 									Toast.makeText(
 											getApplicationContext(),
 											"Locate by MUStudent, MUStaff and EduRoam",
 											Toast.LENGTH_SHORT).show();
 								} else {
-									allNetWork
-											.setText("You are not around Room 3.65 "); // end
+									allNetWork.setText("You are not around Room 3.65 "); // end
 																						// of
 																						// scan
 																						// check
@@ -495,9 +513,9 @@ public class MainActivity extends Activity implements SensorEventListener {
 							}
 						}
 					}
+					*/
 				} else { // if signal strength is greater than -85dB
-					Toast.makeText(getApplicationContext(), "No Wifi for 3.65",
-							Toast.LENGTH_SHORT).show();// end of Room check 3.65
+					Toast.makeText(getApplicationContext(), "No Wifi for 3.65",Toast.LENGTH_SHORT).show();// end of Room check 3.65
 				}
 
 				// For Home Use
