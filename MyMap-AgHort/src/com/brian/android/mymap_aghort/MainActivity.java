@@ -382,18 +382,20 @@ public class MainActivity extends Activity implements SensorEventListener {
 		// Start Scan Network
 		mWifiAdmin.startScan();
 		list = mWifiAdmin.getWifiList();
-		
-		
 
 		if (list != null) {
 
-			
 			for (int i = 0; i < list.size(); i++) {
-				
+
 				RelativeLayout rlMain = (RelativeLayout) findViewById(R.id.relativelayout);
-				RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
+				RelativeLayout.LayoutParams params1 = new RelativeLayout.LayoutParams(
 						50, 50);
-				ImageView iv = new ImageView(this);
+				RelativeLayout.LayoutParams params2 = new RelativeLayout.LayoutParams(
+						50, 50);
+				ImageView iv1 = new ImageView(this);
+				ImageView iv2 = new ImageView(this);
+				iv1.setBackgroundColor(Color.WHITE);
+				iv2.setBackgroundColor(Color.WHITE);
 
 				// Get Scan Result
 				mScanResult = list.get(0);
@@ -509,6 +511,8 @@ public class MainActivity extends Activity implements SensorEventListener {
 				 */
 				// -------------------------------------------------------------------------------------------------------------------------------------//
 
+
+
 				if (mScanResult.level >= -78) {
 
 					// For Home Use
@@ -533,10 +537,17 @@ public class MainActivity extends Activity implements SensorEventListener {
 								"Locate by NETGEAR_18 and Vodafone",
 								Toast.LENGTH_SHORT).show();
 
-						iv.setImageResource(R.drawable.location_icon);
-						params.topMargin = 150;
-						params.leftMargin = 230;
-						rlMain.addView(iv, params);
+						// iv.setImageResource(R.drawable.location_icon);
+						iv2.setBackgroundColor(Color.WHITE);
+						params2.topMargin = 100;
+						params2.leftMargin = 100;
+						rlMain.addView(iv2, params2);
+						
+						
+						iv1.setBackgroundColor(Color.RED);
+						params1.topMargin = 150;
+						params1.leftMargin = 230;
+						rlMain.addView(iv1, params1);
 
 					} else {
 
@@ -550,37 +561,42 @@ public class MainActivity extends Activity implements SensorEventListener {
 							allNetWork.setText("You are not around Home ");
 						}
 					}
-				} else {
-					if (mScanResult.level <= -79) {
+				}
+				if (mScanResult.level <= -79) {
+					// For Home Use
+					if (HScanResult1.SSID.toString().equals("Vodafone0BF3")
+							|| HScanResult2.SSID.toString()
+									.equals("NETGEAR_18")) // Check Vodafone
+					{
+						Hcheck1 = true;
 
-						// For Home Use
-						if (HScanResult1.SSID.toString().equals("Vodafone0BF3")
+						if (HScanResult1.SSID.toString().equals("NETGEAR_18")
 								|| HScanResult2.SSID.toString().equals(
-										"NETGEAR_18")) // Check Vodafone
+										"Vodafone0BF3")) // Check NETGEAR
 						{
-							Hcheck1 = true;
-
-							if (HScanResult1.SSID.toString().equals(
-									"NETGEAR_18")
-									|| HScanResult2.SSID.toString().equals(
-											"Vodafone0BF3")) // Check NETGEAR
-							{
-								Hcheck2 = true;
-							}
+							Hcheck2 = true;
 						}
+					}
 
-						if (Hcheck1 == true && Hcheck2 == true) {
-							allNetWork.setText("You are around home" + " "
-									+ mScanResult.level);
-							Toast.makeText(getApplicationContext(),
-									"Locate by NETGEAR_18 and Vodafone",
-									Toast.LENGTH_SHORT).show();
+					if (Hcheck1 == true && Hcheck2 == true) {
+						allNetWork.setText("You are around home" + " "
+								+ mScanResult.level);
+						Toast.makeText(getApplicationContext(),
+								"Locate by NETGEAR_18 and Vodafone",
+								Toast.LENGTH_SHORT).show();
 
-							iv.setImageResource(R.drawable.location_icon);
-							params.topMargin = 100;
-							params.leftMargin = 100;
-							rlMain.addView(iv, params);
-						}
+						// iv.setImageResource(R.drawable.location_icon);
+						iv1.setBackgroundColor(Color.WHITE);
+						params1.topMargin = 150;
+						params1.leftMargin = 230;
+						rlMain.addView(iv1, params1);
+						
+						iv2.setBackgroundColor(Color.BLUE);
+						params2.topMargin = 100;
+						params2.leftMargin = 100;
+						rlMain.addView(iv2, params2);
+						
+						
 					}
 				}
 			}
