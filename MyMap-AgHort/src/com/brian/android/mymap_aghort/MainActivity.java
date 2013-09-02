@@ -56,6 +56,11 @@ public class MainActivity extends Activity implements SensorEventListener {
 	protected ImageView map;
 	// private ImageView image;
 	private StringBuffer sb = new StringBuffer();
+	private StringBuffer hsb1 = new StringBuffer();
+	private StringBuffer hsb2 = new StringBuffer();
+	private StringBuffer lsb1 = new StringBuffer();
+	private StringBuffer lsb2 = new StringBuffer();
+	private StringBuffer lsb3 = new StringBuffer();
 	private Button ScanButton, TakeButton;
 	private TextView allNetWork;
 	private WifiAdmin mWifiAdmin;
@@ -88,9 +93,8 @@ public class MainActivity extends Activity implements SensorEventListener {
 		// map.setMapImage(ImageUtil.loadBitmapFromResource(getResources(),R.drawable.map3));
 		map = (ImageView) findViewById(R.id.mapTest);
 
-		Bitmap bimtBitmap = BitmapFactory.decodeResource(getResources(),
-				R.drawable.librarymap);
-		map.setImageBitmap(bimtBitmap);
+		//Bitmap bimtBitmap = BitmapFactory.decodeResource(getResources(),R.drawable.librarymap);
+		//map.setImageBitmap(bimtBitmap);
 
 		/**
 		 * Use Simple ImageView
@@ -123,10 +127,8 @@ public class MainActivity extends Activity implements SensorEventListener {
 
 			map = (ImageView) findViewById(R.id.mapTest);
 
-			Bitmap bimtBitmap1 = BitmapFactory.decodeResource(getResources(),
-					R.drawable.map1);
+			Bitmap bimtBitmap1 = BitmapFactory.decodeResource(getResources(),R.drawable.map1);
 			map.setImageBitmap(bimtBitmap1);
-			usedAH1Map = true;
 			return true;
 
 		case R.id.AgHort_2:
@@ -394,8 +396,13 @@ public class MainActivity extends Activity implements SensorEventListener {
 	public void getAllNetWorkList() {
 
 		// Clear previous Scan record
-		if (sb != null) {
-			sb = new StringBuffer();
+		if (sb != null || hsb1 != null || hsb2 != null || lsb1 != null || lsb2 != null || lsb3 != null) {
+			//sb = new StringBuffer();
+			hsb1 = new StringBuffer();
+			hsb2 = new StringBuffer();
+			lsb1 = new StringBuffer();
+			lsb2 = new StringBuffer();
+			lsb3 = new StringBuffer();
 			allNetWork.setText("");
 
 		}
@@ -406,7 +413,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 
 		if (list != null) {
 
-			for (int i = 0; i < list.size(); i++) {
+			//for (int i = 0; i < list.size(); i++) {
 
 				RelativeLayout rlMain = (RelativeLayout) findViewById(R.id.relativelayout);
 				RelativeLayout.LayoutParams hparams1 = new RelativeLayout.LayoutParams(
@@ -435,23 +442,28 @@ public class MainActivity extends Activity implements SensorEventListener {
 				lv4.setBackgroundColor(Color.TRANSPARENT);
 
 				// Get Scan Result
-				mScanResult = list.get(0);
-				mScanResult1 = list.get(i);
-				mScanResult2 = list.get(i);
+				//mScanResult = list.get(0);
+				//mScanResult1 = list.get(1);
+				//mScanResult2 = list.get(2);
 				HScanResult1 = list.get(0);
-				HScanResult2 = list.get(i);
+				HScanResult2 = list.get(1);
 				LScanResult1 = list.get(0);
-				LScanResult2 = list.get(i);
+				LScanResult2 = list.get(1);
+				//LScanResult3 = list.get(2);
 				
 				// sb = sb.append(mScanResult.level +"dBm" + "\n\n");
 
 				// sb = sb.append(mWifiAdmin.getWifiInfo());
 
-				sb = sb.append(mScanResult.BSSID + "   ")
-						.append(mScanResult.SSID + "   ")
-						.append(mScanResult.capabilities + "   ")
-						.append(mScanResult.frequency + "Hz" + "   ")
-						.append(mScanResult.level + "dBm" + "\n\n");
+				//Home Use
+				hsb1 = hsb1.append(HScanResult1.SSID);
+				hsb2 = hsb2.append(HScanResult2.SSID);
+				
+				//Library Use
+				lsb1 = lsb1.append(LScanResult1.BSSID);
+				lsb2 = lsb2.append(LScanResult2.BSSID);
+			//	lsb3 = lsb3.append(LScanResult3.BSSID);
+
 
 				/*
 				 * if (mScanResult.level < -65) {
@@ -550,11 +562,17 @@ public class MainActivity extends Activity implements SensorEventListener {
 				 * check 3.65 }
 				 */
 				// -------------------------------------------------------------------------------------------------------------------------------------//
-/*
+
 				if (HScanResult1.level >= -78) //-- Less than or equal to -78dB
 				{
-					usedHOMEMap = true;
+					map = (ImageView) findViewById(R.id.mapTest);
+					Bitmap HomeBitmap = BitmapFactory.decodeResource(getResources(),
+							R.drawable.homemap);
+					map.setImageBitmap(HomeBitmap);
+					
+					//usedHOMEMap = true;
 					// For Home Use
+				/*
 					if (HScanResult1.SSID.toString().equals("Vodafone0BF3")
 							|| HScanResult2.SSID.toString().equals("NETGEAR_18")) // Check Vodafone
 					{
@@ -565,6 +583,31 @@ public class MainActivity extends Activity implements SensorEventListener {
 						{
 							Hcheck2 = true;
 						}
+					}
+					*/
+					
+					/*
+					if (HScanResult1.SSID.toString().equals("NETGEAR_18")) // Check Vodafone
+					{
+						Hcheck1 = true;
+
+						if (HScanResult2.SSID.toString().equals("Vodafone0BF3")) // Check NETGEAR
+						{
+							Hcheck2 = true;
+						}
+					}
+					*/
+					if (hsb1.toString().equals("NETGEAR_18"))
+					{
+						Hcheck1 = true;
+						allNetWork.setText(hsb1.toString());
+						Toast.makeText(getApplicationContext(),hsb1.toString(),Toast.LENGTH_SHORT).show();
+					}
+					if (hsb2.toString().equals("vodafone0BF3")) 
+					{
+						Hcheck2 = true;
+						allNetWork.setText(hsb2.toString());
+						Toast.makeText(getApplicationContext(),hsb2.toString(),Toast.LENGTH_SHORT).show();
 					}
 
 					if (Hcheck1 == true && Hcheck2 == true) {
@@ -606,6 +649,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 						}
 					}
 				}
+				/*
 				if (HScanResult1.level <= -79) //-- Greater than or equal to -79dB
 					{
 					// For Home Use
@@ -643,25 +687,37 @@ public class MainActivity extends Activity implements SensorEventListener {
 				}
 				*/
 //-------------------------------------------------------------------------------------------------------------//				
+			
 				// City Library test
 				if(Hcheck1 == false && Hcheck2 == false){
+					
+					map = (ImageView) findViewById(R.id.mapTest);
+					@SuppressWarnings("deprecation")
+					Bitmap LibraryBitmap = BitmapFactory.decodeResource(getResources(),
+							R.drawable.librarymap);
+					map.setImageBitmap(LibraryBitmap);
+					
 				if(LScanResult1.level >= -75)   // less than or equal -75dB
 				{
 					// For Library Use
 					//Position 1
-					if (LScanResult1.BSSID.toString().equals("62:f3:a3:ce:d8:9c")	// VodafoneD89F
-							|| LScanResult1.BSSID.toString().equals("00:13:c3:f1:37:b1")	//studentcity
-							|| LScanResult1.BSSID.toString().equals("c2:9f:db:67:5a:57")) // Plamerston North city Library
+					if (lsb1.toString().equals("62:f3:a3:ce:d8:9c"))	// VodafoneD89F
 					{
 						Lcheck1 = true;
-
-						if (LScanResult2.BSSID.toString().equals("00:13:c3:f1:37:b1")			//studentcity
-								|| LScanResult2.BSSID.toString().equals("c2:9f:db:67:5a:57")) 	//Plamerston North city Library 
-						{
-							Lcheck2 = true;
-						}
+						Toast.makeText(getApplicationContext(),lsb1.toString(),Toast.LENGTH_SHORT).show();
 					}
-
+					if (lsb2.toString().equals("00:13:c3:f1:37:b1"))	//studentcity
+					{
+						Lcheck2 = true;
+						Toast.makeText(getApplicationContext(),lsb2.toString(),Toast.LENGTH_SHORT).show();
+					}
+					
+					if (lsb3.toString().equals("c2:9f:db:67:5a:57")) 	// Plamerston North city Library
+					{
+						Lcheck3 = true;
+						Toast.makeText(getApplicationContext(),lsb3.toString(),Toast.LENGTH_SHORT).show();
+					}
+					
 					if (Lcheck1 == true && Lcheck2 == true) {
 						allNetWork.setText("You are at city library Position 1" + " "
 								+ LScanResult1.level);
@@ -680,7 +736,8 @@ public class MainActivity extends Activity implements SensorEventListener {
 						rlMain.addView(lv1, lparams1);
 
 					}	
-				/*	
+				
+				/*
 					// Position 2
 					if (LScanResult1.BSSID.toString().equals("20:4e:7f:53:1d:80") 			// Plamerston North city Library
 							|| LScanResult1.BSSID.toString().equals("00:13:c3:f1:37:b1"))	// studentcity
@@ -712,8 +769,8 @@ public class MainActivity extends Activity implements SensorEventListener {
 						rlMain.addView(lv3, lparams3);
 
 					}	
-					*/
 					
+					*/
 					/*
 					// Position 3
 					if (LScanResult1.BSSID.toString().equals("30:46:9a:1d:b0:60") 			// Plamerston North city Library
@@ -748,9 +805,11 @@ public class MainActivity extends Activity implements SensorEventListener {
 
 					}	
 					*/
+				/*
 					}
 					if(LScanResult1.level >= -60)   // less than or equal -60dB
 					{
+					*/
 					/*
 					// Position 4
 					if (LScanResult1.BSSID.toString().equals("30:46:9a:1d:b0:60")) 			// Plamerston North city Library
@@ -773,12 +832,10 @@ public class MainActivity extends Activity implements SensorEventListener {
 
 					}	
 					*/
-					
+					}
 				}
 			}
-		}
 	}
-}
 }
 /*
  * private void DisplayWifiState() {
