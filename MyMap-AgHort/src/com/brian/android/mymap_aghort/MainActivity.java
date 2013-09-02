@@ -61,8 +61,11 @@ public class MainActivity extends Activity implements SensorEventListener {
 	private WifiAdmin mWifiAdmin;
 	private List<ScanResult> list;
 	private ScanResult mScanResult, mScanResult1, mScanResult2, HScanResult1,
-			HScanResult2;
-	boolean Rcheck, Rcheck1, Rcheck2, Hcheck1, Hcheck2;
+			HScanResult2,LScanResult1, LScanResult2,LScanResult3,LScanResult4;
+	boolean Rcheck, Rcheck1, Rcheck2;
+	boolean Hcheck1, Hcheck2;
+	boolean Lcheck1, Lcheck2,Lcheck3,Lcheck4,Lcheck5,Lcheck6,Lcheck7,Lcheck8;
+	boolean usedHOMEMap = false, usedAH1Map = false,usedLibraryMap = false;
 
 	private float currentDegree = 0f;
 	private SensorManager mSensorManager;
@@ -86,7 +89,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 		map = (ImageView) findViewById(R.id.mapTest);
 
 		Bitmap bimtBitmap = BitmapFactory.decodeResource(getResources(),
-				R.drawable.homemap);
+				R.drawable.librarymap);
 		map.setImageBitmap(bimtBitmap);
 
 		/**
@@ -120,9 +123,10 @@ public class MainActivity extends Activity implements SensorEventListener {
 
 			map = (ImageView) findViewById(R.id.mapTest);
 
-			Bitmap bimtBitmap = BitmapFactory.decodeResource(getResources(),
+			Bitmap bimtBitmap1 = BitmapFactory.decodeResource(getResources(),
 					R.drawable.map1);
-			map.setImageBitmap(bimtBitmap);
+			map.setImageBitmap(bimtBitmap1);
+			usedAH1Map = true;
 			return true;
 
 		case R.id.AgHort_2:
@@ -130,9 +134,9 @@ public class MainActivity extends Activity implements SensorEventListener {
 			// map.setMapImage(ImageUtil.loadBitmapFromResource(getResources(),R.drawable.map2));
 
 			map = (ImageView) findViewById(R.id.mapTest);
-			Bitmap bimtBitmap1 = BitmapFactory.decodeResource(getResources(),
+			Bitmap bimtBitmap2 = BitmapFactory.decodeResource(getResources(),
 					R.drawable.map2);
-			map.setImageBitmap(bimtBitmap1);
+			map.setImageBitmap(bimtBitmap2);
 			return true;
 
 		case R.id.AgHort_3:
@@ -143,6 +147,23 @@ public class MainActivity extends Activity implements SensorEventListener {
 			Bitmap bimtBitmap3 = BitmapFactory.decodeResource(getResources(),
 					R.drawable.map3);
 			map.setImageBitmap(bimtBitmap3);
+			return true;
+
+		case R.id.homemap:
+			map = (ImageView) findViewById(R.id.mapTest);
+			Bitmap HomeBitmap = BitmapFactory.decodeResource(getResources(),
+					R.drawable.homemap);
+			map.setImageBitmap(HomeBitmap);
+			usedHOMEMap = true;
+			return true;
+			
+		case R.id.librarymap:
+			map = (ImageView) findViewById(R.id.mapTest);
+			@SuppressWarnings("deprecation")
+			Bitmap LibraryBitmap = BitmapFactory.decodeResource(getResources(),
+					R.drawable.librarymap);
+			map.setImageBitmap(LibraryBitmap);
+			usedLibraryMap = true;
 			return true;
 
 		case R.id.Sensor_On:
@@ -388,14 +409,30 @@ public class MainActivity extends Activity implements SensorEventListener {
 			for (int i = 0; i < list.size(); i++) {
 
 				RelativeLayout rlMain = (RelativeLayout) findViewById(R.id.relativelayout);
-				RelativeLayout.LayoutParams params1 = new RelativeLayout.LayoutParams(
-						50, 50);
-				RelativeLayout.LayoutParams params2 = new RelativeLayout.LayoutParams(
-						50, 50);
-				ImageView iv1 = new ImageView(this);
-				ImageView iv2 = new ImageView(this);
-				iv1.setBackgroundColor(Color.WHITE);
-				iv2.setBackgroundColor(Color.WHITE);
+				RelativeLayout.LayoutParams hparams1 = new RelativeLayout.LayoutParams(
+						25, 25);
+				RelativeLayout.LayoutParams hparams2 = new RelativeLayout.LayoutParams(
+						25, 25);
+				RelativeLayout.LayoutParams lparams1 = new RelativeLayout.LayoutParams(
+						25, 25);
+				RelativeLayout.LayoutParams lparams2 = new RelativeLayout.LayoutParams(
+						25, 25);
+				RelativeLayout.LayoutParams lparams3 = new RelativeLayout.LayoutParams(
+						25, 25);
+				RelativeLayout.LayoutParams lparams4 = new RelativeLayout.LayoutParams(
+						25, 25);
+				ImageView hv1 = new ImageView(this);
+				ImageView hv2 = new ImageView(this);
+				ImageView lv1 = new ImageView(this);
+				ImageView lv2 = new ImageView(this);
+				ImageView lv3 = new ImageView(this);
+				ImageView lv4 = new ImageView(this);
+				hv1.setBackgroundColor(Color.TRANSPARENT);
+				hv2.setBackgroundColor(Color.TRANSPARENT);
+				lv1.setBackgroundColor(Color.TRANSPARENT);
+				lv2.setBackgroundColor(Color.TRANSPARENT);
+				lv3.setBackgroundColor(Color.TRANSPARENT);
+				lv4.setBackgroundColor(Color.TRANSPARENT);
 
 				// Get Scan Result
 				mScanResult = list.get(0);
@@ -403,6 +440,9 @@ public class MainActivity extends Activity implements SensorEventListener {
 				mScanResult2 = list.get(i);
 				HScanResult1 = list.get(0);
 				HScanResult2 = list.get(i);
+				LScanResult1 = list.get(0);
+				LScanResult2 = list.get(i);
+				
 				// sb = sb.append(mScanResult.level +"dBm" + "\n\n");
 
 				// sb = sb.append(mWifiAdmin.getWifiInfo());
@@ -510,21 +550,18 @@ public class MainActivity extends Activity implements SensorEventListener {
 				 * check 3.65 }
 				 */
 				// -------------------------------------------------------------------------------------------------------------------------------------//
-
-
-
-				if (mScanResult.level >= -78) {
-
+/*
+				if (HScanResult1.level >= -78) //-- Less than or equal to -78dB
+				{
+					usedHOMEMap = true;
 					// For Home Use
 					if (HScanResult1.SSID.toString().equals("Vodafone0BF3")
-							|| HScanResult2.SSID.toString()
-									.equals("NETGEAR_18")) // Check Vodafone
+							|| HScanResult2.SSID.toString().equals("NETGEAR_18")) // Check Vodafone
 					{
 						Hcheck1 = true;
 
 						if (HScanResult1.SSID.toString().equals("NETGEAR_18")
-								|| HScanResult2.SSID.toString().equals(
-										"Vodafone0BF3")) // Check NETGEAR
+								|| HScanResult2.SSID.toString().equals("Vodafone0BF3")) // Check NETGEAR
 						{
 							Hcheck2 = true;
 						}
@@ -532,47 +569,53 @@ public class MainActivity extends Activity implements SensorEventListener {
 
 					if (Hcheck1 == true && Hcheck2 == true) {
 						allNetWork.setText("You are around home" + " "
-								+ mScanResult.level);
+								+ HScanResult1.level);
 						Toast.makeText(getApplicationContext(),
 								"Locate by NETGEAR_18 and Vodafone",
 								Toast.LENGTH_SHORT).show();
 
 						// iv.setImageResource(R.drawable.location_icon);
-						iv2.setBackgroundColor(Color.WHITE);
-						params2.topMargin = 100;
-						params2.leftMargin = 100;
-						rlMain.addView(iv2, params2);
-						
-						
-						iv1.setBackgroundColor(Color.RED);
-						params1.topMargin = 150;
-						params1.leftMargin = 230;
-						rlMain.addView(iv1, params1);
+						hv2.setBackgroundColor(Color.TRANSPARENT);
+						hparams2.topMargin = 100;
+						hparams2.leftMargin = 100;
+						rlMain.addView(hv2, hparams2);
+
+						hv1.setBackgroundColor(Color.RED);
+						hparams1.topMargin = 150;
+						hparams1.leftMargin = 230;
+						rlMain.addView(hv1, hparams1);
 
 					} else {
 
 						if (Hcheck1 == true || Hcheck2 == true) {
 							allNetWork.setText("You are around home" + " "
-									+ mScanResult.level);
+									+ HScanResult1.level);
 							Toast.makeText(getApplicationContext(),
 									"Locate by NETGEAR_18 or Vodafone",
 									Toast.LENGTH_SHORT).show();
 						} else {
 							allNetWork.setText("You are not around Home ");
+							lv1.setBackgroundColor(Color.TRANSPARENT);
+							lparams1.topMargin = 335;	//335
+							lparams1.leftMargin = 55;	//55
+							rlMain.addView(lv1, lparams1);
+							lv2.setBackgroundColor(Color.TRANSPARENT);
+							lparams2.topMargin = 210;	//210
+							lparams2.leftMargin = 10;	//10
+							rlMain.addView(lv2, lparams2);
 						}
 					}
 				}
-				if (mScanResult.level <= -79) {
+				if (HScanResult1.level <= -79) //-- Greater than or equal to -79dB
+					{
 					// For Home Use
 					if (HScanResult1.SSID.toString().equals("Vodafone0BF3")
-							|| HScanResult2.SSID.toString()
-									.equals("NETGEAR_18")) // Check Vodafone
+							|| HScanResult2.SSID.toString().equals("NETGEAR_18")) // Check Vodafone
 					{
 						Hcheck1 = true;
 
 						if (HScanResult1.SSID.toString().equals("NETGEAR_18")
-								|| HScanResult2.SSID.toString().equals(
-										"Vodafone0BF3")) // Check NETGEAR
+								|| HScanResult2.SSID.toString().equals("Vodafone0BF3")) // Check NETGEAR
 						{
 							Hcheck2 = true;
 						}
@@ -580,28 +623,162 @@ public class MainActivity extends Activity implements SensorEventListener {
 
 					if (Hcheck1 == true && Hcheck2 == true) {
 						allNetWork.setText("You are around home" + " "
-								+ mScanResult.level);
+								+ HScanResult1.level);
 						Toast.makeText(getApplicationContext(),
 								"Locate by NETGEAR_18 and Vodafone",
 								Toast.LENGTH_SHORT).show();
 
 						// iv.setImageResource(R.drawable.location_icon);
-						iv1.setBackgroundColor(Color.WHITE);
-						params1.topMargin = 150;
-						params1.leftMargin = 230;
-						rlMain.addView(iv1, params1);
-						
-						iv2.setBackgroundColor(Color.BLUE);
-						params2.topMargin = 100;
-						params2.leftMargin = 100;
-						rlMain.addView(iv2, params2);
-						
-						
+						hv1.setBackgroundColor(Color.TRANSPARENT);
+						hparams1.topMargin = 150;
+						hparams1.leftMargin = 230;
+						rlMain.addView(hv1, hparams1);						
+					
+						hv2.setBackgroundColor(Color.BLUE);
+						hparams2.topMargin = 100;
+						hparams2.leftMargin = 100;
+						rlMain.addView(hv2, hparams2);
+
 					}
+				}
+				*/
+//-------------------------------------------------------------------------------------------------------------//				
+				// City Library test
+				if(Hcheck1 == false && Hcheck2 == false){
+				if(LScanResult1.level >= -75)   // less than or equal -75dB
+				{
+					// For Library Use
+					//Position 1
+					if (LScanResult1.BSSID.toString().equals("62:f3:a3:ce:d8:9c")	// VodafoneD89F
+							|| LScanResult1.BSSID.toString().equals("00:13:c3:f1:37:b1")	//studentcity
+							|| LScanResult1.BSSID.toString().equals("c2:9f:db:67:5a:57")) // Plamerston North city Library
+					{
+						Lcheck1 = true;
+
+						if (LScanResult2.BSSID.toString().equals("00:13:c3:f1:37:b1")			//studentcity
+								|| LScanResult2.BSSID.toString().equals("c2:9f:db:67:5a:57")) 	//Plamerston North city Library 
+						{
+							Lcheck2 = true;
+						}
+					}
+
+					if (Lcheck1 == true && Lcheck2 == true) {
+						allNetWork.setText("You are at city library Position 1" + " "
+								+ LScanResult1.level);
+						Toast.makeText(getApplicationContext(),"P1",Toast.LENGTH_SHORT).show();
+
+						// remove the previous position 
+						lv2.setBackgroundColor(Color.TRANSPARENT);
+						lparams2.topMargin = 210;	//210
+						lparams2.leftMargin = 10;	//10
+						rlMain.addView(lv2, lparams2);
+
+
+						lv1.setBackgroundColor(Color.BLUE);
+						lparams1.topMargin = 335;	//335
+						lparams1.leftMargin = 55;	//55
+						rlMain.addView(lv1, lparams1);
+
+					}	
+				/*	
+					// Position 2
+					if (LScanResult1.BSSID.toString().equals("20:4e:7f:53:1d:80") 			// Plamerston North city Library
+							|| LScanResult1.BSSID.toString().equals("00:13:c3:f1:37:b1"))	// studentcity
+					{
+						Lcheck3 = true;
+
+						if (LScanResult2.BSSID.toString().equals("00:13:c3:f1:37:b1")			// studentcity
+								|| LScanResult2.BSSID.toString().equals("20:4e:7f:53:1d:80")) 	// Plamerston North city Library 
+						{
+							Lcheck4 = true;
+						}
+					}
+
+					if (Lcheck3 == true && Lcheck4 == true) {
+						allNetWork.setText("You are at city library Position 2" + " "
+								+ LScanResult1.level);
+						Toast.makeText(getApplicationContext(),"P2",Toast.LENGTH_SHORT).show();
+
+						// remove the previous position 
+						lv4.setBackgroundColor(Color.TRANSPARENT);
+						lparams4.topMargin = 335;	//335
+						lparams4.leftMargin = 55;	//55
+						rlMain.addView(lv4, lparams4);
+
+
+						lv3.setBackgroundColor(Color.BLUE);
+						lparams3.topMargin = 210;	//210
+						lparams3.leftMargin = 10;	//10
+						rlMain.addView(lv3, lparams3);
+
+					}	
+					*/
+					
+					/*
+					// Position 3
+					if (LScanResult1.BSSID.toString().equals("30:46:9a:1d:b0:60") 			// Plamerston North city Library
+							|| LScanResult1.BSSID.toString().equals("00:13:c3:f1:37:b1")	// studentcity
+							|| LScanResult1.BSSID.toString().equals("64:16:f0:ea:d7:35"))	// chokolato
+					{
+						Lcheck5 = true;
+
+						if (LScanResult2.BSSID.toString().equals("00:13:c3:f1:37:b1")			// studentcity
+								|| LScanResult2.BSSID.toString().equals("30:46:9a:1d:b0:60")) 	// Plamerston North city Library 
+						{
+							Lcheck6 = true;
+						}
+					}
+
+					if (Lcheck5 == true && Lcheck6 == true) {
+						allNetWork.setText("You are at city library Position 3" + " "
+								+ LScanResult1.level);
+						Toast.makeText(getApplicationContext(),"P3",Toast.LENGTH_SHORT).show();
+
+						// remove the previous position 
+						lv6.setBackgroundColor(Color.TRANSPARENT);
+						lparams6.topMargin = 42;	//42
+						lparams6.leftMargin = 165;	//165
+						rlMain.addView(lv6, lparams6);
+
+
+						lv5.setBackgroundColor(Color.BLUE);
+						lparams5.topMargin = 210;	//210
+						lparams5.leftMargin = 10;	//10
+						rlMain.addView(lv5, lparams5);
+
+					}	
+					*/
+					}
+					if(LScanResult1.level >= -60)   // less than or equal -60dB
+					{
+					/*
+					// Position 4
+					if (LScanResult1.BSSID.toString().equals("30:46:9a:1d:b0:60")) 			// Plamerston North city Library
+					{
+						Lcheck7 = true;
+					}
+
+					if (Lcheck5 == true && Lcheck6 == true) {
+						allNetWork.setText("You are at city library Position 4" + " "
+								+ LScanResult1.level);
+						Toast.makeText(getApplicationContext(),"P4",Toast.LENGTH_SHORT).show();
+
+						// remove the previous position 
+
+
+						lv7.setBackgroundColor(Color.BLUE);
+						lparams7.topMargin = 90;	//90
+						lparams7.leftMargin = 2880;	//280
+						rlMain.addView(lv7, lparams7);
+
+					}	
+					*/
+					
 				}
 			}
 		}
 	}
+}
 }
 /*
  * private void DisplayWifiState() {
