@@ -61,15 +61,17 @@ public class MainActivity extends Activity implements SensorEventListener {
 	private StringBuffer lsb1 = new StringBuffer();
 	private StringBuffer lsb2 = new StringBuffer();
 	private StringBuffer lsb3 = new StringBuffer();
+	private StringBuffer lsb4 = new StringBuffer();
+	private StringBuffer lsb5 = new StringBuffer();
 	private Button ScanButton, TakeButton;
 	private TextView allNetWork;
 	private WifiAdmin mWifiAdmin;
 	private List<ScanResult> list;
 	private ScanResult mScanResult, mScanResult1, mScanResult2, HScanResult1,
-			HScanResult2,LScanResult1, LScanResult2,LScanResult3,LScanResult4;
+			HScanResult2,LScanResult1, LScanResult2,LScanResult3,LScanResult4, LScanResult5;
 	boolean Rcheck, Rcheck1, Rcheck2;
 	boolean Hcheck1, Hcheck2;
-	boolean Lcheck1, Lcheck2,Lcheck3,Lcheck4,Lcheck5,Lcheck6,Lcheck7,Lcheck8;
+	boolean Lcheck1, Lcheck2,Lcheck3,Lcheck4,Lcheck5,Lcheck6,Lcheck7,Lcheck8, Lcheck9;
 	boolean usedHOMEMap = false, usedAH1Map = false,usedLibraryMap = false;
 
 	private float currentDegree = 0f;
@@ -93,8 +95,8 @@ public class MainActivity extends Activity implements SensorEventListener {
 		// map.setMapImage(ImageUtil.loadBitmapFromResource(getResources(),R.drawable.map3));
 		map = (ImageView) findViewById(R.id.mapTest);
 
-		//Bitmap bimtBitmap = BitmapFactory.decodeResource(getResources(),R.drawable.librarymap);
-		//map.setImageBitmap(bimtBitmap);
+		Bitmap bimtBitmap = BitmapFactory.decodeResource(getResources(),R.drawable.librarymap);
+		map.setImageBitmap(bimtBitmap);
 
 		/**
 		 * Use Simple ImageView
@@ -403,6 +405,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 			lsb1 = new StringBuffer();
 			lsb2 = new StringBuffer();
 			lsb3 = new StringBuffer();
+			lsb4 = new StringBuffer();
 			allNetWork.setText("");
 
 		}
@@ -449,11 +452,9 @@ public class MainActivity extends Activity implements SensorEventListener {
 				HScanResult2 = list.get(1);
 				LScanResult1 = list.get(0);
 				LScanResult2 = list.get(1);
-				//LScanResult3 = list.get(2);
-				
-				// sb = sb.append(mScanResult.level +"dBm" + "\n\n");
-
-				// sb = sb.append(mWifiAdmin.getWifiInfo());
+				LScanResult3 = list.get(2);
+				LScanResult4 = list.get(3);
+				LScanResult5 = list.get(4);
 
 				//Home Use
 				hsb1 = hsb1.append(HScanResult1.SSID);
@@ -462,7 +463,9 @@ public class MainActivity extends Activity implements SensorEventListener {
 				//Library Use
 				lsb1 = lsb1.append(LScanResult1.BSSID);
 				lsb2 = lsb2.append(LScanResult2.BSSID);
-			//	lsb3 = lsb3.append(LScanResult3.BSSID);
+				lsb3 = lsb3.append(LScanResult3.BSSID);
+				lsb4 = lsb4.append(LScanResult4.BSSID);
+				lsb5 = lsb5.append(LScanResult5.BSSID);
 
 
 				/*
@@ -565,52 +568,27 @@ public class MainActivity extends Activity implements SensorEventListener {
 
 				if (HScanResult1.level >= -78) //-- Less than or equal to -78dB
 				{
-					map = (ImageView) findViewById(R.id.mapTest);
-					Bitmap HomeBitmap = BitmapFactory.decodeResource(getResources(),
-							R.drawable.homemap);
-					map.setImageBitmap(HomeBitmap);
 					
 					//usedHOMEMap = true;
 					// For Home Use
-				/*
-					if (HScanResult1.SSID.toString().equals("Vodafone0BF3")
-							|| HScanResult2.SSID.toString().equals("NETGEAR_18")) // Check Vodafone
-					{
-						Hcheck1 = true;
-
-						if (HScanResult1.SSID.toString().equals("NETGEAR_18")
-								|| HScanResult2.SSID.toString().equals("Vodafone0BF3")) // Check NETGEAR
-						{
-							Hcheck2 = true;
-						}
-					}
-					*/
-					
-					/*
-					if (HScanResult1.SSID.toString().equals("NETGEAR_18")) // Check Vodafone
-					{
-						Hcheck1 = true;
-
-						if (HScanResult2.SSID.toString().equals("Vodafone0BF3")) // Check NETGEAR
-						{
-							Hcheck2 = true;
-						}
-					}
-					*/
+				
 					if (hsb1.toString().equals("NETGEAR_18"))
 					{
 						Hcheck1 = true;
-						allNetWork.setText(hsb1.toString());
-						Toast.makeText(getApplicationContext(),hsb1.toString(),Toast.LENGTH_SHORT).show();
+						//allNetWork.setText(hsb1.toString());
+						//Toast.makeText(getApplicationContext(),hsb1.toString(),Toast.LENGTH_SHORT).show();
 					}
 					if (hsb2.toString().equals("vodafone0BF3")) 
 					{
 						Hcheck2 = true;
-						allNetWork.setText(hsb2.toString());
-						Toast.makeText(getApplicationContext(),hsb2.toString(),Toast.LENGTH_SHORT).show();
+						//allNetWork.setText(hsb2.toString());
+						//Toast.makeText(getApplicationContext(),hsb2.toString(),Toast.LENGTH_SHORT).show();
 					}
 
 					if (Hcheck1 == true && Hcheck2 == true) {
+						//map = (ImageView) findViewById(R.id.mapTest);
+						//Bitmap HomeBitmap = BitmapFactory.decodeResource(getResources(),R.drawable.homemap);
+						//map.setImageBitmap(HomeBitmap);
 						allNetWork.setText("You are around home" + " "
 								+ HScanResult1.level);
 						Toast.makeText(getApplicationContext(),
@@ -638,17 +616,10 @@ public class MainActivity extends Activity implements SensorEventListener {
 									Toast.LENGTH_SHORT).show();
 						} else {
 							allNetWork.setText("You are not around Home ");
-							lv1.setBackgroundColor(Color.TRANSPARENT);
-							lparams1.topMargin = 335;	//335
-							lparams1.leftMargin = 55;	//55
-							rlMain.addView(lv1, lparams1);
-							lv2.setBackgroundColor(Color.TRANSPARENT);
-							lparams2.topMargin = 210;	//210
-							lparams2.leftMargin = 10;	//10
-							rlMain.addView(lv2, lparams2);
 						}
 					}
 				}
+
 				/*
 				if (HScanResult1.level <= -79) //-- Greater than or equal to -79dB
 					{
@@ -692,35 +663,49 @@ public class MainActivity extends Activity implements SensorEventListener {
 				if(Hcheck1 == false && Hcheck2 == false){
 					
 					map = (ImageView) findViewById(R.id.mapTest);
-					@SuppressWarnings("deprecation")
 					Bitmap LibraryBitmap = BitmapFactory.decodeResource(getResources(),
 							R.drawable.librarymap);
 					map.setImageBitmap(LibraryBitmap);
 					
-				if(LScanResult1.level >= -75)   // less than or equal -75dB
-				{
+					
+				//if(LScanResult1.level < -70)   // less than or equal -78dB
+				//{
+					hsb1 = new StringBuffer();
+					hsb2 = new StringBuffer();
+					allNetWork.setText("");
+					
+					
 					// For Library Use
 					//Position 1
-					if (lsb1.toString().equals("62:f3:a3:ce:d8:9c"))	// VodafoneD89F
+					//if (lsb1.toString().equals("62:f3:a3:ce:d8:9c"))	// VodafoneD89F
+					if(lsb1.toString().equals("c2:9f:db:67:5a:57") && (LScanResult1.level < -70)
+							||lsb1.toString().equals("00:13:c3:f1:37:b1")
+							||lsb1.toString().equals("62:f3:a3:ce:d8:9c")
+							||lsb1.toString().equals("58:98:35:96:74:d1"))	// Palmerston North Library
 					{
 						Lcheck1 = true;
 						Toast.makeText(getApplicationContext(),lsb1.toString(),Toast.LENGTH_SHORT).show();
 					}
-					if (lsb2.toString().equals("00:13:c3:f1:37:b1"))	//studentcity
+					//if (lsb2.toString().equals("00:13:c3:f1:37:b1"))	//studentcity
+					if(lsb2.toString().equals("00:13:c3:f1:37:b0")
+							|| lsb2.toString().equals("c2:9f:db:67:5a:57") && (LScanResult2.level < -70)
+							|| lsb2.toString().equals("62:f3:a3:ce:d8:9c"))		//inspirefreewifi
 					{
 						Lcheck2 = true;
 						Toast.makeText(getApplicationContext(),lsb2.toString(),Toast.LENGTH_SHORT).show();
 					}
 					
-					if (lsb3.toString().equals("c2:9f:db:67:5a:57")) 	// Plamerston North city Library
+					//if (lsb3.toString().equals("c2:9f:db:67:5a:57")) 	// Plamerston North city Library
+					if(lsb3.toString().equals("00:13:c3:f1:37:b1")
+							||lsb3.toString().equals("00:13:c3:f1:37:b0")		//mixed Lscanresult3 and 4 mac address
+							||lsb3.toString().equals("c2:9f:db:67:5a:57") && (LScanResult3.level < -70))
 					{
 						Lcheck3 = true;
 						Toast.makeText(getApplicationContext(),lsb3.toString(),Toast.LENGTH_SHORT).show();
 					}
 					
-					if (Lcheck1 == true && Lcheck2 == true) {
-						allNetWork.setText("You are at city library Position 1" + " "
-								+ LScanResult1.level);
+					if (Lcheck1 == true && Lcheck2 == true && Lcheck3) {
+						allNetWork.setText("You are at city library Position 1" + "  " + LScanResult1.level);
 						Toast.makeText(getApplicationContext(),"P1",Toast.LENGTH_SHORT).show();
 
 						// remove the previous position 
@@ -729,82 +714,140 @@ public class MainActivity extends Activity implements SensorEventListener {
 						lparams2.leftMargin = 10;	//10
 						rlMain.addView(lv2, lparams2);
 
-
 						lv1.setBackgroundColor(Color.BLUE);
 						lparams1.topMargin = 335;	//335
 						lparams1.leftMargin = 55;	//55
 						rlMain.addView(lv1, lparams1);
 
-					}	
-				
-				/*
-					// Position 2
-					if (LScanResult1.BSSID.toString().equals("20:4e:7f:53:1d:80") 			// Plamerston North city Library
-							|| LScanResult1.BSSID.toString().equals("00:13:c3:f1:37:b1"))	// studentcity
+					}else
+						if(Lcheck1 == false || Lcheck2 == false || Lcheck3 == false)
 					{
-						Lcheck3 = true;
-
-						if (LScanResult2.BSSID.toString().equals("00:13:c3:f1:37:b1")			// studentcity
-								|| LScanResult2.BSSID.toString().equals("20:4e:7f:53:1d:80")) 	// Plamerston North city Library 
-						{
-							Lcheck4 = true;
-						}
+					// Position 2
+					if(lsb1.toString().equals("c2:9f:db:67:5a:57") && (LScanResult1.level > -70)
+							|| lsb2.toString().equals("00:13:c3:f1:37:b1"))	// Palmerston North Library
+					{
+						Lcheck4 = true;
+						Toast.makeText(getApplicationContext(),lsb1.toString(),Toast.LENGTH_SHORT).show();
+					}
+					if(lsb2.toString().equals("00:13:c3:f1:37:b1")
+							|| lsb1.toString().equals("c2:9f:db:67:5a:57") && (LScanResult1.level > -70))		//inspirefreewifi
+					{
+						Lcheck5 = true;
+						Toast.makeText(getApplicationContext(),lsb2.toString(),Toast.LENGTH_SHORT).show();
+					}
+					
+					if(lsb4.toString().equals("24:db:ac:71:58:5b"))		//
+					{
+						Lcheck6 = true;
+						Toast.makeText(getApplicationContext(),lsb4.toString(),Toast.LENGTH_SHORT).show();
 					}
 
-					if (Lcheck3 == true && Lcheck4 == true) {
+					if (Lcheck4 == true && Lcheck5 == true && Lcheck6 == true) {
 						allNetWork.setText("You are at city library Position 2" + " "
 								+ LScanResult1.level);
 						Toast.makeText(getApplicationContext(),"P2",Toast.LENGTH_SHORT).show();
 
 						// remove the previous position 
-						lv4.setBackgroundColor(Color.TRANSPARENT);
-						lparams4.topMargin = 335;	//335
-						lparams4.leftMargin = 55;	//55
-						rlMain.addView(lv4, lparams4);
+						lv1.setBackgroundColor(Color.TRANSPARENT);
+						lparams1.topMargin = 335;	//335
+						lparams1.leftMargin = 55;	//55
+						rlMain.addView(lv1, lparams1);
 
 
-						lv3.setBackgroundColor(Color.BLUE);
-						lparams3.topMargin = 210;	//210
-						lparams3.leftMargin = 10;	//10
-						rlMain.addView(lv3, lparams3);
+						lv2.setBackgroundColor(Color.BLUE);
+						lparams2.topMargin = 210;	//210
+						lparams2.leftMargin = 10;	//10
+						rlMain.addView(lv2, lparams2);
 
 					}	
+					else
+						if(Lcheck4 == false || Lcheck5 == false || Lcheck6 == false)
 					
-					*/
-					/*
 					// Position 3
-					if (LScanResult1.BSSID.toString().equals("30:46:9a:1d:b0:60") 			// Plamerston North city Library
-							|| LScanResult1.BSSID.toString().equals("00:13:c3:f1:37:b1")	// studentcity
-							|| LScanResult1.BSSID.toString().equals("64:16:f0:ea:d7:35"))	// chokolato
+					if(lsb1.toString().equals("64:16:f0:ea:d7:35")
+							||lsb1.toString().equals("c2:9f:db:67:5a:28")
+							||lsb1.toString().equals("00:12:44:ba:a6:90")
+							||lsb1.toString().equals("00:12:44:ba:a6:91")
+							||lsb1.toString().equals("c2:9f:db:67:5a:54")
+							||lsb1.toString().equals("00:12:44:b8:4e:80")
+							||lsb1.toString().equals("c2:9f:db:67:59:8a")
+							||lsb1.toString().equals("00:60:64:6a:e7:20")
+							||lsb1.toString().equals("00:12:44:b8:4e:81")
+							||lsb1.toString().equals("00:0c:c3:e6:29:90")
+							||lsb1.toString().equals("00:22:a4:bd:66:91")
+							||lsb1.toString().equals("00:13:c3:f1:37:b0")
+							||lsb1.toString().equals("a4:b1:e9:83:6e:29")
+							||lsb1.toString().equals("00:26:44:01:38:10")
+							||lsb1.toString().equals("c2:9f:db:67:5a:57"))	// Palmerston North Library
 					{
-						Lcheck5 = true;
-
-						if (LScanResult2.BSSID.toString().equals("00:13:c3:f1:37:b1")			// studentcity
-								|| LScanResult2.BSSID.toString().equals("30:46:9a:1d:b0:60")) 	// Plamerston North city Library 
-						{
-							Lcheck6 = true;
-						}
+						Lcheck7 = true;
+						//Toast.makeText(getApplicationContext(),lsb1.toString(),Toast.LENGTH_SHORT).show();
+					}
+					if(lsb2.toString().equals("64:16:f0:ea:d7:35")
+							||lsb2.toString().equals("c2:9f:db:67:5a:28")
+							||lsb2.toString().equals("00:12:44:ba:a6:90")
+							||lsb2.toString().equals("00:12:44:ba:a6:91")
+							||lsb2.toString().equals("c2:9f:db:67:5a:54")
+							||lsb2.toString().equals("00:12:44:b8:4e:80")
+							||lsb2.toString().equals("c2:9f:db:67:59:8a")
+							||lsb2.toString().equals("00:60:64:6a:e7:20")
+							||lsb2.toString().equals("00:12:44:b8:4e:81")
+							||lsb2.toString().equals("00:0c:c3:e6:29:90")
+							||lsb2.toString().equals("00:22:a4:bd:66:91")
+							||lsb2.toString().equals("00:13:c3:f1:37:b0")
+							||lsb2.toString().equals("a4:b1:e9:83:6e:29")
+							||lsb2.toString().equals("00:26:44:01:38:10")
+							||lsb2.toString().equals("c2:9f:db:67:5a:57"))	// Palmerston North Library
+					{
+						Lcheck8 = true;
+						//Toast.makeText(getApplicationContext(),lsb2.toString(),Toast.LENGTH_SHORT).show();
+					}
+					
+					if(lsb3.toString().equals("64:16:f0:ea:d7:35")
+							||lsb3.toString().equals("c2:9f:db:67:5a:28")
+							||lsb3.toString().equals("00:12:44:ba:a6:90")
+							||lsb3.toString().equals("00:12:44:ba:a6:91")
+							||lsb3.toString().equals("c2:9f:db:67:5a:54")
+							||lsb3.toString().equals("00:12:44:b8:4e:80")
+							||lsb3.toString().equals("c2:9f:db:67:59:8a")
+							||lsb3.toString().equals("00:60:64:6a:e7:20")
+							||lsb3.toString().equals("00:12:44:b8:4e:81")
+							||lsb3.toString().equals("00:0c:c3:e6:29:90")
+							||lsb3.toString().equals("00:22:a4:bd:66:91")
+							||lsb3.toString().equals("00:13:c3:f1:37:b0")
+							||lsb3.toString().equals("a4:b1:e9:83:6e:29")
+							||lsb3.toString().equals("00:26:44:01:38:10")
+							||lsb3.toString().equals("c2:9f:db:67:5a:57"))	// Palmerston North Library
+					{
+						Lcheck9 = true;
+						//Toast.makeText(getApplicationContext(),lsb4.toString(),Toast.LENGTH_SHORT).show();
 					}
 
-					if (Lcheck5 == true && Lcheck6 == true) {
+					if (Lcheck7 == true && Lcheck8 == true && Lcheck9 == true) {
 						allNetWork.setText("You are at city library Position 3" + " "
 								+ LScanResult1.level);
 						Toast.makeText(getApplicationContext(),"P3",Toast.LENGTH_SHORT).show();
 
-						// remove the previous position 
-						lv6.setBackgroundColor(Color.TRANSPARENT);
-						lparams6.topMargin = 42;	//42
-						lparams6.leftMargin = 165;	//165
-						rlMain.addView(lv6, lparams6);
+						// remove the previous position
+						lv2.setBackgroundColor(Color.TRANSPARENT);
+						lparams2.topMargin = 210;	//210
+						lparams2.leftMargin = 10;	//10
+						rlMain.addView(lv2, lparams2);
+
+						lv1.setBackgroundColor(Color.TRANSPARENT);
+						lparams1.topMargin = 335;	//335
+						lparams1.leftMargin = 55;	//55
+						rlMain.addView(lv1, lparams1);
 
 
-						lv5.setBackgroundColor(Color.BLUE);
-						lparams5.topMargin = 210;	//210
-						lparams5.leftMargin = 10;	//10
-						rlMain.addView(lv5, lparams5);
+
+						lv3.setBackgroundColor(Color.BLUE);
+						lparams3.topMargin = 42;	//42
+						lparams3.leftMargin = 200;	//200
+						rlMain.addView(lv3, lparams3);
 
 					}	
-					*/
+					
 				/*
 					}
 					if(LScanResult1.level >= -60)   // less than or equal -60dB
@@ -837,6 +880,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 			}
 	}
 }
+
 /*
  * private void DisplayWifiState() {
  * 
