@@ -248,6 +248,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 			
 			public void onClick(View view) {
 
+				// Display message that Wi-Fi is off
 				if (!mWifiAdmin.mWifiManager.isWifiEnabled()){
 					Toast.makeText(getApplicationContext(),"Please switch on Wi-Fi",Toast.LENGTH_SHORT).show();
 					//finish();
