@@ -77,8 +77,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 	boolean Rcheck, Rcheck1, Rcheck2;
 	boolean HcheckL1, HcheckL2,HcheckL3, HcheckH1, HcheckH2, HcheckH3;
 	boolean Lcheck1, Lcheck2, Lcheck3, Lcheck4, Lcheck5, Lcheck6, Lcheck7,
-			Lcheck8, Lcheck9;
-	boolean usedHOMEMap = false, usedAH1Map = false, usedLibraryMap = false;
+			Lcheck8, Lcheck9, Lcheck10, Lcheck11, Lcheck12;
 
 	private float currentDegree = 0f;
 	private SensorManager mSensorManager;
@@ -131,9 +130,6 @@ public class MainActivity extends Activity implements SensorEventListener {
 		// Handle item selection
 		switch (item.getItemId()) {
 		case R.id.AgHort_1:
-			// map = (MapView) findViewById(R.id.map);
-			// map.setMapImage(ImageUtil.loadBitmapFromResource(getResources(),R.drawable.map1));
-
 			map = (ImageView) findViewById(R.id.mapTest);
 
 			Bitmap bimtBitmap1 = BitmapFactory.decodeResource(getResources(),
@@ -142,9 +138,6 @@ public class MainActivity extends Activity implements SensorEventListener {
 			return true;
 
 		case R.id.AgHort_2:
-			// map = (MapView) findViewById(R.id.map);
-			// map.setMapImage(ImageUtil.loadBitmapFromResource(getResources(),R.drawable.map2));
-
 			map = (ImageView) findViewById(R.id.mapTest);
 			Bitmap bimtBitmap2 = BitmapFactory.decodeResource(getResources(),
 					R.drawable.map2);
@@ -152,9 +145,6 @@ public class MainActivity extends Activity implements SensorEventListener {
 			return true;
 
 		case R.id.AgHort_3:
-			// map = (MapView) findViewById(R.id.map);
-			// map.setMapImage(ImageUtil.loadBitmapFromResource(getResources(),R.drawable.map3));
-
 			map = (ImageView) findViewById(R.id.mapTest);
 			Bitmap bimtBitmap3 = BitmapFactory.decodeResource(getResources(),
 					R.drawable.map3);
@@ -166,7 +156,6 @@ public class MainActivity extends Activity implements SensorEventListener {
 			Bitmap HomeBitmap = BitmapFactory.decodeResource(getResources(),
 					R.drawable.homemap);
 			map.setImageBitmap(HomeBitmap);
-			usedHOMEMap = true;
 			return true;
 
 		case R.id.librarymap:
@@ -175,7 +164,6 @@ public class MainActivity extends Activity implements SensorEventListener {
 			Bitmap LibraryBitmap = BitmapFactory.decodeResource(getResources(),
 					R.drawable.librarymap);
 			map.setImageBitmap(LibraryBitmap);
-			usedLibraryMap = true;
 			return true;
 
 		case R.id.Sensor_On:
@@ -257,8 +245,14 @@ public class MainActivity extends Activity implements SensorEventListener {
 		ScanButton = (Button) findViewById(R.id.ScanButton);
 
 		ScanButton.setOnClickListener(new OnClickListener() {
+			
 			public void onClick(View view) {
 
+				if (!mWifiAdmin.mWifiManager.isWifiEnabled()){
+					Toast.makeText(getApplicationContext(),"Please switch on Wi-Fi",Toast.LENGTH_SHORT).show();
+					//finish();
+				}
+				
 				getAllNetWorkList();
 			}
 		});
@@ -419,11 +413,6 @@ public class MainActivity extends Activity implements SensorEventListener {
 			lsb3 = new StringBuffer();
 			lsb4 = new StringBuffer();
 			lsb5 = new StringBuffer();
-			lsb1 = new StringBuffer();
-			lsb2 = new StringBuffer();
-			lsb3 = new StringBuffer();
-			lsb4 = new StringBuffer();
-			lsb5 = new StringBuffer();
 			allNetWork.setText("");
 		}
 
@@ -454,6 +443,8 @@ public class MainActivity extends Activity implements SensorEventListener {
 			ImageView lv2 = new ImageView(this);
 			ImageView lv3 = new ImageView(this);
 			ImageView lv4 = new ImageView(this);
+			hv1.setBackgroundColor(Color.TRANSPARENT);
+			hv2.setBackgroundColor(Color.TRANSPARENT);
 			lv1.setBackgroundColor(Color.TRANSPARENT);
 			lv2.setBackgroundColor(Color.TRANSPARENT);
 			lv3.setBackgroundColor(Color.TRANSPARENT);
@@ -464,11 +455,28 @@ public class MainActivity extends Activity implements SensorEventListener {
 			HcheckL1 = false;
 			HcheckL2 = false;
 			HcheckL3 = false;
+			Lcheck1 = false;
+			Lcheck2 = false;
+			Lcheck3 = false;
+			Lcheck4 = false;
+			Lcheck5 = false;
+			Lcheck6 = false;
+			Lcheck7 = false;
+			Lcheck8 = false;
+			Lcheck9 = false;
+			Lcheck10 = false;
+			Lcheck11 = false;
+			Lcheck12 = false;
 			hsb1 = new StringBuffer();
 			hsb2 = new StringBuffer();
 			hsb3 = new StringBuffer();
 			hsb4 = new StringBuffer();
 			hsb5 = new StringBuffer();
+			lsb1 = new StringBuffer();
+			lsb2 = new StringBuffer();
+			lsb3 = new StringBuffer();
+			lsb4 = new StringBuffer();
+			lsb5 = new StringBuffer();
 
 			// Get Scan Result
 			// mScanResult = list.get(0);
@@ -672,12 +680,12 @@ public class MainActivity extends Activity implements SensorEventListener {
 						// iv.setImageResource(R.drawable.location_icon);						
 						
 
-						hv2.setBackgroundColor(Color.BLUE);
+						hv2.setBackgroundColor(Color.WHITE);
 						hparams2.topMargin = 100;
 						hparams2.leftMargin = 100;
 						rlMain.addView(hv2, hparams2);	
 						
-						hv1.setBackgroundColor(Color.WHITE);
+						hv1.setBackgroundColor(Color.BLUE);
 						hparams1.topMargin = 150;
 						hparams1.leftMargin = 230;
 						rlMain.addView(hv1, hparams1);
@@ -718,7 +726,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 					//Toast.makeText(getApplicationContext(),"Locate by NETGEAR_18 and Vodafone",Toast.LENGTH_SHORT).show();
 
 					// iv.setImageResource(R.drawable.location_icon);
-					hv2.setBackgroundColor(Color.TRANSPARENT);
+					hv2.setBackgroundColor(Color.WHITE);
 					hparams2.topMargin = 150;
 					hparams2.leftMargin = 230;
 					rlMain.addView(hv2, hparams2);
@@ -734,70 +742,86 @@ public class MainActivity extends Activity implements SensorEventListener {
 			// -------------------------------------------------------------------------------------------------------------//
 
 			// City Library test
-			if (HcheckL1 == false && HcheckL2 == false && HcheckH1 == false && HcheckH2 == false) {
-
+			if (HcheckL1 == false && HcheckL2 == false && HcheckL3 == false && HcheckH1 == false && HcheckH2 == false) {
+				
+				//Load and display Library Map
 				map = (ImageView) findViewById(R.id.mapTest);
 				Bitmap LibraryBitmap = BitmapFactory.decodeResource(
 						getResources(), R.drawable.librarymap);
 				map.setImageBitmap(LibraryBitmap);
-
-				// if(LScanResult1.level < -70) // less than or equal -78dB
-				// {
-				hsb1 = new StringBuffer();
-				hsb2 = new StringBuffer();
 				allNetWork.setText("");
 
 				// For Library Use
-				// Position 1
-				// if (lsb1.toString().equals("62:f3:a3:ce:d8:9c")) //
-				// VodafoneD89F
-				if (lsb1.toString().equals("c2:9f:db:67:5a:57")
-						&& (LScanResult1.level < -70)
-						|| lsb1.toString().equals("00:13:c3:f1:37:b1")
-						|| lsb1.toString().equals("62:f3:a3:ce:d8:9c")
-						|| lsb1.toString().equals("58:98:35:96:74:d1")) // Palmerston
-																		// North
-																		// Library
+				
+//----------------- Position 1--------------------------------------------
+
+				if (lsb1.toString().equals("c2:9f:db:67:5a:57")&& (LScanResult1.level > -70)	//PN Library wi-fi
+						|| lsb1.toString().equals("00:13:c3:f1:37:b1")		//studentcity
+						|| lsb1.toString().equals("00:13:c4:c3:9c:31")		//studentcity
+						|| lsb1.toString().equals("00:13:c4:c3:9c:30")		//inspirefreewifi
+						|| lsb1.toString().equals("00:13:c3:f1:37:b0")		//inspirefreewifi
+						|| lsb1.toString().equals("62:f3:a3:ce:d8:9c")		//vodafoneD89F
+						|| lsb1.toString().equals("f0:7d:68:f7:cb:9e")		//GCI
+						|| lsb1.toString().equals("00:17:df:10:84:10")		//PPTA
+						|| lsb1.toString().equals("00:18:4d:d3:d7:e8")		//PPTA1
+						|| lsb1.toString().equals("24:db:ac:71:58:5b")		//VodafoneMobileWiFi-585B61
+						|| lsb1.toString().equals("00:0c:c3:e5:a7:88")		//Telecom-6320
+						|| lsb1.toString().equals("00:22:75:29:f0:99")		//Barista Cafe
+						|| lsb1.toString().equals("58:98:35:96:74:d1")) 
 				{
 					Lcheck1 = true;
-					Toast.makeText(getApplicationContext(), lsb1.toString(),
-							Toast.LENGTH_SHORT).show();
-				}
-				// if (lsb2.toString().equals("00:13:c3:f1:37:b1"))
-				// //studentcity
-				if (lsb2.toString().equals("00:13:c3:f1:37:b0")
-						|| lsb2.toString().equals("c2:9f:db:67:5a:57")
-						&& (LScanResult2.level < -70)
-						|| lsb2.toString().equals("62:f3:a3:ce:d8:9c")) // inspirefreewifi
-				{
-					Lcheck2 = true;
-					Toast.makeText(getApplicationContext(), lsb2.toString(),
+					Toast.makeText(getApplicationContext(), "Lcheck1 OK",
 							Toast.LENGTH_SHORT).show();
 				}
 
-				// if (lsb3.toString().equals("c2:9f:db:67:5a:57")) //
-				// Plamerston North city Library
-				if (lsb3.toString().equals("00:13:c3:f1:37:b1")
-						|| lsb3.toString().equals("00:13:c3:f1:37:b0") // mixed
-																		// Lscanresult3
-																		// and 4
-																		// mac
-																		// address
-						|| lsb3.toString().equals("c2:9f:db:67:5a:57")
-						&& (LScanResult3.level < -70)) {
+				if (lsb2.toString().equals("c2:9f:db:67:5a:57")&& (LScanResult2.level > -70)	//PN Library wi-fi
+						|| lsb2.toString().equals("00:13:c3:f1:37:b1")		//studentcity
+						|| lsb2.toString().equals("00:13:c4:c3:9c:31")		//studentcity
+						|| lsb2.toString().equals("00:13:c4:c3:9c:30")		//inspirefreewifi
+						|| lsb2.toString().equals("00:13:c3:f1:37:b0")		//inspirefreewifi
+						|| lsb2.toString().equals("62:f3:a3:ce:d8:9c")		//vodafoneD89F
+						|| lsb2.toString().equals("f0:7d:68:f7:cb:9e")		//GCI
+						|| lsb2.toString().equals("00:17:df:10:84:10")		//PPTA
+						|| lsb2.toString().equals("00:18:4d:d3:d7:e8")		//PPTA1
+						|| lsb2.toString().equals("24:db:ac:71:58:5b")		//VodafoneMobileWiFi-585B61
+						|| lsb2.toString().equals("00:0c:c3:e5:a7:88")		//Telecom-6320
+						|| lsb2.toString().equals("00:22:75:29:f0:99")		//Barista Cafe
+						|| lsb2.toString().equals("58:98:35:96:74:d1")) 
+				{
+					Lcheck2 = true;
+					Toast.makeText(getApplicationContext(), "Lcheck2 OK",
+							Toast.LENGTH_SHORT).show();
+				}
+
+				if (lsb3.toString().equals("c2:9f:db:67:5a:57")&& (LScanResult3.level > -70)	//PN Library wi-fi
+						|| lsb3.toString().equals("00:13:c3:f1:37:b1")		//studentcity
+						|| lsb3.toString().equals("00:13:c4:c3:9c:31")		//studentcity
+						|| lsb3.toString().equals("00:13:c4:c3:9c:30")		//inspirefreewifi
+						|| lsb3.toString().equals("00:13:c3:f1:37:b0")		//inspirefreewifi
+						|| lsb3.toString().equals("62:f3:a3:ce:d8:9c")		//vodafoneD89F
+						|| lsb3.toString().equals("f0:7d:68:f7:cb:9e")		//GCI
+						|| lsb3.toString().equals("00:17:df:10:84:10")		//PPTA
+						|| lsb3.toString().equals("00:18:4d:d3:d7:e8")		//PPTA1
+						|| lsb3.toString().equals("24:db:ac:71:58:5b")		//VodafoneMobileWiFi-585B61
+						|| lsb3.toString().equals("00:0c:c3:e5:a7:88")		//Telecom-6320
+						|| lsb3.toString().equals("00:22:75:29:f0:99")		//Barista Cafe
+						|| lsb3.toString().equals("58:98:35:96:74:d1")) 
+				{
 					Lcheck3 = true;
-					Toast.makeText(getApplicationContext(), lsb3.toString(),
+					Toast.makeText(getApplicationContext(), "Lcheck3 OK",
 							Toast.LENGTH_SHORT).show();
 				}
 
 				if (Lcheck1 == true && Lcheck2 == true && Lcheck3) {
 					allNetWork.setText("You are at city library Position 1"
 							+ "  " + LScanResult1.level);
+					Toast.makeText(getApplicationContext(), "Lcheck1, Lcheck2 and Lcheck3 Pass",
+							Toast.LENGTH_SHORT).show();
 					Toast.makeText(getApplicationContext(), "P1",
 							Toast.LENGTH_SHORT).show();
 
 					// remove the previous position
-					lv2.setBackgroundColor(Color.TRANSPARENT);
+					lv2.setBackgroundColor(Color.WHITE);
 					lparams2.topMargin = 210; // 210
 					lparams2.leftMargin = 10; // 10
 					rlMain.addView(lv2, lparams2);
@@ -807,33 +831,37 @@ public class MainActivity extends Activity implements SensorEventListener {
 					lparams1.leftMargin = 55; // 55
 					rlMain.addView(lv1, lparams1);
 
-				} else if (Lcheck1 == false || Lcheck2 == false
+				} else
+					Lcheck1 = false;
+					Lcheck2 = false;
+					Lcheck3 = false;
+					
+//----------------------- Position 2-----------------------------------------------------------
+				 if (Lcheck1 == false || Lcheck2 == false
 						|| Lcheck3 == false) {
-					// Position 2
-					if (lsb1.toString().equals("c2:9f:db:67:5a:57")
+					
+				if (lsb1.toString().equals("c2:9f:db:67:5a:57")
 							&& (LScanResult1.level > -70)
-							|| lsb2.toString().equals("00:13:c3:f1:37:b1")) // Palmerston
-																			// North
-																			// Library
+							|| lsb2.toString().equals("00:13:c3:f1:37:b1"))
 					{
 						Lcheck4 = true;
 						Toast.makeText(getApplicationContext(),
-								lsb1.toString(), Toast.LENGTH_SHORT).show();
+								"Lcheck4 OK", Toast.LENGTH_SHORT).show();
 					}
 					if (lsb2.toString().equals("00:13:c3:f1:37:b1")
 							|| lsb1.toString().equals("c2:9f:db:67:5a:57")
-							&& (LScanResult1.level > -70)) // inspirefreewifi
+							&& (LScanResult1.level > -70)) 
 					{
 						Lcheck5 = true;
 						Toast.makeText(getApplicationContext(),
-								lsb2.toString(), Toast.LENGTH_SHORT).show();
+								"Lcheck5 OK", Toast.LENGTH_SHORT).show();
 					}
 
 					if (lsb4.toString().equals("24:db:ac:71:58:5b")) //
 					{
 						Lcheck6 = true;
 						Toast.makeText(getApplicationContext(),
-								lsb4.toString(), Toast.LENGTH_SHORT).show();
+								"Lcheck6 OK", Toast.LENGTH_SHORT).show();
 					}
 
 					if (Lcheck4 == true && Lcheck5 == true && Lcheck6 == true) {
@@ -843,7 +871,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 								Toast.LENGTH_SHORT).show();
 
 						// remove the previous position
-						lv1.setBackgroundColor(Color.TRANSPARENT);
+						lv1.setBackgroundColor(Color.WHITE);
 						lparams1.topMargin = 335; // 335
 						lparams1.leftMargin = 55; // 55
 						rlMain.addView(lv1, lparams1);
@@ -853,17 +881,22 @@ public class MainActivity extends Activity implements SensorEventListener {
 						lparams2.leftMargin = 10; // 10
 						rlMain.addView(lv2, lparams2);
 
-					} else if (Lcheck4 == false || Lcheck5 == false
-							|| Lcheck6 == false)
-
-						// Position 3
-						if (lsb1.toString().equals("64:16:f0:ea:d7:35")
+					} else
+						Lcheck4 = false;
+						Lcheck5 = false;
+						Lcheck6 = false;
+				 }
+//------------------------Position 3--------------------------------------------------------------
+				 if (Lcheck4 == false || Lcheck5 == false
+							|| Lcheck6 == false){
+						
+					if (lsb1.toString().equals("64:16:f0:ea:d7:35")
 								|| lsb1.toString().equals("c2:9f:db:67:5a:28")
 								|| lsb1.toString().equals("00:12:44:ba:a6:90")
 								|| lsb1.toString().equals("00:12:44:ba:a6:91")
 								|| lsb1.toString().equals("c2:9f:db:67:5a:54")
 								|| lsb1.toString().equals("00:12:44:b8:4e:80")
-								|| lsb1.toString().equals("c2:9f:db:67:59:8a")
+								|| lsb1.toString().equals("c2:9f:db:67:59:8a") && LScanResult1.level > -70
 								|| lsb1.toString().equals("00:60:64:6a:e7:20")
 								|| lsb1.toString().equals("00:12:44:b8:4e:81")
 								|| lsb1.toString().equals("00:0c:c3:e6:29:90")
@@ -884,7 +917,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 							|| lsb2.toString().equals("00:12:44:ba:a6:91")
 							|| lsb2.toString().equals("c2:9f:db:67:5a:54")
 							|| lsb2.toString().equals("00:12:44:b8:4e:80")
-							|| lsb2.toString().equals("c2:9f:db:67:59:8a")
+							|| lsb2.toString().equals("c2:9f:db:67:59:8a") && LScanResult2.level > -70
 							|| lsb2.toString().equals("00:60:64:6a:e7:20")
 							|| lsb2.toString().equals("00:12:44:b8:4e:81")
 							|| lsb2.toString().equals("00:0c:c3:e6:29:90")
@@ -906,7 +939,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 							|| lsb3.toString().equals("00:12:44:ba:a6:91")
 							|| lsb3.toString().equals("c2:9f:db:67:5a:54")
 							|| lsb3.toString().equals("00:12:44:b8:4e:80")
-							|| lsb3.toString().equals("c2:9f:db:67:59:8a")
+							|| lsb3.toString().equals("c2:9f:db:67:59:8a") && LScanResult3.level > -70
 							|| lsb3.toString().equals("00:60:64:6a:e7:20")
 							|| lsb3.toString().equals("00:12:44:b8:4e:81")
 							|| lsb3.toString().equals("00:0c:c3:e6:29:90")
@@ -929,12 +962,12 @@ public class MainActivity extends Activity implements SensorEventListener {
 								Toast.LENGTH_SHORT).show();
 
 						// remove the previous position
-						lv2.setBackgroundColor(Color.TRANSPARENT);
+						lv2.setBackgroundColor(Color.WHITE);
 						lparams2.topMargin = 210; // 210
 						lparams2.leftMargin = 10; // 10
 						rlMain.addView(lv2, lparams2);
 
-						lv1.setBackgroundColor(Color.TRANSPARENT);
+						lv1.setBackgroundColor(Color.WHITE);
 						lparams1.topMargin = 335; // 335
 						lparams1.leftMargin = 55; // 55
 						rlMain.addView(lv1, lparams1);
@@ -943,58 +976,94 @@ public class MainActivity extends Activity implements SensorEventListener {
 						lparams3.topMargin = 42; // 42
 						lparams3.leftMargin = 200; // 200
 						rlMain.addView(lv3, lparams3);
+						
+						lv4.setBackgroundColor(Color.WHITE); 
+					  	lparams4.topMargin = 42; //90 
+					  	lparams4.leftMargin = 290; //280
+					  	rlMain.addView(lv4, lparams4);
 
 					}
+					else if(Lcheck7 == true || Lcheck8 == true || Lcheck9 == true)
+						Lcheck7 = false;
+						Lcheck8 = false;
+						Lcheck9 = false;
+				 }
+//--------------------------- Position 4-------------------------------------------------------------
+					  if (Lcheck7 == false && Lcheck8 == false && Lcheck9 == false) {
+						
+						  if (lsb1.toString().equals("00:22:75:60:28:b4")			//design_school_2
+								  ||lsb1.toString().equals("c2:9f:db:67:59:8a") && LScanResult1.level < -70		//PN Library wi-fi
+								  ||lsb1.toString().equals("c8:9c:1d:fd:7c:80")		//pavise
+								  ||lsb1.toString().equals("00:12:44:b8:4e:80")		//inspirefreewifi
+								  ||lsb1.toString().equals("00:12:44:b8:4e:81")		//studentcity
+								  ||lsb1.toString().equals("00:0c:42:65:cf:58")		//studentcity
+								  ||lsb1.toString().equals("02:0c:42:65:cf:58")		//inspirefreewifi
+								  ||lsb1.toString().equals("00:1b:11:1c:68:08")		//Boardroom
+								  ||lsb1.toString().equals("00:0e:8f:a3:84:ca")		//AFL
+								  ||lsb1.toString().equals("c2:9f:db:67:5a:54")		//PN Library wi-fi	
+								  ||lsb1.toString().equals("00:60:64:6b:08:ea"))		//Bellas Cafe
+								  {
+							  			Lcheck10 = true;
+								  }
 
-					/*
-					 * } if(LScanResult1.level >= -60) // less than or equal
-					 * -60dB {
-					 */
-					/*
-					 * // Position 4 if
-					 * (LScanResult1.BSSID.toString().equals("30:46:9a:1d:b0:60"
-					 * )) // Plamerston North city Library { Lcheck7 = true; }
-					 * 
-					 * if (Lcheck5 == true && Lcheck6 == true) {
-					 * allNetWork.setText("You are at city library Position 4" +
-					 * " " + LScanResult1.level);
-					 * Toast.makeText(getApplicationContext
-					 * (),"P4",Toast.LENGTH_SHORT).show();
-					 * 
-					 * // remove the previous position
-					 * 
-					 * 
-					 * lv7.setBackgroundColor(Color.BLUE); lparams7.topMargin =
-					 * 90; //90 lparams7.leftMargin = 2880; //280
-					 * rlMain.addView(lv7, lparams7);
-					 * 
-					 * }
-					 */
+						  if (lsb2.toString().equals("00:22:75:60:28:b4")			//design_school_2
+								  ||lsb2.toString().equals("c2:9f:db:67:59:8a") && LScanResult2.level < -70		//PN Library wi-fi
+								  ||lsb2.toString().equals("c8:9c:1d:fd:7c:80")		//pavise
+								  ||lsb2.toString().equals("00:12:44:b8:4e:80")		//inspirefreewifi
+								  ||lsb2.toString().equals("00:12:44:b8:4e:81")		//studentcity
+								  ||lsb2.toString().equals("00:0c:42:65:cf:58")		//studentcity
+								  ||lsb2.toString().equals("02:0c:42:65:cf:58")		//inspirefreewifi
+								  ||lsb2.toString().equals("00:1b:11:1c:68:08")		//Boardroom
+								  ||lsb2.toString().equals("00:0e:8f:a3:84:ca")		//AFL
+								  ||lsb2.toString().equals("c2:9f:db:67:5a:54")		//PN Library wi-fi	
+								  ||lsb2.toString().equals("00:60:64:6b:08:ea"))		//Bellas Cafe
+								  {
+							  			Lcheck11 = true;
+								  }
+						  
+						  if (lsb3.toString().equals("00:22:75:60:28:b4")			//design_school_2
+								  ||lsb3.toString().equals("c2:9f:db:67:59:8a") && LScanResult3.level > -70		//PN Library wi-fi
+								  ||lsb3.toString().equals("c8:9c:1d:fd:7c:80")		//pavise
+								  ||lsb3.toString().equals("00:12:44:b8:4e:80")		//inspirefreewifi
+								  ||lsb3.toString().equals("00:12:44:b8:4e:81")		//studentcity
+								  ||lsb3.toString().equals("00:0c:42:65:cf:58")		//studentcity
+								  ||lsb3.toString().equals("02:0c:42:65:cf:58")		//inspirefreewifi
+								  ||lsb3.toString().equals("00:1b:11:1c:68:08")		//Boardroom
+								  ||lsb3.toString().equals("00:0e:8f:a3:84:ca")		//AFL
+								  ||lsb3.toString().equals("c2:9f:db:67:5a:54")		//PN Library wi-fi	
+								  ||lsb3.toString().equals("00:60:64:6b:08:ea"))		//Bellas Cafe
+								  {
+							  		Lcheck12 = true;
+								  }
+						  
+						  if(Lcheck10 == true && Lcheck11 == true && Lcheck12 == true){
+						  
+							  	allNetWork.setText("You are at city library Position 4" +
+							  				" " + LScanResult1.level);
+							  	Toast.makeText(getApplicationContext(),"P4",Toast.LENGTH_SHORT).show();
+					  
+					  // remove the previous position
+					  
+					  
+							  	lv4.setBackgroundColor(Color.BLUE); 
+							  	lparams4.topMargin = 42; //90 
+							  	lparams4.leftMargin = 290; //280
+							  	rlMain.addView(lv4, lparams4);
+					  
+							  	lv3.setBackgroundColor(Color.WHITE);
+								lparams3.topMargin = 42; // 42
+								lparams3.leftMargin = 200; // 200
+								rlMain.addView(lv3, lparams3);
+						  }		  
+					  }
+			/*		
+					//Position 5
+					 lv7.setBackgroundColor(Color.BLUE); lparams7.topMargin =
+							  90; //90 
+							  lparams7.leftMargin = 2880; //280
+							  rlMain.addView(lv7, lparams7);
+							  */
 				}
 			}
 		}
 	}
-}
-
-/*
- * private void DisplayWifiState() {
- * 
- * ConnectivityManager myConnManager = (ConnectivityManager)
- * getSystemService(CONNECTIVITY_SERVICE);
- * myConnManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI); WifiManager
- * myWifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
- * WifiInfo myWifiInfo = myWifiManager.getConnectionInfo();
- * textBssid.setText(myWifiInfo.getBSSID()); String CurrentMac =
- * "a0:21:b7:70:b4:cc"; String CurrentMac1 = "ac:16:2d:e7:e4:f2"; String
- * SearchedMac = textBssid.getText().toString();
- * 
- * if (SearchedMac.equals(CurrentMac)) { Toast toast =
- * Toast.makeText(getApplicationContext(), "Matches", Toast.LENGTH_SHORT);
- * toast.show(); } else { Toast toast = Toast.makeText(getApplicationContext(),
- * "Noooo", Toast.LENGTH_SHORT); toast.show(); }
- * 
- * if (SearchedMac.equals(CurrentMac1)) { Toast toast =
- * Toast.makeText(getApplicationContext(), "Matches", Toast.LENGTH_SHORT);
- * toast.show(); } else { Toast toast = Toast.makeText(getApplicationContext(),
- * "Noooo", Toast.LENGTH_SHORT); toast.show(); } }
- */

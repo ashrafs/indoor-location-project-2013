@@ -12,7 +12,7 @@ import android.net.wifi.WifiManager.WifiLock;
 public class WifiAdmin {
 
 	// Define a WifiManager Object
-	private WifiManager mWifiManager;
+	WifiManager mWifiManager;
 
 	// Define a WifiInfo Object
 	private WifiInfo mWifiInfo;
