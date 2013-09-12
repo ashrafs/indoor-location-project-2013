@@ -22,7 +22,9 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -66,8 +68,9 @@ public class MainActivity extends Activity implements SensorEventListener {
 	private StringBuffer lsb3 = new StringBuffer();
 	private StringBuffer lsb4 = new StringBuffer();
 	private StringBuffer lsb5 = new StringBuffer();
-	private Button ScanButton, TakeButton;
-	private TextView allNetWork;
+	private Button TakeButton;
+	private ImageButton ScanButton;
+	private TextView allNetWork,destinationSet;
 	private TextView locationtext;
 	private WifiAdmin mWifiAdmin;
 	private List<ScanResult> list;
@@ -114,6 +117,7 @@ public class MainActivity extends Activity implements SensorEventListener {
        //map.setMapImage(ImageUtil.loadBitmapFromResource(getResources(), R.drawable.homemap));
 		
 		allNetWork = (TextView) findViewById(R.id.allNetWork);
+		destinationSet = (TextView) findViewById(R.id.destinationSet);
 		addListenerOnButton();
 		addListenerOnButton1();
 
@@ -129,52 +133,36 @@ public class MainActivity extends Activity implements SensorEventListener {
 
 		// Handle item selection
 		switch (item.getItemId()) {
-		case R.id.AgHort_1:
-			//map = (ImageView) findViewById(R.id.mapTest);
+		case R.id.lposition1:
 			map = (MapView) findViewById(R.id.map);
-
-			//Bitmap bimtBitmap1 = BitmapFactory.decodeResource(getResources(),R.drawable.map1);
-			//map.setImageBitmap(bimtBitmap1);
-			map.setMapImage(ImageUtil.loadBitmapFromResource(getResources(), R.drawable.map1));
-			return true;
-
-		case R.id.AgHort_2:
-			//map = (ImageView) findViewById(R.id.mapTest);
-			map = (MapView) findViewById(R.id.map);
-			
-			//Bitmap bimtBitmap2 = BitmapFactory.decodeResource(getResources(),R.drawable.map2);
-			//map.setImageBitmap(bimtBitmap2);
-			map.setMapImage(ImageUtil.loadBitmapFromResource(getResources(), R.drawable.map2));
-			return true;
-
-		case R.id.AgHort_3:
-			//map = (ImageView) findViewById(R.id.mapTest);
-			map = (MapView) findViewById(R.id.map);
-			
-			//Bitmap bimtBitmap3 = BitmapFactory.decodeResource(getResources(),R.drawable.map3);
-			//map.setImageBitmap(bimtBitmap3);
-			map.setMapImage(ImageUtil.loadBitmapFromResource(getResources(), R.drawable.map3));
-			
-			return true;
-
-		case R.id.homemap:
-			//map = (ImageView) findViewById(R.id.mapTest);
-			map = (MapView) findViewById(R.id.map);
-			
-			//Bitmap HomeBitmap = BitmapFactory.decodeResource(getResources(),R.drawable.homemap);
-			//map.setImageBitmap(HomeBitmap);
-			map.setMapImage(ImageUtil.loadBitmapFromResource(getResources(), R.drawable.homemap));
-
-			return true;
-
-		case R.id.librarymap:
-			//map = (ImageView) findViewById(R.id.mapTest);
-			map = (MapView) findViewById(R.id.mapTest);
-			
-			//Bitmap LibraryBitmap = BitmapFactory.decodeResource(getResources(),R.drawable.librarymap);
-			//map.setImageBitmap(LibraryBitmap);
 			map.setMapImage(ImageUtil.loadBitmapFromResource(getResources(), R.drawable.librarymap));
+			MapLocation[] locations1 = new MapLocation[] {new StateLocation(this, 180, 740, R.drawable.location_icon, R.drawable.location_icon_selected, "Position 1")};
+			map.setLocations(locations1);
+			destinationSet.setText("You have choose Position 1");
+			return true;
+		
+		case R.id.lposition2:
+			map = (MapView) findViewById(R.id.map);	
+			map.setMapImage(ImageUtil.loadBitmapFromResource(getResources(), R.drawable.librarymap));
+			MapLocation[] locations2 = new MapLocation[] {new StateLocation(this, 70, 450, R.drawable.location_icon, R.drawable.location_icon_selected, "Position 2")};
+			map.setLocations(locations2);
+			destinationSet.setText("You have choose Position 2");
+			return true;
 			
+		case R.id.lposition3:
+			map = (MapView) findViewById(R.id.map);	
+			map.setMapImage(ImageUtil.loadBitmapFromResource(getResources(), R.drawable.librarymap));
+		  	MapLocation[] locations3 = new MapLocation[] {new StateLocation(this, 530, 10, R.drawable.location_icon, R.drawable.location_icon_selected, "Position 3")};
+			map.setLocations(locations3);
+			destinationSet.setText("You have choose Position 3");
+			return true;
+			
+		case R.id.lposition4:
+			map = (MapView) findViewById(R.id.map);	
+			map.setMapImage(ImageUtil.loadBitmapFromResource(getResources(), R.drawable.librarymap));
+			MapLocation[] locations4 = new MapLocation[] {new StateLocation(this, 780, 10, R.drawable.location_icon, R.drawable.location_icon_selected, "Position 4")};
+			map.setLocations(locations4);
+			destinationSet.setText("You have choose Position 4");
 			return true;
 
 		case R.id.Sensor_On:
@@ -220,7 +208,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 	 */
 	private void addListenerOnButton() {
 
-		ScanButton = (Button) findViewById(R.id.ScanButton);
+		ScanButton = (ImageButton) findViewById(R.id.ScanButton);
 
 		ScanButton.setOnClickListener(new OnClickListener() {
 			
@@ -239,20 +227,79 @@ public class MainActivity extends Activity implements SensorEventListener {
 
 	private void addListenerOnButton1() {
 
-		final Context context = this;
+		Button button=(Button) findViewById(R.id.changeMap); 
+		 button.setOnClickListener(new OnClickListener() {       
+		        @Override 
+		        public void onClick(View v) { 
+		            // TODO Auto-generated method stub 
+		            //第二个参数是该popupmenu将要依附于哪个view上，如果该view下面有空间它就在下面显示，否则在其上面 
+		            PopupMenu popupMenu=new PopupMenu(getApplicationContext(), allNetWork); 
+		            popupMenu.getMenuInflater().inflate(R.menu.popupmenu,popupMenu.getMenu()); 
+		            popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() { 
+		                 
+		                @Override 
+		                public boolean onMenuItemClick(MenuItem item) { 
+		                    // TODO Auto-generated method stub 
+		                    //Toast.makeText(getApplicationContext(), item.getTitle(),1000).show(); 
+		                	switch(item.getItemId()){
+		                		                	
+		                	case R.id.AgHort_1:
+		            			//map = (ImageView) findViewById(R.id.mapTest);
+		            			map = (MapView) findViewById(R.id.map);
 
-		TakeButton = (Button) findViewById(R.id.takeMe);
+		            			//Bitmap bimtBitmap1 = BitmapFactory.decodeResource(getResources(),R.drawable.map1);
+		            			//map.setImageBitmap(bimtBitmap1);
+		            			map.setMapImage(ImageUtil.loadBitmapFromResource(getResources(), R.drawable.map1));
+		            			return true;
 
-		TakeButton.setOnClickListener(new View.OnClickListener() {
+		            		case R.id.AgHort_2:
+		            			//map = (ImageView) findViewById(R.id.mapTest);
+		            			map = (MapView) findViewById(R.id.map);
+		            			
+		            			//Bitmap bimtBitmap2 = BitmapFactory.decodeResource(getResources(),R.drawable.map2);
+		            			//map.setImageBitmap(bimtBitmap2);
+		            			map.setMapImage(ImageUtil.loadBitmapFromResource(getResources(), R.drawable.map2));
+		            			return true;
 
-			@Override
-			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
-				Intent intent = new Intent(context, SettingDActivity.class);
-				startActivity(intent);
-			}
-		});
+		            		case R.id.AgHort_3:
+		            			//map = (ImageView) findViewById(R.id.mapTest);
+		            			map = (MapView) findViewById(R.id.map);
+		            			
+		            			//Bitmap bimtBitmap3 = BitmapFactory.decodeResource(getResources(),R.drawable.map3);
+		            			//map.setImageBitmap(bimtBitmap3);
+		            			map.setMapImage(ImageUtil.loadBitmapFromResource(getResources(), R.drawable.map3));
+		            			
+		            			return true;
+
+		            		case R.id.homemap:
+		            			//map = (ImageView) findViewById(R.id.mapTest);
+		            			map = (MapView) findViewById(R.id.map);
+		            			
+		            			//Bitmap HomeBitmap = BitmapFactory.decodeResource(getResources(),R.drawable.homemap);
+		            			//map.setImageBitmap(HomeBitmap);
+		            			map.setMapImage(ImageUtil.loadBitmapFromResource(getResources(), R.drawable.homemap));
+
+		            			return true;
+		            			
+		            		case R.id.librarymap:
+		            			//map = (ImageView) findViewById(R.id.mapTest);
+		            			map = (MapView) findViewById(R.id.map);
+		            			
+		            			//Bitmap HomeBitmap = BitmapFactory.decodeResource(getResources(),R.drawable.homemap);
+		            			//map.setImageBitmap(HomeBitmap);
+		            			map.setMapImage(ImageUtil.loadBitmapFromResource(getResources(), R.drawable.librarymap));
+
+		            			return true;
+		                }
+							return false;
+		                } 
+		            }); 
+		            //最后不要忘了调用show方法 
+		            popupMenu.show(); 
+		        } 
+		    }); 
 	}
+	
 
 	/**
 	 * Called when user clicks Zoom out button.
@@ -652,7 +699,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 				}
 
 			}
-			/*
+			
 			// -------------------------------------------------------------------------------------------------------------//
 
 			// City Library test
@@ -730,13 +777,13 @@ public class MainActivity extends Activity implements SensorEventListener {
 				}
 
 				if (Lcheck1 == true && Lcheck2 == true && Lcheck3) {
-				/*	allNetWork.setText("You are at city library Position 1"
+					allNetWork.setText("You are at city library Position 1"
 							+ "  " + LScanResult1.level);
 					Toast.makeText(getApplicationContext(), "Lcheck1, Lcheck2 and Lcheck3 Pass",
 							Toast.LENGTH_SHORT).show();
 					Toast.makeText(getApplicationContext(), "P1",
 							Toast.LENGTH_SHORT).show();
-
+/*
 					// remove the previous position
 					lv2.setBackgroundColor(Color.WHITE);
 					lparams2.topMargin = 210; // 210
@@ -747,7 +794,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 					lparams1.topMargin = 335; // 335
 					lparams1.leftMargin = 55; // 55
 					rlMain.addView(lv1, lparams1);
-				
+			*/	
 				MapLocation[] locations = new MapLocation[] {new StateLocation(this, 55, 335, R.drawable.location_icon, R.drawable.location_icon_selected, "Position 1")};
 				map.setLocations(locations);
 
@@ -789,7 +836,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 								+ " " + LScanResult1.level);
 						Toast.makeText(getApplicationContext(), "P2",
 								Toast.LENGTH_SHORT).show();
-
+/*
 						// remove the previous position
 						lv1.setBackgroundColor(Color.WHITE);
 						lparams1.topMargin = 335; // 335
@@ -800,7 +847,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 						lparams2.topMargin = 210; // 210
 						lparams2.leftMargin = 10; // 10
 						rlMain.addView(lv2, lparams2);
-						
+			*/			
 						MapLocation[] locations = new MapLocation[] {new StateLocation(this, 10, 210, R.drawable.location_icon, R.drawable.location_icon_selected, "Position 2")};
 						map.setLocations(locations);
 
@@ -884,7 +931,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 						Toast.makeText(getApplicationContext(), "P3",
 								Toast.LENGTH_SHORT).show();
 
-						// remove the previous position
+		/*				// remove the previous position
 						lv2.setBackgroundColor(Color.WHITE);
 						lparams2.topMargin = 210; // 210
 						lparams2.leftMargin = 10; // 10
@@ -904,7 +951,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 					  	lparams4.topMargin = 42; //90 
 					  	lparams4.leftMargin = 290; //280
 					  	rlMain.addView(lv4, lparams4);
-					  	
+			*/		  	
 					  	MapLocation[] locations = new MapLocation[] {new StateLocation(this, 200, 42, R.drawable.location_icon, R.drawable.location_icon_selected, "Position 3")};
 						map.setLocations(locations);
 
@@ -968,9 +1015,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 							  				" " + LScanResult1.level);
 							  	Toast.makeText(getApplicationContext(),"P4",Toast.LENGTH_SHORT).show();
 					  
-					  // remove the previous position
-					  
-					  
+			/*				  	// remove the previous position
 							  	lv4.setBackgroundColor(Color.BLUE); 
 							  	lparams4.topMargin = 42; //90 
 							  	lparams4.leftMargin = 290; //280
@@ -980,7 +1025,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 								lparams3.topMargin = 42; // 42
 								lparams3.leftMargin = 200; // 200
 								rlMain.addView(lv3, lparams3);
-								
+				*/				
 								MapLocation[] locations = new MapLocation[] {new StateLocation(this, 290, 42, R.drawable.location_icon, R.drawable.location_icon_selected, "Position 4")};
 								map.setLocations(locations);
 						  }		  
@@ -1090,3 +1135,4 @@ public class MainActivity extends Activity implements SensorEventListener {
 			}
 			}
 		}
+}

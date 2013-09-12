@@ -16,8 +16,8 @@
 	    android:id="@+id/map"
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content"
-	    android:layout_above="@+id/takeMe"
-	    android:layout_below="@+id/allNetWork"
+	    android:layout_above="@+id/changeMap"
+	    android:layout_below="@+id/destinationSet"
 	    android:background="@android:color/white" >
 
 		<RelativeLayout
@@ -33,12 +33,12 @@
     
 
     <Button
-        android:id="@+id/takeMe"
+        android:id="@+id/changeMap"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:text="Take Me" />
+        android:text="Change Map" />
 
     <Button
         android:id="@+id/button1"
@@ -58,15 +58,6 @@
         android:onClick="zoomOut"
         android:text="-" />
 
-    <Button
-        android:id="@+id/ScanButton"
-        android:layout_width="50dp"
-        android:layout_height="40dp"
-        android:layout_alignParentBottom="true"
-        android:layout_below="@+id/map"
-        android:layout_toRightOf="@+id/button2"
-        android:text="0" />
-
     <TextView
         android:id="@+id/allNetWork"
         android:layout_width="fill_parent"
@@ -74,5 +65,24 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:text="Your current location is" />
+
+    <ImageButton
+        android:id="@+id/ScanButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignTop="@+id/button2"
+        android:layout_toRightOf="@+id/button2"
+        android:background="@null"
+        android:src="@drawable/gbutton" />
+
+    <TextView
+        android:id="@+id/destinationSet"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="18dp"
+        android:text="Your destination is " />
 
 </RelativeLayout>

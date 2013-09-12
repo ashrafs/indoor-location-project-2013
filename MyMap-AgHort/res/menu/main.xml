@@ -2,23 +2,21 @@
 
     <item
         android:id="@+id/btnoptions"
-        android:title="Change Map">
+        android:title="Set Destination">
         <menu>
             <item
-                android:id="@+id/AgHort_1"
-                android:title="AgHort Level 1"/>
+                android:id="@+id/lposition1"
+                android:title="Library Position 1"/>
             <item
-                android:id="@+id/AgHort_2"
-                android:title="AgHort Level 2"/>
+                android:id="@+id/lposition2"
+                android:title="Library Position 2"/>
             <item
-                android:id="@+id/AgHort_3"
-                android:title="AgHort Level 3"/>
+                android:id="@+id/lposition3"
+                android:title="Library Position 3"/>
             <item
-                android:id="@+id/homemap"
-                android:title="Home Map"/>
-             <item
-                android:id="@+id/librarymap"
-                android:title="Library Map"/>
+                android:id="@+id/lposition4"
+                android:title="Library Position 4"/>
+
         </menu>
     </item>
     
