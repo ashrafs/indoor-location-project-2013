@@ -631,8 +631,8 @@ public class MainActivity extends Activity implements SensorEventListener {
 					
 					allNetWork.setText("You are around home" + " "+ HScanResult1.level);
 					
-					MapLocation[] locations = new MapLocation[] {new StateLocation(this, 700, 700, R.drawable.location_icon, R.drawable.location_icon_selected, "Addition Signals")};
-					map.setLocations(locations);
+					MapLocation[] Hlocations = new MapLocation[] {new StateLocation(this, 700, 700, R.drawable.location_icon, R.drawable.location_icon_selected, "Addition Signals")};
+					map.setLocations(Hlocations);
 
 				}
 				else
@@ -643,8 +643,8 @@ public class MainActivity extends Activity implements SensorEventListener {
 						
 						allNetWork.setText("You are around home" + " "+ HScanResult1.level);					
 						
-						MapLocation[] locations = new MapLocation[] {new StateLocation(this, 700, 400, R.drawable.location_icon, R.drawable.location_icon_selected, "My_room")};
-						map.setLocations(locations);
+						MapLocation[] Hlocations = new MapLocation[] {new StateLocation(this, 700, 400, R.drawable.location_icon, R.drawable.location_icon_selected, "My_room")};
+						map.setLocations(Hlocations);
 					}
 			}
 
@@ -719,7 +719,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 				
 //----------------- Position 1--------------------------------------------
 
-				if (lsb1.toString().equals("c2:9f:db:67:5a:57")&& (LScanResult1.level > -70)	//PN Library wi-fi
+				if (lsb1.toString().equals("c2:9f:db:67:5a:57")&& (LScanResult1.level <= -65)	//PN Library wi-fi greater(more) than -65db eg -66 -67...
 						|| lsb1.toString().equals("00:13:c3:f1:37:b1")		//studentcity
 						|| lsb1.toString().equals("00:13:c4:c3:9c:31")		//studentcity
 						|| lsb1.toString().equals("00:13:c4:c3:9c:30")		//inspirefreewifi
@@ -738,7 +738,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 							Toast.LENGTH_SHORT).show();
 				}
 
-				if (lsb2.toString().equals("c2:9f:db:67:5a:57")&& (LScanResult2.level > -70)	//PN Library wi-fi
+				if (lsb2.toString().equals("c2:9f:db:67:5a:57")&& (LScanResult2.level <= -65)	//PN Library wi-fi greater(more) than -65db eg -66 -67...
 						|| lsb2.toString().equals("00:13:c3:f1:37:b1")		//studentcity
 						|| lsb2.toString().equals("00:13:c4:c3:9c:31")		//studentcity
 						|| lsb2.toString().equals("00:13:c4:c3:9c:30")		//inspirefreewifi
@@ -757,7 +757,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 							Toast.LENGTH_SHORT).show();
 				}
 
-				if (lsb3.toString().equals("c2:9f:db:67:5a:57")&& (LScanResult3.level > -70)	//PN Library wi-fi
+				if (lsb3.toString().equals("c2:9f:db:67:5a:57")&& (LScanResult3.level <= -65)	//PN Library wi-fi greater(more) than -65db eg -66 -67...
 						|| lsb3.toString().equals("00:13:c3:f1:37:b1")		//studentcity
 						|| lsb3.toString().equals("00:13:c4:c3:9c:31")		//studentcity
 						|| lsb3.toString().equals("00:13:c4:c3:9c:30")		//inspirefreewifi
@@ -776,13 +776,15 @@ public class MainActivity extends Activity implements SensorEventListener {
 							Toast.LENGTH_SHORT).show();
 				}
 
-				if (Lcheck1 == true && Lcheck2 == true && Lcheck3) {
+				if (Lcheck1 == true && Lcheck2 == true && Lcheck3 == true) {
 					allNetWork.setText("You are at city library Position 1"
 							+ "  " + LScanResult1.level);
-					Toast.makeText(getApplicationContext(), "Lcheck1, Lcheck2 and Lcheck3 Pass",
-							Toast.LENGTH_SHORT).show();
+					//Toast.makeText(getApplicationContext(), "Lcheck1, Lcheck2 and Lcheck3 Pass",Toast.LENGTH_SHORT).show();
 					Toast.makeText(getApplicationContext(), "P1",
-							Toast.LENGTH_SHORT).show();
+							Toast.LENGTH_SHORT).show();		 							//55, 335
+					MapLocation[] Llocations = new MapLocation[] {new StateLocation(this, 180, 750, R.drawable.location_icon, R.drawable.location_icon_selected, "Position 1")};
+					map.setLocations(Llocations);
+				}
 /*
 					// remove the previous position
 					lv2.setBackgroundColor(Color.WHITE);
@@ -795,40 +797,72 @@ public class MainActivity extends Activity implements SensorEventListener {
 					lparams1.leftMargin = 55; // 55
 					rlMain.addView(lv1, lparams1);
 			*/	
-				MapLocation[] locations = new MapLocation[] {new StateLocation(this, 55, 335, R.drawable.location_icon, R.drawable.location_icon_selected, "Position 1")};
-				map.setLocations(locations);
-
-				} else
+					else{
 					Lcheck1 = false;
 					Lcheck2 = false;
 					Lcheck3 = false;
+					}
 					
 //----------------------- Position 2-----------------------------------------------------------
-				 if (Lcheck1 == false || Lcheck2 == false
-						|| Lcheck3 == false) {
+				 if (Lcheck1 == false || Lcheck2 == false || Lcheck3 == false) {
 					
-				if (lsb1.toString().equals("c2:9f:db:67:5a:57")
-							&& (LScanResult1.level > -70)
-							|| lsb2.toString().equals("00:13:c3:f1:37:b1"))
+				if (lsb1.toString().equals("c2:9f:db:67:5a:57") && (LScanResult1.level > -65)	// City library Wi-Fi less than -65db eg -64 -63...
+							|| lsb2.toString().equals("00:13:c3:f1:37:b1")
+							|| lsb1.toString().equals("00:13:c3:f1:37:b1")		//studentcity
+							|| lsb1.toString().equals("00:13:c4:c3:9c:31")		//studentcity
+							|| lsb1.toString().equals("00:13:c4:c3:9c:30")		//inspirefreewifi
+							|| lsb1.toString().equals("00:13:c3:f1:37:b0")		//inspirefreewifi
+							|| lsb1.toString().equals("62:f3:a3:ce:d8:9c")		//vodafoneD89F
+							|| lsb1.toString().equals("f0:7d:68:f7:cb:9e")		//GCI
+							|| lsb1.toString().equals("00:17:df:10:84:10")		//PPTA
+							|| lsb1.toString().equals("00:18:4d:d3:d7:e8")		//PPTA1
+							|| lsb1.toString().equals("24:db:ac:71:58:5b")		//VodafoneMobileWiFi-585B61
+							|| lsb1.toString().equals("00:0c:c3:e5:a7:88")		//Telecom-6320
+							|| lsb1.toString().equals("00:22:75:29:f0:99")		//Barista Cafe
+							|| lsb1.toString().equals("58:98:35:96:74:d1"))
 					{
 						Lcheck4 = true;
 						Toast.makeText(getApplicationContext(),
 								"Lcheck4 OK", Toast.LENGTH_SHORT).show();
 					}
-					if (lsb2.toString().equals("00:13:c3:f1:37:b1")
-							|| lsb1.toString().equals("c2:9f:db:67:5a:57")
-							&& (LScanResult1.level > -70)) 
+				
+				if (lsb2.toString().equals("c2:9f:db:67:5a:57")&& (LScanResult1.level > -65)		// City library Wi-Fi less than -65db eg -64 -63...
+							|| lsb2.toString().equals("00:13:c3:f1:37:b1")
+							|| lsb2.toString().equals("00:13:c3:f1:37:b1")		//studentcity
+							|| lsb2.toString().equals("00:13:c4:c3:9c:31")		//studentcity
+							|| lsb2.toString().equals("00:13:c4:c3:9c:30")		//inspirefreewifi
+							|| lsb2.toString().equals("00:13:c3:f1:37:b0")		//inspirefreewifi
+							|| lsb2.toString().equals("62:f3:a3:ce:d8:9c")		//vodafoneD89F
+							|| lsb2.toString().equals("f0:7d:68:f7:cb:9e")		//GCI
+							|| lsb2.toString().equals("00:17:df:10:84:10")		//PPTA
+							|| lsb2.toString().equals("00:18:4d:d3:d7:e8")		//PPTA1
+							|| lsb2.toString().equals("24:db:ac:71:58:5b")		//VodafoneMobileWiFi-585B61
+							|| lsb2.toString().equals("00:0c:c3:e5:a7:88")		//Telecom-6320
+							|| lsb2.toString().equals("00:22:75:29:f0:99")		//Barista Cafe
+							|| lsb2.toString().equals("58:98:35:96:74:d1")) 
 					{
 						Lcheck5 = true;
-						Toast.makeText(getApplicationContext(),
-								"Lcheck5 OK", Toast.LENGTH_SHORT).show();
+						Toast.makeText(getApplicationContext(),"Lcheck5 OK", Toast.LENGTH_SHORT).show();
 					}
 
-					if (lsb4.toString().equals("24:db:ac:71:58:5b")) //
+				if (lsb3.toString().equals("c2:9f:db:67:5a:57") && (LScanResult1.level > -65)// City library Wi-Fi less than -65db eg -64 -63...
+						|| lsb3.toString().equals("00:13:c3:f1:37:b1")
+						|| lsb3.toString().equals("00:13:c3:f1:37:b1")		//studentcity
+						|| lsb3.toString().equals("00:13:c4:c3:9c:31")		//studentcity
+						|| lsb3.toString().equals("00:13:c4:c3:9c:30")		//inspirefreewifi
+						|| lsb3.toString().equals("00:13:c3:f1:37:b0")		//inspirefreewifi
+						|| lsb3.toString().equals("62:f3:a3:ce:d8:9c")		//vodafoneD89F
+						|| lsb3.toString().equals("f0:7d:68:f7:cb:9e")		//GCI
+						|| lsb3.toString().equals("00:17:df:10:84:10")		//PPTA
+						|| lsb3.toString().equals("00:18:4d:d3:d7:e8")		//PPTA1
+						|| lsb3.toString().equals("24:db:ac:71:58:5b")		//VodafoneMobileWiFi-585B61
+						|| lsb3.toString().equals("00:0c:c3:e5:a7:88")		//Telecom-6320
+						|| lsb3.toString().equals("00:22:75:29:f0:99")		//Barista Cafe
+						|| lsb3.toString().equals("58:98:35:96:74:d1")
+						) 
 					{
 						Lcheck6 = true;
-						Toast.makeText(getApplicationContext(),
-								"Lcheck6 OK", Toast.LENGTH_SHORT).show();
+						Toast.makeText(getApplicationContext(),	"Lcheck6 OK", Toast.LENGTH_SHORT).show();
 					}
 
 					if (Lcheck4 == true && Lcheck5 == true && Lcheck6 == true) {
@@ -836,7 +870,10 @@ public class MainActivity extends Activity implements SensorEventListener {
 								+ " " + LScanResult1.level);
 						Toast.makeText(getApplicationContext(), "P2",
 								Toast.LENGTH_SHORT).show();
-/*
+
+						MapLocation[] Llocations = new MapLocation[] {new StateLocation(this, 40, 440, R.drawable.location_icon, R.drawable.location_icon_selected, "Position 2")};
+						map.setLocations(Llocations);
+						/*
 						// remove the previous position
 						lv1.setBackgroundColor(Color.WHITE);
 						lparams1.topMargin = 335; // 335
@@ -848,9 +885,6 @@ public class MainActivity extends Activity implements SensorEventListener {
 						lparams2.leftMargin = 10; // 10
 						rlMain.addView(lv2, lparams2);
 			*/			
-						MapLocation[] locations = new MapLocation[] {new StateLocation(this, 10, 210, R.drawable.location_icon, R.drawable.location_icon_selected, "Position 2")};
-						map.setLocations(locations);
-
 					} else
 						Lcheck4 = false;
 						Lcheck5 = false;
@@ -860,23 +894,21 @@ public class MainActivity extends Activity implements SensorEventListener {
 				 if (Lcheck4 == false || Lcheck5 == false
 							|| Lcheck6 == false){
 						
-					if (lsb1.toString().equals("64:16:f0:ea:d7:35")
+					if (lsb1.toString().equals("64:16:f0:ea:d7:35")					//Chokolato
 								|| lsb1.toString().equals("c2:9f:db:67:5a:28")
 								|| lsb1.toString().equals("00:12:44:ba:a6:90")
 								|| lsb1.toString().equals("00:12:44:ba:a6:91")
-								|| lsb1.toString().equals("c2:9f:db:67:5a:54")
-								|| lsb1.toString().equals("00:12:44:b8:4e:80")
-								|| lsb1.toString().equals("c2:9f:db:67:59:8a") && LScanResult1.level > -70
+								|| lsb1.toString().equals("c2:9f:db:67:5a:54") && LScanResult1.level < -65
+								|| lsb1.toString().equals("00:12:44:b8:4e:80")		//inspirefreewifi
+								|| lsb1.toString().equals("c2:9f:db:67:59:8a") && LScanResult1.level < -65		//less(more) than -65db eg -66, -67...
 								|| lsb1.toString().equals("00:60:64:6a:e7:20")
-								|| lsb1.toString().equals("00:12:44:b8:4e:81")
+								|| lsb1.toString().equals("00:12:44:b8:4e:81")		//studentcity
 								|| lsb1.toString().equals("00:0c:c3:e6:29:90")
 								|| lsb1.toString().equals("00:22:a4:bd:66:91")
 								|| lsb1.toString().equals("00:13:c3:f1:37:b0")
 								|| lsb1.toString().equals("a4:b1:e9:83:6e:29")
 								|| lsb1.toString().equals("00:26:44:01:38:10")
-								|| lsb1.toString().equals("c2:9f:db:67:5a:57")) // Palmerston
-																				// North
-																				// Library
+								|| lsb1.toString().equals("c2:9f:db:67:5a:57"))
 						{
 							Lcheck7 = true;
 							// Toast.makeText(getApplicationContext(),lsb1.toString(),Toast.LENGTH_SHORT).show();
@@ -885,9 +917,9 @@ public class MainActivity extends Activity implements SensorEventListener {
 							|| lsb2.toString().equals("c2:9f:db:67:5a:28")
 							|| lsb2.toString().equals("00:12:44:ba:a6:90")
 							|| lsb2.toString().equals("00:12:44:ba:a6:91")
-							|| lsb2.toString().equals("c2:9f:db:67:5a:54")
-							|| lsb2.toString().equals("00:12:44:b8:4e:80")
-							|| lsb2.toString().equals("c2:9f:db:67:59:8a") && LScanResult2.level > -70
+							|| lsb2.toString().equals("c2:9f:db:67:5a:54") && LScanResult1.level < -65
+							|| lsb2.toString().equals("00:12:44:b8:4e:80")		//inspirefreewifi
+							|| lsb2.toString().equals("c2:9f:db:67:59:8a") && LScanResult1.level < -65		//less(more) than -65db eg -66, -67...
 							|| lsb2.toString().equals("00:60:64:6a:e7:20")
 							|| lsb2.toString().equals("00:12:44:b8:4e:81")
 							|| lsb2.toString().equals("00:0c:c3:e6:29:90")
@@ -895,9 +927,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 							|| lsb2.toString().equals("00:13:c3:f1:37:b0")
 							|| lsb2.toString().equals("a4:b1:e9:83:6e:29")
 							|| lsb2.toString().equals("00:26:44:01:38:10")
-							|| lsb2.toString().equals("c2:9f:db:67:5a:57")) // Palmerston
-																			// North
-																			// Library
+							|| lsb2.toString().equals("c2:9f:db:67:5a:57")) 
 					{
 						Lcheck8 = true;
 						// Toast.makeText(getApplicationContext(),lsb2.toString(),Toast.LENGTH_SHORT).show();
@@ -907,9 +937,9 @@ public class MainActivity extends Activity implements SensorEventListener {
 							|| lsb3.toString().equals("c2:9f:db:67:5a:28")
 							|| lsb3.toString().equals("00:12:44:ba:a6:90")
 							|| lsb3.toString().equals("00:12:44:ba:a6:91")
-							|| lsb3.toString().equals("c2:9f:db:67:5a:54")
-							|| lsb3.toString().equals("00:12:44:b8:4e:80")
-							|| lsb3.toString().equals("c2:9f:db:67:59:8a") && LScanResult3.level > -70
+							|| lsb3.toString().equals("c2:9f:db:67:5a:54") && LScanResult1.level < -65
+							|| lsb3.toString().equals("00:12:44:b8:4e:80")		//inspirefreewifi
+							|| lsb3.toString().equals("c2:9f:db:67:59:8a") && LScanResult1.level < -65		//less(more) than -65db eg -66, -67...
 							|| lsb3.toString().equals("00:60:64:6a:e7:20")
 							|| lsb3.toString().equals("00:12:44:b8:4e:81")
 							|| lsb3.toString().equals("00:0c:c3:e6:29:90")
@@ -917,9 +947,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 							|| lsb3.toString().equals("00:13:c3:f1:37:b0")
 							|| lsb3.toString().equals("a4:b1:e9:83:6e:29")
 							|| lsb3.toString().equals("00:26:44:01:38:10")
-							|| lsb3.toString().equals("c2:9f:db:67:5a:57")) // Palmerston
-																			// North
-																			// Library
+							|| lsb3.toString().equals("c2:9f:db:67:5a:57"))
 					{
 						Lcheck9 = true;
 						// Toast.makeText(getApplicationContext(),lsb4.toString(),Toast.LENGTH_SHORT).show();
@@ -931,7 +959,9 @@ public class MainActivity extends Activity implements SensorEventListener {
 						Toast.makeText(getApplicationContext(), "P3",
 								Toast.LENGTH_SHORT).show();
 
-		/*				// remove the previous position
+					  	MapLocation[] Llocations = new MapLocation[] {new StateLocation(this, 520, 42, R.drawable.location_icon, R.drawable.location_icon_selected, "Position 3")};
+						map.setLocations(Llocations);
+						/*				// remove the previous position
 						lv2.setBackgroundColor(Color.WHITE);
 						lparams2.topMargin = 210; // 210
 						lparams2.leftMargin = 10; // 10
@@ -951,10 +981,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 					  	lparams4.topMargin = 42; //90 
 					  	lparams4.leftMargin = 290; //280
 					  	rlMain.addView(lv4, lparams4);
-			*/		  	
-					  	MapLocation[] locations = new MapLocation[] {new StateLocation(this, 200, 42, R.drawable.location_icon, R.drawable.location_icon_selected, "Position 3")};
-						map.setLocations(locations);
-
+			*/	
 					}
 					else if(Lcheck7 == true || Lcheck8 == true || Lcheck9 == true)
 						Lcheck7 = false;
@@ -965,45 +992,42 @@ public class MainActivity extends Activity implements SensorEventListener {
 					  if (Lcheck7 == false && Lcheck8 == false && Lcheck9 == false) {
 						
 						  if (lsb1.toString().equals("00:22:75:60:28:b4")			//design_school_2
-								  ||lsb1.toString().equals("c2:9f:db:67:59:8a") && LScanResult1.level < -70		//PN Library wi-fi
+								  ||lsb1.toString().equals("c2:9f:db:67:59:8a") && LScanResult1.level > -65		//PN Library wi-fi	less than -65db
 								  ||lsb1.toString().equals("c8:9c:1d:fd:7c:80")		//pavise
 								  ||lsb1.toString().equals("00:12:44:b8:4e:80")		//inspirefreewifi
 								  ||lsb1.toString().equals("00:12:44:b8:4e:81")		//studentcity
 								  ||lsb1.toString().equals("00:0c:42:65:cf:58")		//studentcity
-								  ||lsb1.toString().equals("02:0c:42:65:cf:58")		//inspirefreewifi
 								  ||lsb1.toString().equals("00:1b:11:1c:68:08")		//Boardroom
 								  ||lsb1.toString().equals("00:0e:8f:a3:84:ca")		//AFL
-								  ||lsb1.toString().equals("c2:9f:db:67:5a:54")		//PN Library wi-fi	
+								  ||lsb1.toString().equals("c2:9f:db:67:5a:54")&& LScanResult2.level > -65		//PN Library wi-fi	
 								  ||lsb1.toString().equals("00:60:64:6b:08:ea"))		//Bellas Cafe
 								  {
 							  			Lcheck10 = true;
 								  }
 
 						  if (lsb2.toString().equals("00:22:75:60:28:b4")			//design_school_2
-								  ||lsb2.toString().equals("c2:9f:db:67:59:8a") && LScanResult2.level < -70		//PN Library wi-fi
+								  ||lsb2.toString().equals("c2:9f:db:67:59:8a") && LScanResult2.level > -65		//PN Library wi-fi less than -65db
 								  ||lsb2.toString().equals("c8:9c:1d:fd:7c:80")		//pavise
 								  ||lsb2.toString().equals("00:12:44:b8:4e:80")		//inspirefreewifi
 								  ||lsb2.toString().equals("00:12:44:b8:4e:81")		//studentcity
 								  ||lsb2.toString().equals("00:0c:42:65:cf:58")		//studentcity
-								  ||lsb2.toString().equals("02:0c:42:65:cf:58")		//inspirefreewifi
 								  ||lsb2.toString().equals("00:1b:11:1c:68:08")		//Boardroom
 								  ||lsb2.toString().equals("00:0e:8f:a3:84:ca")		//AFL
-								  ||lsb2.toString().equals("c2:9f:db:67:5a:54")		//PN Library wi-fi	
+								  ||lsb2.toString().equals("c2:9f:db:67:5a:54")	&& LScanResult2.level > -65	//PN Library wi-fi	
 								  ||lsb2.toString().equals("00:60:64:6b:08:ea"))		//Bellas Cafe
 								  {
 							  			Lcheck11 = true;
 								  }
 						  
 						  if (lsb3.toString().equals("00:22:75:60:28:b4")			//design_school_2
-								  ||lsb3.toString().equals("c2:9f:db:67:59:8a") && LScanResult3.level > -70		//PN Library wi-fi
+								  ||lsb3.toString().equals("c2:9f:db:67:59:8a") && LScanResult3.level > -65		//PN Library wi-fi less than -65db
 								  ||lsb3.toString().equals("c8:9c:1d:fd:7c:80")		//pavise
 								  ||lsb3.toString().equals("00:12:44:b8:4e:80")		//inspirefreewifi
 								  ||lsb3.toString().equals("00:12:44:b8:4e:81")		//studentcity
 								  ||lsb3.toString().equals("00:0c:42:65:cf:58")		//studentcity
-								  ||lsb3.toString().equals("02:0c:42:65:cf:58")		//inspirefreewifi
 								  ||lsb3.toString().equals("00:1b:11:1c:68:08")		//Boardroom
 								  ||lsb3.toString().equals("00:0e:8f:a3:84:ca")		//AFL
-								  ||lsb3.toString().equals("c2:9f:db:67:5a:54")		//PN Library wi-fi	
+								  ||lsb3.toString().equals("c2:9f:db:67:5a:54")	&& LScanResult2.level > -65	//PN Library wi-fi	
 								  ||lsb3.toString().equals("00:60:64:6b:08:ea"))		//Bellas Cafe
 								  {
 							  		Lcheck12 = true;
@@ -1014,8 +1038,11 @@ public class MainActivity extends Activity implements SensorEventListener {
 							  	allNetWork.setText("You are at city library Position 4" +
 							  				" " + LScanResult1.level);
 							  	Toast.makeText(getApplicationContext(),"P4",Toast.LENGTH_SHORT).show();
-					  
-			/*				  	// remove the previous position
+
+								MapLocation[] Llocations = new MapLocation[] {new StateLocation(this, 290, 42, R.drawable.location_icon, R.drawable.location_icon_selected, "Position 4")};
+								map.setLocations(Llocations);
+								
+								/*				  	// remove the previous position
 							  	lv4.setBackgroundColor(Color.BLUE); 
 							  	lparams4.topMargin = 42; //90 
 							  	lparams4.leftMargin = 290; //280
@@ -1025,18 +1052,9 @@ public class MainActivity extends Activity implements SensorEventListener {
 								lparams3.topMargin = 42; // 42
 								lparams3.leftMargin = 200; // 200
 								rlMain.addView(lv3, lparams3);
-				*/				
-								MapLocation[] locations = new MapLocation[] {new StateLocation(this, 290, 42, R.drawable.location_icon, R.drawable.location_icon_selected, "Position 4")};
-								map.setLocations(locations);
+				*/
 						  }		  
 					  }
-			/*		
-					//Position 5
-					 lv7.setBackgroundColor(Color.BLUE); lparams7.topMargin =
-							  90; //90 
-							  lparams7.leftMargin = 2880; //280
-							  rlMain.addView(lv7, lparams7);
-							  */
 			
 /**
  *  Aghort Map			
