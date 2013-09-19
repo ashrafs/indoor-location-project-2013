@@ -225,7 +225,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 		case R.id.Hposition1:
 			map = (MapView) findViewById(R.id.map);	
 			map.setMapImage(ImageUtil.loadBitmapFromResource(getResources(), R.drawable.homemap));
-			MapLocation[] locations8 = new MapLocation[] {new StateLocation(this, 700, 700, R.drawable.destination_icon, R.drawable.destination_icon_selected, "Home1")};
+			MapLocation[] locations8 = new MapLocation[] {new StateLocation(this, 700, 700, R.drawable.destination_icon, R.drawable.destination_icon_selected, "Home P1")};
 			map.setLocations(locations8);
 			HomePositionset[0] = true;
 			destinationSet.setText("You have choose Home Position 1");
@@ -234,7 +234,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 		case R.id.Hposition2:
 			map = (MapView) findViewById(R.id.map);	
 			map.setMapImage(ImageUtil.loadBitmapFromResource(getResources(), R.drawable.homemap));
-			MapLocation[] locations9 = new MapLocation[] {new StateLocation(this, 200, 700, R.drawable.destination_icon, R.drawable.destination_icon_selected, "Home2")};
+			MapLocation[] locations9 = new MapLocation[] {new StateLocation(this, 200, 700, R.drawable.destination_icon, R.drawable.destination_icon_selected, "Home P2")};
 			map.setLocations(locations9);
 			HomePositionset[1] = true;
 			destinationSet.setText("You have choose Home Position 2");
@@ -767,21 +767,21 @@ public class MainActivity extends Activity implements SensorEventListener {
 						
 						if(HomePositionset[0] == true){
 							MapLocation[] locations8 = new MapLocation[] {
-									new StateLocation(this, 700, 700, R.drawable.destination_icon, R.drawable.destination_icon_selected, "Your are destination at Home1"),
-									new StateLocation(this, 700, 400, R.drawable.location_icon, R.drawable.location_icon_selected, "My_room")
+									new StateLocation(this, 700, 700, R.drawable.at_destination_icon, R.drawable.at_destination_icon_selected, "Your are at your destination - Home1"),
 							};
 							map.setLocations(locations8);
+							Toast.makeText(getApplicationContext(),"You are at your destination",Toast.LENGTH_SHORT).show();
 						}
 						else
 							if(HomePositionset[1] == true){
 								MapLocation[] locations8 = new MapLocation[] {
 										new StateLocation(this, 200, 700, R.drawable.destination_icon, R.drawable.destination_icon_selected, "Your are destination at Home2"),
-										new StateLocation(this, 700, 400, R.drawable.location_icon, R.drawable.location_icon_selected, "My_room")
+										new StateLocation(this, 700, 700, R.drawable.location_icon, R.drawable.location_icon_selected, "Home1")
 								};
 								map.setLocations(locations8);
 						}
 						else{
-						MapLocation[] Hlocations = new MapLocation[] {new StateLocation(this, 700, 400, R.drawable.location_icon, R.drawable.location_icon_selected, "My_room")};
+						MapLocation[] Hlocations = new MapLocation[] {new StateLocation(this, 700, 700, R.drawable.location_icon, R.drawable.location_icon_selected, "Home1")};
 						map.setLocations(Hlocations);
 						}
 					}
@@ -839,10 +839,10 @@ public class MainActivity extends Activity implements SensorEventListener {
 					else
 						if(HomePositionset[1] == true){
 							MapLocation[] locations8 = new MapLocation[] {
-									new StateLocation(this, 200, 700, R.drawable.destination_icon, R.drawable.destination_icon_selected, "Your are destination at Home2"),
-									new StateLocation(this, 200, 200, R.drawable.location_icon, R.drawable.location_icon_selected, "My position")
+									new StateLocation(this, 200, 200, R.drawable.at_destination_icon, R.drawable.at_destination_icon_selected, "Your are at your destination at Home2"),
 							};
 							map.setLocations(locations8);
+							Toast.makeText(getApplicationContext(),"You are at your destination",Toast.LENGTH_SHORT).show();
 						}
 					
 					else{
@@ -935,19 +935,19 @@ public class MainActivity extends Activity implements SensorEventListener {
 					Toast.makeText(getApplicationContext(), "P1", Toast.LENGTH_SHORT).show();	
 					
 					if (LPositionset[0] == true){
-						MapLocation[] Llocations = new MapLocation[] {new StateLocation(this, 180, 740, R.drawable.destination_icon, R.drawable.destination_icon_selected, "Your are destination at Position 1"),
-																		new StateLocation(this, 180, 740, R.drawable.location_icon, R.drawable.location_icon_selected, "You are at Position 1")
+						MapLocation[] Llocations = new MapLocation[] {new StateLocation(this, 180, 740, R.drawable.at_destination_icon, R.drawable.at_destination_icon_selected, "Your are at your destination at Position 1"),
 																	};
 						map.setLocations(Llocations);
+						Toast.makeText(getApplicationContext(),"You are at your destination",Toast.LENGTH_SHORT).show();
 					}else
 					if (LPositionset[1] == true){
-						MapLocation[] Llocations = new MapLocation[] {new StateLocation(this, 70, 450, R.drawable.destination_icon, R.drawable.destination_icon_selected, "Your are destination at Position 2"),
+						MapLocation[] Llocations = new MapLocation[] {new StateLocation(this, 40, 440, R.drawable.destination_icon, R.drawable.destination_icon_selected, "Your are destination at Position 2"),
 																	new StateLocation(this, 180, 740, R.drawable.location_icon, R.drawable.location_icon_selected, "You are at Position 1")
 																	};
 						map.setLocations(Llocations);
 					}else
 					if (LPositionset[2] == true){
-						MapLocation[] Llocations = new MapLocation[] {new StateLocation(this, 530, 10, R.drawable.destination_icon, R.drawable.destination_icon_selected, "Your are destination at Position 3"),
+						MapLocation[] Llocations = new MapLocation[] {new StateLocation(this, 520, 42, R.drawable.destination_icon, R.drawable.destination_icon_selected, "Your are destination at Position 3"),
 																new StateLocation(this, 180, 740, R.drawable.location_icon, R.drawable.location_icon_selected, "You are at Position 1")
 																	};
 						map.setLocations(Llocations);
@@ -1049,13 +1049,13 @@ public class MainActivity extends Activity implements SensorEventListener {
 							map.setLocations(Llocations);
 						}else
 						if (LPositionset[1] == true){
-							MapLocation[] Llocations = new MapLocation[] {new StateLocation(this, 40, 440, R.drawable.destination_icon, R.drawable.destination_icon_selected, "Your are destination at Position 2"),
-																		new StateLocation(this, 40, 440, R.drawable.location_icon, R.drawable.location_icon_selected, "You are at Position 2")
+							MapLocation[] Llocations = new MapLocation[] {new StateLocation(this, 40, 440, R.drawable.at_destination_icon, R.drawable.at_destination_icon_selected, "Your are at your destination at Position 2"),
 																		};
 							map.setLocations(Llocations);
+							Toast.makeText(getApplicationContext(),"You are at your destination",Toast.LENGTH_SHORT).show();
 						}else
 						if (LPositionset[2] == true){
-							MapLocation[] Llocations = new MapLocation[] {new StateLocation(this, 530, 10, R.drawable.destination_icon, R.drawable.destination_icon_selected, "Your are destination at Position 3"),
+							MapLocation[] Llocations = new MapLocation[] {new StateLocation(this, 520, 42, R.drawable.destination_icon, R.drawable.destination_icon_selected, "Your are destination at Position 3"),
 																			new StateLocation(this, 40, 440, R.drawable.location_icon, R.drawable.location_icon_selected, "You are at Position 2")
 																		};
 							map.setLocations(Llocations);
@@ -1163,10 +1163,10 @@ public class MainActivity extends Activity implements SensorEventListener {
 							map.setLocations(Llocations);
 						}else
 						if (LPositionset[2] == true){
-							MapLocation[] Llocations = new MapLocation[] {new StateLocation(this, 530, 10, R.drawable.destination_icon, R.drawable.destination_icon_selected, "Your are destination at Position 3"),
-																			new StateLocation(this, 520, 42, R.drawable.location_icon, R.drawable.location_icon_selected, "You are at Position 3")
+							MapLocation[] Llocations = new MapLocation[] {new StateLocation(this, 520, 42, R.drawable.at_destination_icon, R.drawable.at_destination_icon_selected, "Your are at your destination at Position 3"),
 																		};
 							map.setLocations(Llocations);
+							Toast.makeText(getApplicationContext(),"You are at your destination",Toast.LENGTH_SHORT).show();
 						}else
 						{
 						MapLocation[] Llocations = new MapLocation[] {new StateLocation(this, 520, 42, R.drawable.location_icon, R.drawable.location_icon_selected, "You are at Position 3")};
@@ -1445,10 +1445,10 @@ public class MainActivity extends Activity implements SensorEventListener {
 							  	//Toast.makeText(getApplicationContext(),"P1",Toast.LENGTH_SHORT).show();
 								
 								if (AgHPositionset[0] == true){
-									MapLocation[] Llocations = new MapLocation[] {new StateLocation(this, 270, 160, R.drawable.destination_icon, R.drawable.destination_icon_selected, "Your are destination around Room 3.81"),
-																					new StateLocation(this, 270, 160, R.drawable.location_icon, R.drawable.location_icon_selected, "You are around Room 3.81")
+									MapLocation[] Llocations = new MapLocation[] {new StateLocation(this, 270, 160, R.drawable.at_destination_icon, R.drawable.at_destination_icon_selected, "Your are at your destination around Room 3.81"),
 																				};
 									map.setLocations(Llocations);
+									Toast.makeText(getApplicationContext(),"You are at your destination",Toast.LENGTH_SHORT).show();
 								}else
 								if (AgHPositionset[1] == true){
 									MapLocation[] Llocations = new MapLocation[] {new StateLocation(this, 700, 160, R.drawable.destination_icon, R.drawable.destination_icon_selected, "Your are destination around Room 3.64"),
@@ -1627,10 +1627,10 @@ public class MainActivity extends Activity implements SensorEventListener {
 										map.setLocations(Llocations);
 									}else
 									if (AgHPositionset[1] == true){
-										MapLocation[] Llocations = new MapLocation[] {new StateLocation(this, 700, 160, R.drawable.destination_icon, R.drawable.destination_icon_selected, "Your are destination around Room 3.64"),
-																						new StateLocation(this, 700, 160, R.drawable.location_icon, R.drawable.location_icon_selected, "You are around Room 3.64")
+										MapLocation[] Llocations = new MapLocation[] {new StateLocation(this, 700, 160, R.drawable.at_destination_icon, R.drawable.at_destination_icon_selected, "Your are at your destination around Room 3.64"),
 																					};
 										map.setLocations(Llocations);
+										Toast.makeText(getApplicationContext(),"You are at your destination",Toast.LENGTH_SHORT).show();
 									}else
 									if (AgHPositionset[2] == true){
 										MapLocation[] Llocations = new MapLocation[] {new StateLocation(this, 920, 160, R.drawable.destination_icon, R.drawable.destination_icon_selected, "Your are destination around Room 3.52"),
@@ -1754,10 +1754,10 @@ public class MainActivity extends Activity implements SensorEventListener {
 										map.setLocations(Llocations);
 									}else
 									if (AgHPositionset[2] == true){
-										MapLocation[] Llocations = new MapLocation[] {new StateLocation(this, 920, 160, R.drawable.destination_icon, R.drawable.destination_icon_selected, "Your are destination around Room 3.52"),
-																						new StateLocation(this, 920, 160, R.drawable.location_icon, R.drawable.location_icon_selected, "You are around Room 3.52")
+										MapLocation[] Llocations = new MapLocation[] {new StateLocation(this, 920, 160, R.drawable.at_destination_icon, R.drawable.at_destination_icon_selected, "Your are at your destination around Room 3.52"),
 																					};
 										map.setLocations(Llocations);
+										Toast.makeText(getApplicationContext(),"You are at your destination",Toast.LENGTH_SHORT).show();
 									}else
 									if (AgHPositionset[3] == true){
 										MapLocation[] Llocations = new MapLocation[] {new StateLocation(this, 1370, 200, R.drawable.destination_icon, R.drawable.destination_icon_selected, "Your are destination around Room 3.42"),
@@ -1911,10 +1911,10 @@ public class MainActivity extends Activity implements SensorEventListener {
 											map.setLocations(Llocations);
 										}else
 										if (AgHPositionset[3] == true){
-											MapLocation[] Llocations = new MapLocation[] {new StateLocation(this, 1370, 200, R.drawable.destination_icon, R.drawable.destination_icon_selected, "Your are destination Outside Room 3.42"),
-																								new StateLocation(this, 1370, 200, R.drawable.location_icon, R.drawable.location_icon_selected, "You are around Room 3.42")
+											MapLocation[] Llocations = new MapLocation[] {new StateLocation(this, 1370, 200, R.drawable.at_destination_icon, R.drawable.at_destination_icon_selected, "Your are at your destination Outside Room 3.42"),
 																							};
 											map.setLocations(Llocations);
+											Toast.makeText(getApplicationContext(),"You are at your destination",Toast.LENGTH_SHORT).show();
 										}
 										else
 										{
