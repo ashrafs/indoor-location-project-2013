@@ -1,5 +1,6 @@
 package com.brian.android.mymap_aghort;
 
+import java.util.Arrays;
 import java.util.List;
 
 import android.app.Activity;
@@ -68,20 +69,45 @@ public class MainActivity extends Activity implements SensorEventListener {
 	private StringBuffer lsb3 = new StringBuffer();
 	private StringBuffer lsb4 = new StringBuffer();
 	private StringBuffer lsb5 = new StringBuffer();
+	private StringBuffer Ahgsb1 = new StringBuffer();
+	private StringBuffer Ahgsb2 = new StringBuffer();
+	private StringBuffer Ahgsb3 = new StringBuffer();
+	private StringBuffer Ahgsb4 = new StringBuffer();
+	private StringBuffer Ahgsb5 = new StringBuffer();
+
+	
 	private Button TakeButton;
 	private ImageButton ScanButton;
 	private TextView allNetWork,destinationSet;
 	private TextView locationtext;
 	private WifiAdmin mWifiAdmin;
 	private List<ScanResult> list;
-	private ScanResult mScanResult, mScanResult1, mScanResult2, HScanResult1,
-			HScanResult2, HScanResult3, HScanResult4, HScanResult5,
-			LScanResult1, LScanResult2, LScanResult3, LScanResult4,
-			LScanResult5;
-	boolean Rcheck, Rcheck1, Rcheck2;
+	
+	
+	private ScanResult AgHScanResult1,AgHScanResult2, AgHScanResult3,AgHScanResult4,AgHScanResult5,
+			HScanResult1,HScanResult2, HScanResult3, HScanResult4, HScanResult5,
+			LScanResult1, LScanResult2, LScanResult3, LScanResult4,LScanResult5;
+	/*
+	boolean Aghortcheck1, Aghortcheck2, Aghortcheck3, Aghortcheck4, Aghortcheck5,
+			Aghortcheck6,Aghortcheck7,Aghortcheck8,Aghortcheck9,Aghortcheck10,
+			Aghortcheck11,Aghortcheck12,Aghortcheck13,Aghortcheck14,Aghortcheck15,
+			Aghortcheck17,Aghortcheck18,Aghortcheck19,Aghortcheck20,Aghortcheck21;
+			
 	boolean HcheckL1, HcheckL2,HcheckL3, HcheckH1, HcheckH2, HcheckH3;
 	boolean Lcheck1, Lcheck2, Lcheck3, Lcheck4, Lcheck5, Lcheck6, Lcheck7,
 			Lcheck8, Lcheck9, Lcheck10, Lcheck11, Lcheck12;
+	
+	boolean HomePositionset1, HomePositionset2;
+	boolean AgHPositionset1, AgHPositionset2, AgHPositionset3, AgHPositionset4;
+	boolean	LPositionset1, LPositionset2, LPositionset3, LPositionset4;
+	*/
+	boolean[] Homecheck = new boolean[3];
+	boolean[] Lcheck = new boolean[12];
+	boolean[] Aghortcheck = new boolean[20];
+	
+	boolean[] HomePositionset = new boolean[2];
+	boolean[] LPositionset = new boolean[4];
+	boolean[] AgHPositionset = new boolean[4];
 
 	private float currentDegree = 0f;
 	private SensorManager mSensorManager;
@@ -136,34 +162,85 @@ public class MainActivity extends Activity implements SensorEventListener {
 		case R.id.lposition1:
 			map = (MapView) findViewById(R.id.map);
 			map.setMapImage(ImageUtil.loadBitmapFromResource(getResources(), R.drawable.librarymap));
-			MapLocation[] locations1 = new MapLocation[] {new StateLocation(this, 180, 740, R.drawable.location_icon, R.drawable.location_icon_selected, "Position 1")};
+			MapLocation[] locations1 = new MapLocation[] {new StateLocation(this, 180, 740, R.drawable.destination_icon, R.drawable.destination_icon_selected, "Position 1")};
 			map.setLocations(locations1);
+			LPositionset[0] = true;
 			destinationSet.setText("You have choose Position 1");
 			return true;
 		
 		case R.id.lposition2:
 			map = (MapView) findViewById(R.id.map);	
 			map.setMapImage(ImageUtil.loadBitmapFromResource(getResources(), R.drawable.librarymap));
-			MapLocation[] locations2 = new MapLocation[] {new StateLocation(this, 70, 450, R.drawable.location_icon, R.drawable.location_icon_selected, "Position 2")};
+			MapLocation[] locations2 = new MapLocation[] {new StateLocation(this, 70, 450, R.drawable.destination_icon, R.drawable.destination_icon_selected, "Position 2")};
 			map.setLocations(locations2);
+			LPositionset[1] = true;
 			destinationSet.setText("You have choose Position 2");
 			return true;
 			
 		case R.id.lposition3:
 			map = (MapView) findViewById(R.id.map);	
 			map.setMapImage(ImageUtil.loadBitmapFromResource(getResources(), R.drawable.librarymap));
-		  	MapLocation[] locations3 = new MapLocation[] {new StateLocation(this, 530, 10, R.drawable.location_icon, R.drawable.location_icon_selected, "Position 3")};
+		  	MapLocation[] locations3 = new MapLocation[] {new StateLocation(this, 530, 10, R.drawable.destination_icon, R.drawable.destination_icon_selected, "Position 3")};
 			map.setLocations(locations3);
+			LPositionset[2] = true;
 			destinationSet.setText("You have choose Position 3");
 			return true;
 			
-		case R.id.lposition4:
+		case R.id.Aghort1:
 			map = (MapView) findViewById(R.id.map);	
-			map.setMapImage(ImageUtil.loadBitmapFromResource(getResources(), R.drawable.librarymap));
-			MapLocation[] locations4 = new MapLocation[] {new StateLocation(this, 780, 10, R.drawable.location_icon, R.drawable.location_icon_selected, "Position 4")};
+			map.setMapImage(ImageUtil.loadBitmapFromResource(getResources(), R.drawable.map3));
+			MapLocation[] locations4 = new MapLocation[] {new StateLocation(this, 270, 160, R.drawable.destination_icon, R.drawable.destination_icon_selected, "Outside Room 3.81")};
 			map.setLocations(locations4);
-			destinationSet.setText("You have choose Position 4");
+			AgHPositionset[0] = true;
+			destinationSet.setText("You have choose destination around room 3.81");
 			return true;
+			
+		case R.id.Aghort2:
+			map = (MapView) findViewById(R.id.map);	
+			map.setMapImage(ImageUtil.loadBitmapFromResource(getResources(), R.drawable.map3));
+			MapLocation[] locations5 = new MapLocation[] {new StateLocation(this, 700, 160, R.drawable.destination_icon, R.drawable.destination_icon_selected, "Outside Room 3.64")};
+			map.setLocations(locations5);
+			AgHPositionset[1] = true;
+			destinationSet.setText("You have choose destination around room 3.64");
+			return true;
+			
+		case R.id.Aghort3:
+			map = (MapView) findViewById(R.id.map);	
+			map.setMapImage(ImageUtil.loadBitmapFromResource(getResources(), R.drawable.map3));
+			MapLocation[] locations6 = new MapLocation[] {new StateLocation(this, 920, 160, R.drawable.destination_icon, R.drawable.destination_icon_selected, "Outside Room 3.52")};
+			map.setLocations(locations6);
+			AgHPositionset[2] = true;
+			destinationSet.setText("You have choose destination around room 3.52");
+			return true;
+
+		case R.id.Aghort4:
+			map = (MapView) findViewById(R.id.map);	
+			map.setMapImage(ImageUtil.loadBitmapFromResource(getResources(), R.drawable.map3));
+			MapLocation[] locations7 = new MapLocation[] {new StateLocation(this, 1370, 200, R.drawable.destination_icon, R.drawable.destination_icon_selected, "Outside Room 3.42")};
+			map.setLocations(locations7);
+			AgHPositionset[3] = true;
+			destinationSet.setText("You have choose destination around room 3.42");
+			return true;
+			
+		case R.id.Hposition1:
+			map = (MapView) findViewById(R.id.map);	
+			map.setMapImage(ImageUtil.loadBitmapFromResource(getResources(), R.drawable.homemap));
+			MapLocation[] locations8 = new MapLocation[] {new StateLocation(this, 700, 700, R.drawable.destination_icon, R.drawable.destination_icon_selected, "Home1")};
+			map.setLocations(locations8);
+			HomePositionset[0] = true;
+			destinationSet.setText("You have choose Home Position 1");
+			return true;
+
+		case R.id.Hposition2:
+			map = (MapView) findViewById(R.id.map);	
+			map.setMapImage(ImageUtil.loadBitmapFromResource(getResources(), R.drawable.homemap));
+			MapLocation[] locations9 = new MapLocation[] {new StateLocation(this, 200, 700, R.drawable.destination_icon, R.drawable.destination_icon_selected, "Home2")};
+			map.setLocations(locations9);
+			HomePositionset[1] = true;
+			destinationSet.setText("You have choose Home Position 2");
+			return true;
+
+		
 
 		case R.id.Sensor_On:
 			mSensorManager.registerListener(this,mSensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION),SensorManager.SENSOR_DELAY_GAME);
@@ -317,12 +394,19 @@ public class MainActivity extends Activity implements SensorEventListener {
 	 * @param v
 	 */
 	public void zoomOut(View v) {
-    	float oldRatio = map.getZoomRatio();
-    	float newRatio = oldRatio - .1f;
-    	if (newRatio < 0.3f) {
+		
+		try{
+			float oldRatio = map.getZoomRatio();
+			float newRatio = oldRatio - .1f;
+			if (newRatio < 0.3f) {
     		newRatio = 0.3f;
-    	}
-   		map.zoom(newRatio);
+    		}
+   			map.zoom(newRatio);
+		}
+		catch(IllegalStateException e)
+			{	
+				Toast.makeText(getApplicationContext(),"Cant Zoom",Toast.LENGTH_SHORT).show();
+			}
     }
     
     /**
@@ -464,7 +548,8 @@ public class MainActivity extends Activity implements SensorEventListener {
 
 		// Clear previous Scan record
 		if (sb != null || hsb1 != null || hsb2 != null || hsb3 != null || hsb4 != null || hsb5 != null
-				|| lsb1 != null || lsb2 != null || lsb3 != null || lsb4 != null || lsb5 != null) {
+				|| lsb1 != null || lsb2 != null || lsb3 != null || lsb4 != null || lsb5 != null 
+				|| Ahgsb1 != null || Ahgsb2 != null || Ahgsb3 != null || Ahgsb4 != null || Ahgsb5 != null) {
 			// sb = new StringBuffer();
 			hsb1 = new StringBuffer();
 			hsb2 = new StringBuffer();
@@ -476,6 +561,11 @@ public class MainActivity extends Activity implements SensorEventListener {
 			lsb3 = new StringBuffer();
 			lsb4 = new StringBuffer();
 			lsb5 = new StringBuffer();
+			Ahgsb1 = new StringBuffer();
+			Ahgsb2 = new StringBuffer();
+			Ahgsb3 = new StringBuffer();
+			Ahgsb4 = new StringBuffer();
+			Ahgsb5 = new StringBuffer();
 			//allNetWork.setText("");
 			
 		}
@@ -514,13 +604,13 @@ public class MainActivity extends Activity implements SensorEventListener {
 			lv3.setBackgroundColor(Color.TRANSPARENT);
 			lv4.setBackgroundColor(Color.TRANSPARENT);
 			
-			*/
+			
 			HcheckH1 = false;
 			HcheckH2 = false;
 			HcheckH3 = false;
 			HcheckL1 = false;
 			HcheckL2 = false;
-			HcheckL3 = false;
+			HcheckL3 = false;	
 			Lcheck1 = false;
 			Lcheck2 = false;
 			Lcheck3 = false;
@@ -533,6 +623,17 @@ public class MainActivity extends Activity implements SensorEventListener {
 			Lcheck10 = false;
 			Lcheck11 = false;
 			Lcheck12 = false;
+			Aghortcheck1 = false;
+			Aghortcheck2 = false;
+			Aghortcheck3 = false;
+			Aghortcheck4 = false;
+			Aghortcheck5 = false;
+			*/
+			
+			Arrays.fill(Homecheck, Boolean.FALSE);
+			Arrays.fill(Lcheck, Boolean.FALSE);
+			Arrays.fill(Aghortcheck, Boolean.FALSE);
+			
 			hsb1 = new StringBuffer();
 			hsb2 = new StringBuffer();
 			hsb3 = new StringBuffer();
@@ -543,6 +644,11 @@ public class MainActivity extends Activity implements SensorEventListener {
 			lsb3 = new StringBuffer();
 			lsb4 = new StringBuffer();
 			lsb5 = new StringBuffer();
+			Ahgsb1 = new StringBuffer();
+			Ahgsb2 = new StringBuffer();
+			Ahgsb3 = new StringBuffer();
+			Ahgsb4 = new StringBuffer();
+			Ahgsb5 = new StringBuffer();
 
 			// Get Scan Result
 			// mScanResult = list.get(0);
@@ -550,22 +656,27 @@ public class MainActivity extends Activity implements SensorEventListener {
 			// mScanResult2 = list.get(2);
 			HScanResult1 = list.get(0);
 			LScanResult1 = list.get(0);
+			AgHScanResult1 = list.get(0);
 
 			if (list.size() > 1) {
 				HScanResult2 = list.get(1);
 				LScanResult2 = list.get(1);
+				AgHScanResult2 = list.get(1);
 			}
 			if (list.size() > 2) {
 				HScanResult3 = list.get(2);
 				LScanResult3 = list.get(2);
+				AgHScanResult3 = list.get(2);
 			}
 			if (list.size() > 3) {
 				HScanResult4 = list.get(3);
 				LScanResult4 = list.get(3);
+				AgHScanResult4 = list.get(3);
 			}
 			if (list.size() > 4) {
 				HScanResult5 = list.get(4);
 				LScanResult5 = list.get(4);
+				AgHScanResult5 = list.get(4);
 			}
 
 			// Home Use
@@ -575,23 +686,32 @@ public class MainActivity extends Activity implements SensorEventListener {
 			// Library Use
 			lsb1 = lsb1.append(LScanResult1.BSSID);
 			lsb2 = lsb2.append(LScanResult2.BSSID);
+			
+			// Aghort Use
+			Ahgsb1 = Ahgsb1.append(AgHScanResult1.BSSID);
+			Ahgsb2 = Ahgsb2.append(AgHScanResult2.BSSID);
 
 			if (list.size() > 2) {
 				hsb3 = hsb3.append(LScanResult3.SSID);
 				lsb3 = lsb3.append(LScanResult3.BSSID);
+				Ahgsb3 = Ahgsb3.append(AgHScanResult3.BSSID);
 			}
 			if (list.size() > 3) {
 				hsb4 = hsb4.append(LScanResult4.SSID);
 				lsb4 = lsb4.append(LScanResult4.BSSID);
+				Ahgsb4 = Ahgsb4.append(AgHScanResult4.BSSID);
 			}
 			if (list.size() > 4) {
 				hsb5 = hsb5.append(LScanResult5.SSID);
 				lsb5 = lsb5.append(LScanResult5.BSSID);
+				Ahgsb5 = Ahgsb5.append(AgHScanResult5.BSSID);
 			}
 
 			
-			// -------------------------------------------------------------------------------------------------------------------------------------//
-
+// -------------------------------------------------------------------------------------------------------------------------------------//
+/**
+ * Home Use
+ */
 			if (HScanResult1.level >= -78) {// -- Less than or equal to -78dB	
 
 				// usedHOMEMap = true;
@@ -600,27 +720,30 @@ public class MainActivity extends Activity implements SensorEventListener {
 				if (hsb1.toString().equals("NETGEAR_18")
 						|| hsb2.toString().equals("vodafone0BF3")
 						|| hsb3.toString().equals("AndroidAP")) {
-					HcheckL1 = true;
+					Homecheck[0] = true;
+					//HcheckL1 = true;
 					// allNetWork.setText(hsb1.toString());
 					// Toast.makeText(getApplicationContext(),hsb1.toString(),Toast.LENGTH_SHORT).show();
 				}
 				if (hsb2.toString().equals("vodafone0BF3")
 						|| hsb1.toString().equals("NETGEAR_18")
 						|| hsb3.toString().equals("AndroidAP")) {
-					HcheckL2 = true;
+					Homecheck[1] = true;
+					//HcheckL2 = true;
 					// allNetWork.setText(hsb2.toString());
 					// Toast.makeText(getApplicationContext(),hsb2.toString(),Toast.LENGTH_SHORT).show();
 				}
 				if (hsb3.toString().equals("vodafone0BF3")
 						|| hsb3.toString().equals("NETGEAR_18")
 						|| hsb3.toString().equals("AndroidAP")) {
-					HcheckL3 = true;
+					Homecheck[2] = true;
+					//HcheckL3 = true;
 					// allNetWork.setText(hsb2.toString());
 					// Toast.makeText(getApplicationContext(),hsb2.toString(),Toast.LENGTH_SHORT).show();
 				}
 				
 
-				if (HcheckL1 == true && HcheckL2 == true && HcheckL3 == true) {
+				if (Homecheck[0] == true && Homecheck[1] == true && Homecheck[2] == true) {
 					locationtext.setText("");
 					//map = (ImageView) findViewById(R.id.mapTest);
 					map = (MapView) findViewById(R.id.map);
@@ -636,15 +759,31 @@ public class MainActivity extends Activity implements SensorEventListener {
 
 				}
 				else
-					if(HcheckL1 == true && HcheckL2 == true && HcheckL3 == false|| HcheckL1 == true && HcheckL3 == true && HcheckL2 == false ||HcheckL3 == true && HcheckL2 == true && HcheckL1 == false){
-						//locationtext.setText("");
+						if(Homecheck[0]== true && Homecheck[1]== true && Homecheck[2] == false||Homecheck[1]== true && Homecheck[2]== true && Homecheck[0] == false|| Homecheck[0]== true && Homecheck[2]== true && Homecheck[1] == false)
 						map = (MapView) findViewById(R.id.map);
 						map.setMapImage(ImageUtil.loadBitmapFromResource(getResources(), R.drawable.homemap));
 						
-						allNetWork.setText("You are around home" + " "+ HScanResult1.level);					
+						allNetWork.setText("You are around home" + " "+ HScanResult1.level);
 						
+						if(HomePositionset[0] == true){
+							MapLocation[] locations8 = new MapLocation[] {
+									new StateLocation(this, 700, 700, R.drawable.destination_icon, R.drawable.destination_icon_selected, "Your are destination at Home1"),
+									new StateLocation(this, 700, 400, R.drawable.location_icon, R.drawable.location_icon_selected, "My_room")
+							};
+							map.setLocations(locations8);
+						}
+						else
+							if(HomePositionset[1] == true){
+								MapLocation[] locations8 = new MapLocation[] {
+										new StateLocation(this, 200, 700, R.drawable.destination_icon, R.drawable.destination_icon_selected, "Your are destination at Home2"),
+										new StateLocation(this, 700, 400, R.drawable.location_icon, R.drawable.location_icon_selected, "My_room")
+								};
+								map.setLocations(locations8);
+						}
+						else{
 						MapLocation[] Hlocations = new MapLocation[] {new StateLocation(this, 700, 400, R.drawable.location_icon, R.drawable.location_icon_selected, "My_room")};
 						map.setLocations(Hlocations);
+						}
 					}
 			}
 
@@ -659,7 +798,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 						|| hsb1.toString().equals("T & P on Air 99.4")) // Check
 																	// Vodafone
 				{
-					HcheckH1 = true;
+					Homecheck[0] = true;
 				}
 
 				if (hsb2.toString().equals("vodafone0BF3")
@@ -669,33 +808,47 @@ public class MainActivity extends Activity implements SensorEventListener {
 						|| hsb2.toString().equals("T & P on Air 99.4")) // Check
 																	// NETGEAR
 				{
-					HcheckH2 = true;
+					Homecheck[1] = true;
+				}
+				
+				if (hsb3.toString().equals("vodafone0BF3")
+						|| hsb3.toString().equals("NETGEAR_18")
+						|| hsb3.toString().equals("TNCAP5DC00F")
+						|| hsb3.toString().equals("Sophie_Thomas")
+						|| hsb3.toString().equals("T & P on Air 99.4")) // Check
+																	// NETGEAR
+				{
+					Homecheck[2] = true;
 				}
 
-				if (HcheckH1 == true && HcheckH2 == true ) {
+				if (Homecheck[0] = true && Homecheck[1] == true && Homecheck[2] == true  ) {
 					allNetWork.setText("");
-					//map = (ImageView) findViewById(R.id.mapTest);
 					map = (MapView) findViewById(R.id.map);
-					
-					//Bitmap HomeBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.homemap);
-					//map.setImageBitmap(HomeBitmap);
 					map.setMapImage(ImageUtil.loadBitmapFromResource(getResources(), R.drawable.homemap));
 					
 					allNetWork.setText("You are around home" + " "+ HScanResult1.level);
 					//Toast.makeText(getApplicationContext(),"Locate by NETGEAR_18 and Vodafone",Toast.LENGTH_SHORT).show();
-
-					/*
-					// iv.setImageResource(R.drawable.location_icon);
-					hv2.setBackgroundColor(Color.WHITE);
-					hparams2.topMargin = 150;
-					hparams2.leftMargin = 230;
-					rlMain.addView(hv2, hparams2);
-
-					hv1.setBackgroundColor(Color.BLUE);
-					hparams1.topMargin = 100;
-					hparams1.leftMargin = 100;
-					rlMain.addView(hv1, hparams1);
-*/
+					
+					if(HomePositionset[0] == true){
+						MapLocation[] locations8 = new MapLocation[] {
+								new StateLocation(this, 700, 700, R.drawable.destination_icon, R.drawable.destination_icon_selected, "Your are destination at Home1"),
+								new StateLocation(this, 200, 200, R.drawable.location_icon, R.drawable.location_icon_selected, "My position")
+						};
+						map.setLocations(locations8);
+					}
+					else
+						if(HomePositionset[1] == true){
+							MapLocation[] locations8 = new MapLocation[] {
+									new StateLocation(this, 200, 700, R.drawable.destination_icon, R.drawable.destination_icon_selected, "Your are destination at Home2"),
+									new StateLocation(this, 200, 200, R.drawable.location_icon, R.drawable.location_icon_selected, "My position")
+							};
+							map.setLocations(locations8);
+						}
+					
+					else{
+					MapLocation[] Hlocations = new MapLocation[] {new StateLocation(this, 200, 200, R.drawable.location_icon, R.drawable.location_icon_selected, "My position")};
+					map.setLocations(Hlocations);
+					}
 				}
 
 			}
@@ -703,7 +856,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 			// -------------------------------------------------------------------------------------------------------------//
 
 			// City Library test
-			if (HcheckL1 == false && HcheckL2 == false && HcheckL3 == false && HcheckH1 == false && HcheckH2 == false) {
+			if (Homecheck[0] == false && Homecheck[1] == false && Homecheck[2] == false) {
 				
 				//Load and display Library Map
 				//map = (ImageView) findViewById(R.id.mapTest);
@@ -733,7 +886,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 						|| lsb1.toString().equals("00:22:75:29:f0:99")		//Barista Cafe
 						|| lsb1.toString().equals("58:98:35:96:74:d1")) 
 				{
-					Lcheck1 = true;
+					Lcheck[0] = true;
 					Toast.makeText(getApplicationContext(), "Lcheck1 OK",
 							Toast.LENGTH_SHORT).show();
 				}
@@ -752,7 +905,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 						|| lsb2.toString().equals("00:22:75:29:f0:99")		//Barista Cafe
 						|| lsb2.toString().equals("58:98:35:96:74:d1")) 
 				{
-					Lcheck2 = true;
+					Lcheck[1] = true;
 					Toast.makeText(getApplicationContext(), "Lcheck2 OK",
 							Toast.LENGTH_SHORT).show();
 				}
@@ -771,19 +924,38 @@ public class MainActivity extends Activity implements SensorEventListener {
 						|| lsb3.toString().equals("00:22:75:29:f0:99")		//Barista Cafe
 						|| lsb3.toString().equals("58:98:35:96:74:d1")) 
 				{
-					Lcheck3 = true;
+					Lcheck[2] = true;
 					Toast.makeText(getApplicationContext(), "Lcheck3 OK",
 							Toast.LENGTH_SHORT).show();
 				}
 
-				if (Lcheck1 == true && Lcheck2 == true && Lcheck3 == true) {
+				if (Lcheck[0] == true && Lcheck[1] == true && Lcheck[2] == true) {
 					allNetWork.setText("You are at city library Position 1"
 							+ "  " + LScanResult1.level);
-					//Toast.makeText(getApplicationContext(), "Lcheck1, Lcheck2 and Lcheck3 Pass",Toast.LENGTH_SHORT).show();
-					Toast.makeText(getApplicationContext(), "P1",
-							Toast.LENGTH_SHORT).show();		 							//55, 335
-					MapLocation[] Llocations = new MapLocation[] {new StateLocation(this, 180, 750, R.drawable.location_icon, R.drawable.location_icon_selected, "Position 1")};
+					Toast.makeText(getApplicationContext(), "P1", Toast.LENGTH_SHORT).show();	
+					
+					if (LPositionset[0] == true){
+						MapLocation[] Llocations = new MapLocation[] {new StateLocation(this, 180, 740, R.drawable.destination_icon, R.drawable.destination_icon_selected, "Your are destination at Position 1"),
+																		new StateLocation(this, 180, 740, R.drawable.location_icon, R.drawable.location_icon_selected, "You are at Position 1")
+																	};
+						map.setLocations(Llocations);
+					}else
+					if (LPositionset[1] == true){
+						MapLocation[] Llocations = new MapLocation[] {new StateLocation(this, 70, 450, R.drawable.destination_icon, R.drawable.destination_icon_selected, "Your are destination at Position 2"),
+																	new StateLocation(this, 180, 740, R.drawable.location_icon, R.drawable.location_icon_selected, "You are at Position 1")
+																	};
+						map.setLocations(Llocations);
+					}else
+					if (LPositionset[2] == true){
+						MapLocation[] Llocations = new MapLocation[] {new StateLocation(this, 530, 10, R.drawable.destination_icon, R.drawable.destination_icon_selected, "Your are destination at Position 3"),
+																new StateLocation(this, 180, 740, R.drawable.location_icon, R.drawable.location_icon_selected, "You are at Position 1")
+																	};
+						map.setLocations(Llocations);
+					}else
+					{
+					MapLocation[] Llocations = new MapLocation[] {new StateLocation(this, 180, 740, R.drawable.location_icon, R.drawable.location_icon_selected, "You are at Position 1")};
 					map.setLocations(Llocations);
+					}
 				}
 /*
 					// remove the previous position
@@ -798,13 +970,13 @@ public class MainActivity extends Activity implements SensorEventListener {
 					rlMain.addView(lv1, lparams1);
 			*/	
 					else{
-					Lcheck1 = false;
-					Lcheck2 = false;
-					Lcheck3 = false;
+					Lcheck[0] = false;
+					Lcheck[1] = false;
+					Lcheck[2] = false;
 					}
 					
 //----------------------- Position 2-----------------------------------------------------------
-				 if (Lcheck1 == false || Lcheck2 == false || Lcheck3 == false) {
+				 if (Lcheck[0] == false || Lcheck[1] == false || Lcheck[2] == false) {
 					
 				if (lsb1.toString().equals("c2:9f:db:67:5a:57") && (LScanResult1.level > -65)	// City library Wi-Fi less than -65db eg -64 -63...
 							|| lsb2.toString().equals("00:13:c3:f1:37:b1")
@@ -821,7 +993,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 							|| lsb1.toString().equals("00:22:75:29:f0:99")		//Barista Cafe
 							|| lsb1.toString().equals("58:98:35:96:74:d1"))
 					{
-						Lcheck4 = true;
+						Lcheck[3] = true;
 						Toast.makeText(getApplicationContext(),
 								"Lcheck4 OK", Toast.LENGTH_SHORT).show();
 					}
@@ -841,7 +1013,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 							|| lsb2.toString().equals("00:22:75:29:f0:99")		//Barista Cafe
 							|| lsb2.toString().equals("58:98:35:96:74:d1")) 
 					{
-						Lcheck5 = true;
+						Lcheck[4] = true;
 						Toast.makeText(getApplicationContext(),"Lcheck5 OK", Toast.LENGTH_SHORT).show();
 					}
 
@@ -861,18 +1033,38 @@ public class MainActivity extends Activity implements SensorEventListener {
 						|| lsb3.toString().equals("58:98:35:96:74:d1")
 						) 
 					{
-						Lcheck6 = true;
+						Lcheck[5] = true;
 						Toast.makeText(getApplicationContext(),	"Lcheck6 OK", Toast.LENGTH_SHORT).show();
 					}
 
-					if (Lcheck4 == true && Lcheck5 == true && Lcheck6 == true) {
+					if (Lcheck[3] == true && Lcheck[4] == true && Lcheck[5] == true) {
 						allNetWork.setText("You are at city library Position 2"
 								+ " " + LScanResult1.level);
-						Toast.makeText(getApplicationContext(), "P2",
-								Toast.LENGTH_SHORT).show();
-
-						MapLocation[] Llocations = new MapLocation[] {new StateLocation(this, 40, 440, R.drawable.location_icon, R.drawable.location_icon_selected, "Position 2")};
+						Toast.makeText(getApplicationContext(), "P2", Toast.LENGTH_SHORT).show();
+						
+						if (LPositionset[0] == true){
+							MapLocation[] Llocations = new MapLocation[] {new StateLocation(this, 180, 740, R.drawable.destination_icon, R.drawable.destination_icon_selected, "Your are destination at Position 1"),
+																		new StateLocation(this, 40, 440, R.drawable.location_icon, R.drawable.location_icon_selected, "You are at Position 2")
+																		};
+							map.setLocations(Llocations);
+						}else
+						if (LPositionset[1] == true){
+							MapLocation[] Llocations = new MapLocation[] {new StateLocation(this, 40, 440, R.drawable.destination_icon, R.drawable.destination_icon_selected, "Your are destination at Position 2"),
+																		new StateLocation(this, 40, 440, R.drawable.location_icon, R.drawable.location_icon_selected, "You are at Position 2")
+																		};
+							map.setLocations(Llocations);
+						}else
+						if (LPositionset[2] == true){
+							MapLocation[] Llocations = new MapLocation[] {new StateLocation(this, 530, 10, R.drawable.destination_icon, R.drawable.destination_icon_selected, "Your are destination at Position 3"),
+																			new StateLocation(this, 40, 440, R.drawable.location_icon, R.drawable.location_icon_selected, "You are at Position 2")
+																		};
+							map.setLocations(Llocations);
+						}else
+						{
+						MapLocation[] Llocations = new MapLocation[] {new StateLocation(this, 40, 440, R.drawable.location_icon, R.drawable.location_icon_selected, "You are at Position 2")};
 						map.setLocations(Llocations);
+						}
+						
 						/*
 						// remove the previous position
 						lv1.setBackgroundColor(Color.WHITE);
@@ -886,13 +1078,12 @@ public class MainActivity extends Activity implements SensorEventListener {
 						rlMain.addView(lv2, lparams2);
 			*/			
 					} else
-						Lcheck4 = false;
-						Lcheck5 = false;
-						Lcheck6 = false;
+						Lcheck[3] = false;
+						Lcheck[4] = false;
+						Lcheck[5] = false;
 				 }
 //------------------------Position 3--------------------------------------------------------------
-				 if (Lcheck4 == false || Lcheck5 == false
-							|| Lcheck6 == false){
+				 if (Lcheck[3] == false || Lcheck[4] == false|| Lcheck[5] == false){
 						
 					if (lsb1.toString().equals("64:16:f0:ea:d7:35")					//Chokolato
 								|| lsb1.toString().equals("c2:9f:db:67:5a:28")
@@ -910,7 +1101,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 								|| lsb1.toString().equals("00:26:44:01:38:10")
 								|| lsb1.toString().equals("c2:9f:db:67:5a:57"))
 						{
-							Lcheck7 = true;
+							Lcheck[6] = true;
 							// Toast.makeText(getApplicationContext(),lsb1.toString(),Toast.LENGTH_SHORT).show();
 						}
 					if (lsb2.toString().equals("64:16:f0:ea:d7:35")
@@ -929,7 +1120,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 							|| lsb2.toString().equals("00:26:44:01:38:10")
 							|| lsb2.toString().equals("c2:9f:db:67:5a:57")) 
 					{
-						Lcheck8 = true;
+						Lcheck[7] = true;
 						// Toast.makeText(getApplicationContext(),lsb2.toString(),Toast.LENGTH_SHORT).show();
 					}
 
@@ -949,18 +1140,39 @@ public class MainActivity extends Activity implements SensorEventListener {
 							|| lsb3.toString().equals("00:26:44:01:38:10")
 							|| lsb3.toString().equals("c2:9f:db:67:5a:57"))
 					{
-						Lcheck9 = true;
+						Lcheck[8] = true;
 						// Toast.makeText(getApplicationContext(),lsb4.toString(),Toast.LENGTH_SHORT).show();
 					}
 
-					if (Lcheck7 == true && Lcheck8 == true && Lcheck9 == true) {
+					if (Lcheck[6] == true && Lcheck[7] == true && Lcheck[8] == true) {
 						allNetWork.setText("You are at city library Position 3"
 								+ " " + LScanResult1.level);
 						Toast.makeText(getApplicationContext(), "P3",
 								Toast.LENGTH_SHORT).show();
 
-					  	MapLocation[] Llocations = new MapLocation[] {new StateLocation(this, 520, 42, R.drawable.location_icon, R.drawable.location_icon_selected, "Position 3")};
+						if (LPositionset[0] == true){
+							MapLocation[] Llocations = new MapLocation[] {new StateLocation(this, 180, 740, R.drawable.destination_icon, R.drawable.destination_icon_selected, "Your are destination at Position 1"),
+																			new StateLocation(this, 520, 42, R.drawable.location_icon, R.drawable.location_icon_selected, "You are at Position 3")
+																		};
+							map.setLocations(Llocations);
+						}else
+						if (LPositionset[1] == true){
+							MapLocation[] Llocations = new MapLocation[] {new StateLocation(this, 40, 440, R.drawable.destination_icon, R.drawable.destination_icon_selected, "Your are destination at Position 2"),
+																			new StateLocation(this, 520, 42, R.drawable.location_icon, R.drawable.location_icon_selected, "You are at Position 3")
+																		};
+							map.setLocations(Llocations);
+						}else
+						if (LPositionset[2] == true){
+							MapLocation[] Llocations = new MapLocation[] {new StateLocation(this, 530, 10, R.drawable.destination_icon, R.drawable.destination_icon_selected, "Your are destination at Position 3"),
+																			new StateLocation(this, 520, 42, R.drawable.location_icon, R.drawable.location_icon_selected, "You are at Position 3")
+																		};
+							map.setLocations(Llocations);
+						}else
+						{
+						MapLocation[] Llocations = new MapLocation[] {new StateLocation(this, 520, 42, R.drawable.location_icon, R.drawable.location_icon_selected, "You are at Position 3")};
 						map.setLocations(Llocations);
+						}
+						
 						/*				// remove the previous position
 						lv2.setBackgroundColor(Color.WHITE);
 						lparams2.topMargin = 210; // 210
@@ -983,13 +1195,13 @@ public class MainActivity extends Activity implements SensorEventListener {
 					  	rlMain.addView(lv4, lparams4);
 			*/	
 					}
-					else if(Lcheck7 == true || Lcheck8 == true || Lcheck9 == true)
-						Lcheck7 = false;
-						Lcheck8 = false;
-						Lcheck9 = false;
+					else 
+						Lcheck[6] = false;
+						Lcheck[7] = false;
+						Lcheck[8] = false;
 				 }
 //--------------------------- Position 4-------------------------------------------------------------
-					  if (Lcheck7 == false && Lcheck8 == false && Lcheck9 == false) {
+					  if (Lcheck[6] == false && Lcheck[7] == false && Lcheck[8] == false) {
 						
 						  if (lsb1.toString().equals("00:22:75:60:28:b4")			//design_school_2
 								  ||lsb1.toString().equals("c2:9f:db:67:59:8a") && LScanResult1.level > -65		//PN Library wi-fi	less than -65db
@@ -1002,7 +1214,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 								  ||lsb1.toString().equals("c2:9f:db:67:5a:54")&& LScanResult2.level > -65		//PN Library wi-fi	
 								  ||lsb1.toString().equals("00:60:64:6b:08:ea"))		//Bellas Cafe
 								  {
-							  			Lcheck10 = true;
+							  			Lcheck[9] = true;
 								  }
 
 						  if (lsb2.toString().equals("00:22:75:60:28:b4")			//design_school_2
@@ -1016,7 +1228,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 								  ||lsb2.toString().equals("c2:9f:db:67:5a:54")	&& LScanResult2.level > -65	//PN Library wi-fi	
 								  ||lsb2.toString().equals("00:60:64:6b:08:ea"))		//Bellas Cafe
 								  {
-							  			Lcheck11 = true;
+							  			Lcheck[10] = true;
 								  }
 						  
 						  if (lsb3.toString().equals("00:22:75:60:28:b4")			//design_school_2
@@ -1030,17 +1242,39 @@ public class MainActivity extends Activity implements SensorEventListener {
 								  ||lsb3.toString().equals("c2:9f:db:67:5a:54")	&& LScanResult2.level > -65	//PN Library wi-fi	
 								  ||lsb3.toString().equals("00:60:64:6b:08:ea"))		//Bellas Cafe
 								  {
-							  		Lcheck12 = true;
+							  			Lcheck[11] = true;
 								  }
 						  
-						  if(Lcheck10 == true && Lcheck11 == true && Lcheck12 == true){
+						  if(Lcheck[9] == true && Lcheck[10] == true && Lcheck[11] == true){
 						  
 							  	allNetWork.setText("You are at city library Position 4" +
 							  				" " + LScanResult1.level);
 							  	Toast.makeText(getApplicationContext(),"P4",Toast.LENGTH_SHORT).show();
 
-								MapLocation[] Llocations = new MapLocation[] {new StateLocation(this, 290, 42, R.drawable.location_icon, R.drawable.location_icon_selected, "Position 4")};
-								map.setLocations(Llocations);
+								
+								
+								if (LPositionset[0] == true){
+									MapLocation[] Llocations = new MapLocation[] {new StateLocation(this, 180, 740, R.drawable.destination_icon, R.drawable.destination_icon_selected, "Your are destination at Position 1"),
+																					new StateLocation(this, 290, 42, R.drawable.location_icon, R.drawable.location_icon_selected, "You are at Position 4")
+																				};
+									map.setLocations(Llocations);
+								}else
+								if (LPositionset[1] == true){
+									MapLocation[] Llocations = new MapLocation[] {new StateLocation(this, 40, 440, R.drawable.destination_icon, R.drawable.destination_icon_selected, "Your are destination at Position 2"),
+																					new StateLocation(this, 290, 42, R.drawable.location_icon, R.drawable.location_icon_selected, "You are at Position 4")
+																				};
+									map.setLocations(Llocations);
+								}else
+								if (LPositionset[2] == true){
+									MapLocation[] Llocations = new MapLocation[] {new StateLocation(this, 530, 10, R.drawable.destination_icon, R.drawable.destination_icon_selected, "Your are destination at Position 3"),
+																					new StateLocation(this, 290, 42, R.drawable.location_icon, R.drawable.location_icon_selected, "You are at Position 4")
+																				};
+									map.setLocations(Llocations);
+								}else
+								{
+									MapLocation[] Llocations = new MapLocation[] {new StateLocation(this, 290, 42, R.drawable.location_icon, R.drawable.location_icon_selected, "You are at Position 4")};
+									map.setLocations(Llocations);
+								}
 								
 								/*				  	// remove the previous position
 							  	lv4.setBackgroundColor(Color.BLUE); 
@@ -1053,104 +1287,651 @@ public class MainActivity extends Activity implements SensorEventListener {
 								lparams3.leftMargin = 200; // 200
 								rlMain.addView(lv3, lparams3);
 				*/
-						  }		  
+						  }	else
+							  	Lcheck[9] = false;
+						  		Lcheck[10] = false;
+						  		Lcheck[11] = false;	  
 					  }
 			
 /**
  *  Aghort Map			
  */
-			/*
-			 * if (mScanResult.level < -65) { //------------------------------
-			 * ------------------------------
-			 * ------------------------------------------------------//
-			 * 
-			 * if (mScanResult.SSID.toString().equals("MUStudents")) {
-			 * 
-			 * if (mScanResult.BSSID.toString().equals( "ac:16:2d:e7:f4:02") ||
-			 * mScanResult.BSSID.toString().equals( "ac:16:2d:e7:e4:e2") ||
-			 * mScanResult.BSSID.toString().equals( "ac:16:2d:e7:e4:41")) {
-			 * Rcheck = true; if
-			 * (mScanResult1.SSID.toString().equals("MUStaff")) { if
-			 * (mScanResult1.BSSID.toString().equals( "ac:16:2d:e7:e4:40")) {
-			 * Rcheck1 = true; if (mScanResult2.SSID.toString().equals(
-			 * "EduRoam")) { if
-			 * (mScanResult2.BSSID.toString().equals("ac:16:2d:e7:e4:43")) {
-			 * Rcheck2 = true; } } } } } }
-			 * 
-			 * if (mScanResult.SSID.toString().equals("MUStaff")) { if
-			 * (mScanResult.BSSID.toString().equals( "ac:16:2d:e7:e4:40")) {
-			 * Rcheck = true; if
-			 * (mScanResult1.SSID.toString().equals("EduRoam")) { if
-			 * (mScanResult1.BSSID.toString().equals( "ac:16:2d:e7:e4:43")) {
-			 * Rcheck1 = true; if (mScanResult2.SSID.toString().equals(
-			 * "MUStudents")) { if
-			 * (mScanResult2.BSSID.toString().equals("ac:16:2d:e7:f4:02") ||
-			 * mScanResult2.BSSID.toString().equals("ac:16:2d:e7:e4:e2") ||
-			 * mScanResult2.BSSID.toString().equals("ac:16:2d:e7:e4:41")) {
-			 * Rcheck2 = true; } } } } } }
-			 * 
-			 * if (mScanResult.SSID.toString().equals("EduRoam")) { if
-			 * (mScanResult.BSSID.toString().equals( "ac:16:2d:e7:e4:43")) {
-			 * Rcheck = true; if (mScanResult1.SSID.toString().equals(
-			 * "MUStudents")) { if (mScanResult1.BSSID.toString().equals(
-			 * "ac:16:2d:e7:f4:02") ||
-			 * mScanResult1.BSSID.toString().equals("ac:16:2d:e7:e4:e2") ||
-			 * mScanResult1.BSSID.toString().equals("ac:16:2d:e7:e4:41")) {
-			 * Rcheck1 = true; if (mScanResult2.SSID.toString().equals(
-			 * "MUStaff")) { if
-			 * (mScanResult2.BSSID.toString().equals("ac:16:2d:e7:e4:40")) {
-			 * Rcheck2 = true; } } } } } } /*
-			 * if(mScanResult1.SSID.toString().equals("MUStaff")) { if
-			 * (mScanResult1 .BSSID.toString().equals("ac:16:2d:e7:e4:40")) {
-			 * Rcheck1 = true; } }
-			 * 
-			 * if (mScanResult2.SSID.toString().equals("EduRoam")) { if
-			 * (mScanResult2.BSSID.toString().equals( "ac:16:2d:e7:e4:43")) {
-			 * Rcheck2 = true; } }
-			 * 
-			 * 
-			 * if (Rcheck == true || Rcheck1 == true || Rcheck2 == true) { //
-			 * check MUStudent found or MUStaff found or EduRoam // found
-			 * allNetWork.setText("You are around Room 3.65"); // map =
-			 * (MapView) findViewById(R.id.map); // map.setMapImage(ImageUtil
-			 * .loadBitmapFromResource(getResources(), // R.drawable.map4));
-			 * Toast.makeText(getApplicationContext(),
-			 * "Locate by either MUStudent or MUStaff or EduRoam",
-			 * Toast.LENGTH_SHORT).show(); }
-			 * 
-			 * else { if (Rcheck == true && Rcheck1 == true || Rcheck2 == true)
-			 * { // check MUStudent found and MUStaff found or // EduRoam found
-			 * allNetWork.setText("You are around Room 3.65"); map = (MapView)
-			 * findViewById(R.id.map);
-			 * map.setMapImage(ImageUtil.loadBitmapFromResource( getResources(),
-			 * R.drawable.map4)); Toast.makeText( getApplicationContext(),
-			 * "Locate by MUStudent and MUStaff or EduRoam",
-			 * Toast.LENGTH_SHORT).show(); } else { if (Rcheck == true ||
-			 * Rcheck1 == true && Rcheck2 == true) { // check MUStudent found or
-			 * MUStaff found and // EduRoam found
-			 * allNetWork.setText("You are around Room 3.65"); map = (MapView)
-			 * findViewById(R.id.map);
-			 * map.setMapImage(ImageUtil.loadBitmapFromResource (getResources(),
-			 * R.drawable.map4)); Toast.makeText( getApplicationContext(),
-			 * "Locate by MUStudent or MUStaff and EduRoam",
-			 * Toast.LENGTH_SHORT).show(); } else { if (Rcheck == true &&
-			 * Rcheck1 == true && Rcheck2 == true) { // check MUStudent // found
-			 * and // MUStaff found // and EduRoam // found
-			 * allNetWork.setText("You are around Room 3.65"); map = (MapView)
-			 * findViewById(R.id.map);
-			 * map.setMapImage(ImageUtil.loadBitmapFromResource (getResources(),
-			 * R.drawable.map4)); Toast.makeText( getApplicationContext(),
-			 * "Locate by MUStudent, MUStaff and EduRoam",
-			 * Toast.LENGTH_SHORT).show(); } else {
-			 * allNetWork.setText("You are not around Room 3.65 "); // end // of
-			 * // scan // check } } } }
-			 * 
-			 * } else { // if signal strength is greater than -85dB
-			 * Toast.makeText(getApplicationContext(),
-			 * "No Wifi for 3.65",Toast.LENGTH_SHORT).show();// end of Room
-			 * check 3.65 }
-			 */
-			}
+
+//-----------------Position 3.81-----------------------------------------------------------------------------
+					  //if (Lcheck[0] == false || Lcheck[1] == false|| Lcheck[2] == false|| Lcheck[3] == false|| Lcheck[4] == false
+					  	//	|| Lcheck[5] == false|| Lcheck[6] == false|| Lcheck[7] == false||Lcheck[8] == false || Lcheck[9] == false 
+					  	//	|| Lcheck[10] == false|| Lcheck[11] == false){
+					  			
+						  if (Arrays.asList(Lcheck).contains(false)){
+					  
+						  if (Ahgsb1.toString().equals("ac:16:2d:e7:e4:f1")			//EduRoam
+								  ||Ahgsb1.toString().equals("ac:16:2d:e7:e4:53")	//EduRoam
+								  ||Ahgsb1.toString().equals("ac:16:2d:e7:f4:11")	//EduRoam
+								  ||Ahgsb1.toString().equals("ac:16:2d:e7:e4:50")&& AgHScanResult1.level >= -70	//MUStaff
+								  ||Ahgsb1.toString().equals("ac:16:2d:e7:e4:f0")&& AgHScanResult1.level <= -70//MUStaff
+								  ||Ahgsb1.toString().equals("ac:16:2d:e7:f4:10")&& AgHScanResult1.level <= -70	//MUStaff
+								  ||Ahgsb1.toString().equals("ac:16:2d:e7:e4:f4")	//MUStaffPrivateEquipment
+								  ||Ahgsb1.toString().equals("ac:16:2d:e7:f4:14")	//MUStaffPrivateEquipment
+								  ||Ahgsb1.toString().equals("ac:16:2d:e7:e4:52")	//MUStaffPrivateEquipment
+								  ||Ahgsb1.toString().equals("c8:cb:b8:ec:5a:b4")	//MUStaffPrivateEquipment
+								  ||Ahgsb1.toString().equals("ac:16:2d:e7:d4:b2")	//MUStaffPrivateEquipment
+								  ||Ahgsb1.toString().equals("ac:16:2d:e7:e4:f2")&& AgHScanResult1.level <= -70	//MUStudents
+								  ||Ahgsb1.toString().equals("ac:16:2d:e7:f4:12")&& AgHScanResult1.level <= -70	//MUStudents
+								  ||Ahgsb1.toString().equals("ac:16:2d:e7:e4:51")&& AgHScanResult1.level >= -70	//MUStudents
+								  ||Ahgsb1.toString().equals("ac:16:2d:e7:e4:f3")	//inspirefreewifi
+								  ||Ahgsb1.toString().equals("ac:16:2d:e7:f4:13")	//inspirefreewifi
+								  ||Ahgsb1.toString().equals("ac:16:2d:e7:e4:54")	//inspirefreewifi
+								  ||Ahgsb1.toString().equals("ac:16:2d:e7:d4:b4")	//inspirefreewifi
+								  ||Ahgsb1.toString().equals("ac:16:2d:e7:e4:f5")	//studentcity
+								  ||Ahgsb1.toString().equals("ac:16:2d:e7:f4:15")	//studentcity
+								  ||Ahgsb1.toString().equals("ac:16:2d:e7:e4:55")	//studentcity
+								  ||Ahgsb1.toString().equals("ac:16:2d:e7:d4:b5")	//studentcity
+								  )
+								  {
+							  		Aghortcheck[0] = true;
+								  }
+
+						  if (Ahgsb2.toString().equals("ac:16:2d:e7:e4:f1")			//EduRoam
+								  ||Ahgsb2.toString().equals("ac:16:2d:e7:e4:53")	//EduRoam
+								  ||Ahgsb2.toString().equals("ac:16:2d:e7:f4:11")	//EduRoam
+								  ||Ahgsb2.toString().equals("ac:16:2d:e7:e4:50")&& AgHScanResult1.level >= -70	//MUStaff
+								  ||Ahgsb2.toString().equals("ac:16:2d:e7:e4:f0")&& AgHScanResult1.level <= -70//MUStaff
+								  ||Ahgsb2.toString().equals("ac:16:2d:e7:f4:10")&& AgHScanResult1.level <= -70	//MUStaff
+								  ||Ahgsb2.toString().equals("ac:16:2d:e7:e4:f4")	//MUStaffPrivateEquipment
+								  ||Ahgsb2.toString().equals("ac:16:2d:e7:f4:14")	//MUStaffPrivateEquipment
+								  ||Ahgsb2.toString().equals("ac:16:2d:e7:e4:52")	//MUStaffPrivateEquipment
+								  ||Ahgsb2.toString().equals("c8:cb:b8:ec:5a:b4")	//MUStaffPrivateEquipment
+								  ||Ahgsb2.toString().equals("ac:16:2d:e7:d4:b2")	//MUStaffPrivateEquipment
+								  ||Ahgsb2.toString().equals("ac:16:2d:e7:e4:f2")&& AgHScanResult1.level <= -70	//MUStudents
+								  ||Ahgsb2.toString().equals("ac:16:2d:e7:f4:12")&& AgHScanResult1.level <= -70	//MUStudents
+								  ||Ahgsb2.toString().equals("ac:16:2d:e7:e4:51")&& AgHScanResult1.level >= -70	//MUStudents
+								  ||Ahgsb2.toString().equals("ac:16:2d:e7:e4:f3")	//inspirefreewifi
+								  ||Ahgsb2.toString().equals("ac:16:2d:e7:f4:13")	//inspirefreewifi
+								  ||Ahgsb2.toString().equals("ac:16:2d:e7:e4:54")	//inspirefreewifi
+								  ||Ahgsb2.toString().equals("ac:16:2d:e7:d4:b4")	//inspirefreewifi
+								  ||Ahgsb2.toString().equals("ac:16:2d:e7:e4:f5")	//studentcity
+								  ||Ahgsb2.toString().equals("ac:16:2d:e7:f4:15")	//studentcity
+								  ||Ahgsb2.toString().equals("ac:16:2d:e7:e4:55")	//studentcity
+								  ||Ahgsb2.toString().equals("ac:16:2d:e7:d4:b5")	//studentcity
+								  )
+								  {
+							  		Aghortcheck[1] = true;
+								  }
+						  
+						  if (Ahgsb3.toString().equals("ac:16:2d:e7:e4:f1")			//EduRoam
+								  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:53")	//EduRoam
+								  ||Ahgsb3.toString().equals("ac:16:2d:e7:f4:11")	//EduRoam
+								  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:50")&& AgHScanResult1.level >= -70	//MUStaff
+								  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:f0")&& AgHScanResult1.level <= -70//MUStaff
+								  ||Ahgsb3.toString().equals("ac:16:2d:e7:f4:10")&& AgHScanResult1.level <= -70	//MUStaff
+								  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:f4")	//MUStaffPrivateEquipment
+								  ||Ahgsb3.toString().equals("ac:16:2d:e7:f4:14")	//MUStaffPrivateEquipment
+								  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:52")	//MUStaffPrivateEquipment
+								  ||Ahgsb3.toString().equals("c8:cb:b8:ec:5a:b4")	//MUStaffPrivateEquipment
+								  ||Ahgsb3.toString().equals("ac:16:2d:e7:d4:b2")	//MUStaffPrivateEquipment
+								  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:f2")&& AgHScanResult1.level <= -70	//MUStudents
+								  ||Ahgsb3.toString().equals("ac:16:2d:e7:f4:12")&& AgHScanResult1.level <= -70	//MUStudents
+								  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:51")&& AgHScanResult1.level >= -70	//MUStudents
+								  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:f3")	//inspirefreewifi
+								  ||Ahgsb3.toString().equals("ac:16:2d:e7:f4:13")	//inspirefreewifi
+								  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:54")	//inspirefreewifi
+								  ||Ahgsb3.toString().equals("ac:16:2d:e7:d4:b4")	//inspirefreewifi
+								  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:f5")	//studentcity
+								  ||Ahgsb3.toString().equals("ac:16:2d:e7:f4:15")	//studentcity
+								  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:55")	//studentcity
+								  ||Ahgsb3.toString().equals("ac:16:2d:e7:d4:b5")	//studentcity
+								  )
+								  {
+							  		Aghortcheck[2] = true;
+								  }
+						  
+						  if (Ahgsb4.toString().equals("ac:16:2d:e7:e4:f1")			//EduRoam
+								  ||Ahgsb4.toString().equals("ac:16:2d:e7:e4:53")	//EduRoam
+								  ||Ahgsb4.toString().equals("ac:16:2d:e7:f4:11")	//EduRoam
+								  ||Ahgsb4.toString().equals("ac:16:2d:e7:e4:50")&& AgHScanResult1.level >= -70	//MUStaff
+								  ||Ahgsb4.toString().equals("ac:16:2d:e7:e4:f0")&& AgHScanResult1.level <= -70//MUStaff
+								  ||Ahgsb4.toString().equals("ac:16:2d:e7:f4:10")&& AgHScanResult1.level <= -70	//MUStaff
+								  ||Ahgsb4.toString().equals("ac:16:2d:e7:e4:f4")	//MUStaffPrivateEquipment
+								  ||Ahgsb4.toString().equals("ac:16:2d:e7:f4:14")	//MUStaffPrivateEquipment
+								  ||Ahgsb4.toString().equals("ac:16:2d:e7:e4:52")	//MUStaffPrivateEquipment
+								  ||Ahgsb4.toString().equals("c8:cb:b8:ec:5a:b4")	//MUStaffPrivateEquipment
+								  ||Ahgsb4.toString().equals("ac:16:2d:e7:d4:b2")	//MUStaffPrivateEquipment
+								  ||Ahgsb4.toString().equals("ac:16:2d:e7:e4:f2")&& AgHScanResult1.level <= -70	//MUStudents
+								  ||Ahgsb4.toString().equals("ac:16:2d:e7:f4:12")&& AgHScanResult1.level <= -70	//MUStudents
+								  ||Ahgsb4.toString().equals("ac:16:2d:e7:e4:51")&& AgHScanResult1.level >= -70	//MUStudents
+								  ||Ahgsb4.toString().equals("ac:16:2d:e7:e4:f3")	//inspirefreewifi
+								  ||Ahgsb4.toString().equals("ac:16:2d:e7:f4:13")	//inspirefreewifi
+								  ||Ahgsb4.toString().equals("ac:16:2d:e7:e4:54")	//inspirefreewifi
+								  ||Ahgsb4.toString().equals("ac:16:2d:e7:d4:b4")	//inspirefreewifi
+								  ||Ahgsb4.toString().equals("ac:16:2d:e7:e4:f5")	//studentcity
+								  ||Ahgsb4.toString().equals("ac:16:2d:e7:f4:15")	//studentcity
+								  ||Ahgsb4.toString().equals("ac:16:2d:e7:e4:55")	//studentcity
+								  ||Ahgsb4.toString().equals("ac:16:2d:e7:d4:b5")	//studentcity
+								  )
+								  {
+							  		Aghortcheck[3] = true;
+								  }
+						  
+						  if (Ahgsb5.toString().equals("ac:16:2d:e7:e4:f1")			//EduRoam
+								  ||Ahgsb5.toString().equals("ac:16:2d:e7:e4:53")	//EduRoam
+								  ||Ahgsb5.toString().equals("ac:16:2d:e7:f4:11")	//EduRoam
+								  ||Ahgsb5.toString().equals("ac:16:2d:e7:e4:50")&& AgHScanResult1.level >= -70	//MUStaff
+								  ||Ahgsb5.toString().equals("ac:16:2d:e7:e4:f0")&& AgHScanResult1.level <= -70//MUStaff
+								  ||Ahgsb5.toString().equals("ac:16:2d:e7:f4:10")&& AgHScanResult1.level <= -70	//MUStaff
+								  ||Ahgsb5.toString().equals("ac:16:2d:e7:e4:f4")	//MUStaffPrivateEquipment
+								  ||Ahgsb5.toString().equals("ac:16:2d:e7:f4:14")	//MUStaffPrivateEquipment
+								  ||Ahgsb5.toString().equals("ac:16:2d:e7:e4:52")	//MUStaffPrivateEquipment
+								  ||Ahgsb5.toString().equals("c8:cb:b8:ec:5a:b4")	//MUStaffPrivateEquipment
+								  ||Ahgsb5.toString().equals("ac:16:2d:e7:d4:b2")	//MUStaffPrivateEquipment
+								  ||Ahgsb5.toString().equals("ac:16:2d:e7:e4:f2")&& AgHScanResult1.level <= -70	//MUStudents
+								  ||Ahgsb5.toString().equals("ac:16:2d:e7:f4:12")&& AgHScanResult1.level <= -70	//MUStudents
+								  ||Ahgsb5.toString().equals("ac:16:2d:e7:e4:51")&& AgHScanResult1.level >= -70	//MUStudents
+								  ||Ahgsb5.toString().equals("ac:16:2d:e7:e4:f3")	//inspirefreewifi
+								  ||Ahgsb5.toString().equals("ac:16:2d:e7:f4:13")	//inspirefreewifi
+								  ||Ahgsb5.toString().equals("ac:16:2d:e7:e4:54")	//inspirefreewifi
+								  ||Ahgsb5.toString().equals("ac:16:2d:e7:d4:b4")	//inspirefreewifi
+								  ||Ahgsb5.toString().equals("ac:16:2d:e7:e4:f5")	//studentcity
+								  ||Ahgsb5.toString().equals("ac:16:2d:e7:f4:15")	//studentcity
+								  ||Ahgsb5.toString().equals("ac:16:2d:e7:e4:55")	//studentcity
+								  ||Ahgsb5.toString().equals("ac:16:2d:e7:d4:b5")	//studentcity
+								  )
+								  {
+							  		Aghortcheck[4] = true;
+								  }
+						  
+						  if(Aghortcheck[0] == true && Aghortcheck[1] == true && Aghortcheck[2] == true && Aghortcheck[3] == true && Aghortcheck[4] == true){
+						  
+							  	allNetWork.setText("You are close to Aghort Level 3 room 3.81" + " " + AgHScanResult1.level);
+							  	//Toast.makeText(getApplicationContext(),"P1",Toast.LENGTH_SHORT).show();
+								
+								if (AgHPositionset[0] == true){
+									MapLocation[] Llocations = new MapLocation[] {new StateLocation(this, 270, 160, R.drawable.destination_icon, R.drawable.destination_icon_selected, "Your are destination around Room 3.81"),
+																					new StateLocation(this, 270, 160, R.drawable.location_icon, R.drawable.location_icon_selected, "You are around Room 3.81")
+																				};
+									map.setLocations(Llocations);
+								}else
+								if (AgHPositionset[1] == true){
+									MapLocation[] Llocations = new MapLocation[] {new StateLocation(this, 700, 160, R.drawable.destination_icon, R.drawable.destination_icon_selected, "Your are destination around Room 3.64"),
+																					new StateLocation(this, 270, 160, R.drawable.location_icon, R.drawable.location_icon_selected, "You are around Room 3.81")
+																				};
+									map.setLocations(Llocations);
+								}else
+								if (AgHPositionset[2] == true){
+									MapLocation[] Llocations = new MapLocation[] {new StateLocation(this, 920, 160, R.drawable.destination_icon, R.drawable.destination_icon_selected, "Your are destination around Room 3.52"),
+																					new StateLocation(this, 270, 160, R.drawable.location_icon, R.drawable.location_icon_selected, "You are around Room 3.81")
+																				};
+									map.setLocations(Llocations);
+								}else
+								if (AgHPositionset[3] == true){
+									MapLocation[] Llocations = new MapLocation[] {new StateLocation(this, 1370, 200, R.drawable.destination_icon, R.drawable.destination_icon_selected, "Your are destination around Room 3.42"),
+																					new StateLocation(this, 270, 160, R.drawable.location_icon, R.drawable.location_icon_selected, "You are around Room 3.81")
+																					};
+									map.setLocations(Llocations);
+								}
+								else
+								{
+									MapLocation[] Llocations = new MapLocation[] {new StateLocation(this, 270, 160, R.drawable.location_icon, R.drawable.location_icon_selected, "You are around Room 3.81")};
+									map.setLocations(Llocations);
+								}
+
+						  }	else
+							  	Aghortcheck[0] = false;
+						  		Aghortcheck[1] = false;
+						  		Aghortcheck[2] = false;
+						  		Aghortcheck[3] = false;
+						  		Aghortcheck[4] = false;
+					  }
+					  
+//-----------------Position 3.64-----------------------------------------------------------------------------					  
+						  if(Aghortcheck[0] == false && Aghortcheck[1] == false && Aghortcheck[2] == false && Aghortcheck[3] == false && Aghortcheck[4] == false){
+							  
+							  if (Ahgsb1.toString().equals("ac:16:2d:e7:f4:14")	//MUStaffPrivateEquipment			..-74 
+									  ||Ahgsb1.toString().equals("ac:16:2d:e7:e4:f4")	//MUStaffPrivateEquipment	..-78
+									  ||Ahgsb1.toString().equals("ac:16:2d:e7:e4:52")	//MUStaffPrivateEquipment	..-85
+									  
+									  ||Ahgsb1.toString().equals("ac:16:2d:e7:f4:10")	//MUStaff					..-74
+									  ||Ahgsb1.toString().equals("ac:16:2d:e7:e4:50")	//MUStaff					..-80
+									  
+									  ||Ahgsb1.toString().equals("ac:16:2d:e7:f4:12")	//MUStudents				..-75
+									  ||Ahgsb1.toString().equals("ac:16:2d:e7:e4:f2")	//MUStudents				..-78
+									  ||Ahgsb1.toString().equals("ac:16:2d:e7:e4:51")	//MUStudents				..-85
+									  
+									  ||Ahgsb1.toString().equals("ac:16:2d:e7:f4:11")	//EduRoam					..-75
+									  ||Ahgsb1.toString().equals("ac:16:2d:e7:e4:53")	//EduRoam					..-79
+
+									  ||Ahgsb1.toString().equals("ac:16:2d:e7:f4:15")	//studentcity				..-74
+									  ||Ahgsb1.toString().equals("ac:16:2d:e7:e4:f5")	//studentcity				..-78
+									  ||Ahgsb1.toString().equals("ac:16:2d:e7:e4:55")	//studentcity				..-86
+									  
+									  ||Ahgsb1.toString().equals("ac:16:2d:e7:f4:13")	//inspirefreewifi			..-75
+									  ||Ahgsb1.toString().equals("ac:16:2d:e7:e4:f3")	//inspirefreewifi			..-77
+									  ||Ahgsb1.toString().equals("ac:16:2d:e7:e4:54")	//inspirefreewifi			..-80
+									  )
+									  {
+								  		Aghortcheck[5] = true;
+									  }
+
+							  if (Ahgsb2.toString().equals("ac:16:2d:e7:f4:14")	//MUStaffPrivateEquipment			..-74 
+									  ||Ahgsb2.toString().equals("ac:16:2d:e7:e4:f4")	//MUStaffPrivateEquipment	..-78
+									  ||Ahgsb2.toString().equals("ac:16:2d:e7:e4:52")	//MUStaffPrivateEquipment	..-85
+									  
+									  ||Ahgsb2.toString().equals("ac:16:2d:e7:f4:10")	//MUStaff					..-74
+									  ||Ahgsb2.toString().equals("ac:16:2d:e7:e4:50")	//MUStaff					..-80
+									  
+									  ||Ahgsb2.toString().equals("ac:16:2d:e7:f4:12")	//MUStudents				..-75
+									  ||Ahgsb2.toString().equals("ac:16:2d:e7:e4:f2")	//MUStudents				..-78
+									  ||Ahgsb2.toString().equals("ac:16:2d:e7:e4:51")	//MUStudents				..-85
+									  
+									  ||Ahgsb2.toString().equals("ac:16:2d:e7:f4:11")	//EduRoam					..-75
+									  ||Ahgsb2.toString().equals("ac:16:2d:e7:e4:53")	//EduRoam					..-79
+
+									  ||Ahgsb2.toString().equals("ac:16:2d:e7:f4:15")	//studentcity				..-74
+									  ||Ahgsb2.toString().equals("ac:16:2d:e7:e4:f5")	//studentcity				..-78
+									  ||Ahgsb2.toString().equals("ac:16:2d:e7:e4:55")	//studentcity				..-86
+									  
+									  ||Ahgsb2.toString().equals("ac:16:2d:e7:f4:13")	//inspirefreewifi			..-75
+									  ||Ahgsb2.toString().equals("ac:16:2d:e7:e4:f3")	//inspirefreewifi			..-77
+									  ||Ahgsb2.toString().equals("ac:16:2d:e7:e4:54")	//inspirefreewifi			..-80
+									  )
+									  {
+								  		Aghortcheck[6] = true;
+									  }
+							  
+							  if (Ahgsb3.toString().equals("ac:16:2d:e7:f4:14")	//MUStaffPrivateEquipment			..-74 
+									  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:f4")	//MUStaffPrivateEquipment	..-78
+									  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:52")	//MUStaffPrivateEquipment	..-85
+									  
+									  ||Ahgsb3.toString().equals("ac:16:2d:e7:f4:10")	//MUStaff					..-74
+									  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:50")	//MUStaff					..-80
+									  
+									  ||Ahgsb3.toString().equals("ac:16:2d:e7:f4:12")	//MUStudents				..-75
+									  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:f2")	//MUStudents				..-78
+									  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:51")	//MUStudents				..-85
+									  
+									  ||Ahgsb3.toString().equals("ac:16:2d:e7:f4:11")	//EduRoam					..-75
+									  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:53")	//EduRoam					..-79
+
+									  ||Ahgsb3.toString().equals("ac:16:2d:e7:f4:15")	//studentcity				..-74
+									  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:f5")	//studentcity				..-78
+									  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:55")	//studentcity				..-86
+									  
+									  ||Ahgsb3.toString().equals("ac:16:2d:e7:f4:13")	//inspirefreewifi			..-75
+									  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:f3")	//inspirefreewifi			..-77
+									  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:54")	//inspirefreewifi			..-80
+									  )
+									  {
+								  		Aghortcheck[7] = true;
+									  }
+							  
+							  if (Ahgsb4.toString().equals("ac:16:2d:e7:f4:14")	//MUStaffPrivateEquipment			..-74 
+									  ||Ahgsb4.toString().equals("ac:16:2d:e7:e4:f4")	//MUStaffPrivateEquipment	..-78
+									  ||Ahgsb4.toString().equals("ac:16:2d:e7:e4:52")	//MUStaffPrivateEquipment	..-85
+									  
+									  ||Ahgsb4.toString().equals("ac:16:2d:e7:f4:10")	//MUStaff					..-74
+									  ||Ahgsb4.toString().equals("ac:16:2d:e7:e4:50")	//MUStaff					..-80
+									  
+									  ||Ahgsb4.toString().equals("ac:16:2d:e7:f4:12")	//MUStudents				..-75
+									  ||Ahgsb4.toString().equals("ac:16:2d:e7:e4:f2")	//MUStudents				..-78
+									  ||Ahgsb4.toString().equals("ac:16:2d:e7:e4:51")	//MUStudents				..-85
+									  
+									  ||Ahgsb4.toString().equals("ac:16:2d:e7:f4:11")	//EduRoam					..-75
+									  ||Ahgsb4.toString().equals("ac:16:2d:e7:e4:53")	//EduRoam					..-79
+
+									  ||Ahgsb4.toString().equals("ac:16:2d:e7:f4:15")	//studentcity				..-74
+									  ||Ahgsb4.toString().equals("ac:16:2d:e7:e4:f5")	//studentcity				..-78
+									  ||Ahgsb4.toString().equals("ac:16:2d:e7:e4:55")	//studentcity				..-86
+									  
+									  ||Ahgsb4.toString().equals("ac:16:2d:e7:f4:13")	//inspirefreewifi			..-75
+									  ||Ahgsb4.toString().equals("ac:16:2d:e7:e4:f3")	//inspirefreewifi			..-77
+									  ||Ahgsb4.toString().equals("ac:16:2d:e7:e4:54")	//inspirefreewifi			..-80
+									  )
+									  {
+								  		Aghortcheck[8] = true;
+									  }
+							  
+							  if (Ahgsb5.toString().equals("ac:16:2d:e7:f4:14")	//MUStaffPrivateEquipment			..-74 
+									  ||Ahgsb5.toString().equals("ac:16:2d:e7:e4:f4")	//MUStaffPrivateEquipment	..-78
+									  ||Ahgsb5.toString().equals("ac:16:2d:e7:e4:52")	//MUStaffPrivateEquipment	..-85
+									  
+									  ||Ahgsb5.toString().equals("ac:16:2d:e7:f4:10")	//MUStaff					..-74
+									  ||Ahgsb5.toString().equals("ac:16:2d:e7:e4:50")	//MUStaff					..-80
+									  
+									  ||Ahgsb5.toString().equals("ac:16:2d:e7:f4:12")	//MUStudents				..-75
+									  ||Ahgsb5.toString().equals("ac:16:2d:e7:e4:f2")	//MUStudents				..-78
+									  ||Ahgsb5.toString().equals("ac:16:2d:e7:e4:51")	//MUStudents				..-85
+									  
+									  ||Ahgsb5.toString().equals("ac:16:2d:e7:f4:11")	//EduRoam					..-75
+									  ||Ahgsb5.toString().equals("ac:16:2d:e7:e4:53")	//EduRoam					..-79
+
+									  ||Ahgsb5.toString().equals("ac:16:2d:e7:f4:15")	//studentcity				..-74
+									  ||Ahgsb5.toString().equals("ac:16:2d:e7:e4:f5")	//studentcity				..-78
+									  ||Ahgsb5.toString().equals("ac:16:2d:e7:e4:55")	//studentcity				..-86
+									  
+									  ||Ahgsb5.toString().equals("ac:16:2d:e7:f4:13")	//inspirefreewifi			..-75
+									  ||Ahgsb5.toString().equals("ac:16:2d:e7:e4:f3")	//inspirefreewifi			..-77
+									  ||Ahgsb5.toString().equals("ac:16:2d:e7:e4:54")	//inspirefreewifi			..-80
+									  )
+									  {
+								  		Aghortcheck[9] = true;
+									  }
+							  
+							  if(Aghortcheck[5] == true && Aghortcheck[6] == true && Aghortcheck[7] == true && Aghortcheck[8] == true && Aghortcheck[9] == true){
+							  
+								  	allNetWork.setText("You are close to Aghort Level 3 room 3.64" + " " + AgHScanResult1.level);
+								  	//Toast.makeText(getApplicationContext(),"P1",Toast.LENGTH_SHORT).show();
+									
+									if (AgHPositionset[0] == true){
+										MapLocation[] Llocations = new MapLocation[] {new StateLocation(this, 270, 160, R.drawable.destination_icon, R.drawable.destination_icon_selected, "Your are destination around Room 3.81"),
+																						new StateLocation(this, 700, 160, R.drawable.location_icon, R.drawable.location_icon_selected, "You are around Room 3.64")
+																					};
+										map.setLocations(Llocations);
+									}else
+									if (AgHPositionset[1] == true){
+										MapLocation[] Llocations = new MapLocation[] {new StateLocation(this, 700, 160, R.drawable.destination_icon, R.drawable.destination_icon_selected, "Your are destination around Room 3.64"),
+																						new StateLocation(this, 700, 160, R.drawable.location_icon, R.drawable.location_icon_selected, "You are around Room 3.64")
+																					};
+										map.setLocations(Llocations);
+									}else
+									if (AgHPositionset[2] == true){
+										MapLocation[] Llocations = new MapLocation[] {new StateLocation(this, 920, 160, R.drawable.destination_icon, R.drawable.destination_icon_selected, "Your are destination around Room 3.52"),
+																						new StateLocation(this, 700, 160, R.drawable.location_icon, R.drawable.location_icon_selected, "You are around Room 3.64")
+																					};
+										map.setLocations(Llocations);
+									}else
+									if (AgHPositionset[3] == true){
+										MapLocation[] Llocations = new MapLocation[] {new StateLocation(this, 1370, 200, R.drawable.destination_icon, R.drawable.destination_icon_selected, "Your are destination around Room 3.42"),
+																							new StateLocation(this, 700, 160, R.drawable.location_icon, R.drawable.location_icon_selected, "You are around Room 3.64")
+																						};
+										map.setLocations(Llocations);
+									}
+									else
+									{
+										MapLocation[] Llocations = new MapLocation[] {new StateLocation(this, 700, 160, R.drawable.location_icon, R.drawable.location_icon_selected, "You are around Room 3.64")};
+										map.setLocations(Llocations);
+									}
+							  }	else
+								  	Aghortcheck[5] = false;
+							  		Aghortcheck[6] = false;
+							  		Aghortcheck[7] = false;
+							  		Aghortcheck[8] = false;
+							  		Aghortcheck[9] = false;
+						  }
+					  
+					  
+//-----------------Position 3.52-----------------------------------------------------------------------------
+						  	if(Aghortcheck[5] == false && Aghortcheck[6] == false && Aghortcheck[7] == false && Aghortcheck[8] == false && Aghortcheck[9] == false){
+							  
+							  if (		Ahgsb1.toString().equals("ac:16:2d:e7:e4:f0")	//MUStaff					..-60
+									  
+									  ||Ahgsb1.toString().equals("ac:16:2d:e7:e4:f2")	//MUStudents				..-60
+									  ||Ahgsb1.toString().equals("ac:16:2d:e7:d4:d2")	//MUStudents				..-91
+									  
+									  ||Ahgsb1.toString().equals("ac:16:2d:e7:e4:f1")	//EduRoam					..-60
+
+									  ||Ahgsb1.toString().equals("ac:16:2d:e7:e4:f5")	//studentcity				..-78
+									  
+									  ||Ahgsb1.toString().equals("ac:16:2d:e7:e4:f3")	//inspirefreewifi			..-77
+									  )
+									  {
+								  		Aghortcheck[10] = true;
+									  }
+
+							  if (Ahgsb2.toString().equals("ac:16:2d:e7:e4:f0")	//MUStaff					..-60
+									  
+									  ||Ahgsb2.toString().equals("ac:16:2d:e7:e4:f2")	//MUStudents				..-60
+									  ||Ahgsb2.toString().equals("ac:16:2d:e7:d4:d2")	//MUStudents				..-91
+									  
+									  ||Ahgsb2.toString().equals("ac:16:2d:e7:e4:f1")	//EduRoam					..-60
+
+									  ||Ahgsb2.toString().equals("ac:16:2d:e7:e4:f5")	//studentcity				..-78
+									  
+									  ||Ahgsb2.toString().equals("ac:16:2d:e7:e4:f3")	//inspirefreewifi			..-77
+									  )
+									  {
+								  		Aghortcheck[11] = true;
+									  }
+							  
+							  if (Ahgsb3.toString().equals("ac:16:2d:e7:e4:f0")	//MUStaff					..-60
+									  
+									  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:f2")	//MUStudents				..-60
+									  ||Ahgsb3.toString().equals("ac:16:2d:e7:d4:d2")	//MUStudents				..-91
+									  
+									  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:f1")	//EduRoam					..-60
+
+									  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:f5")	//studentcity				..-78
+									  
+									  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:f3")	//inspirefreewifi			..-77
+									  )
+									  {
+								  		Aghortcheck[12] = true;
+									  }
+							  
+							  if (Ahgsb4.toString().equals("ac:16:2d:e7:e4:f0")	//MUStaff					..-60
+									  
+									  ||Ahgsb4.toString().equals("ac:16:2d:e7:e4:f2")	//MUStudents				..-60
+									  ||Ahgsb4.toString().equals("ac:16:2d:e7:d4:d2")	//MUStudents				..-91
+									  
+									  ||Ahgsb4.toString().equals("ac:16:2d:e7:e4:f1")	//EduRoam					..-60
+
+									  ||Ahgsb4.toString().equals("ac:16:2d:e7:e4:f5")	//studentcity				..-78
+									  
+									  ||Ahgsb4.toString().equals("ac:16:2d:e7:e4:f3")	//inspirefreewifi			..-77
+									  )
+									  {
+								  		Aghortcheck[13] = true;
+									  }
+							  
+							  if (Ahgsb5.toString().equals("ac:16:2d:e7:e4:f0")	//MUStaff					..-60
+									  
+									  ||Ahgsb5.toString().equals("ac:16:2d:e7:e4:f2")	//MUStudents				..-60
+									  ||Ahgsb5.toString().equals("ac:16:2d:e7:d4:d2")	//MUStudents				..-91
+									  
+									  ||Ahgsb5.toString().equals("ac:16:2d:e7:e4:f1")	//EduRoam					..-60
+
+									  ||Ahgsb5.toString().equals("ac:16:2d:e7:e4:f5")	//studentcity				..-78
+									  
+									  ||Ahgsb5.toString().equals("ac:16:2d:e7:e4:f3")	//inspirefreewifi			..-77
+									  )
+									  {
+								  		Aghortcheck[14] = true;
+									  }
+							  
+							  if(Aghortcheck[10] == true && Aghortcheck[11] == true && Aghortcheck[12] == true && Aghortcheck[13] == true && Aghortcheck[14] == true){
+							  
+								  	allNetWork.setText("You are close to Aghort Level 3 room 3.52" + " " + AgHScanResult1.level);
+								  	//Toast.makeText(getApplicationContext(),"P1",Toast.LENGTH_SHORT).show();
+									
+									if (AgHPositionset[0] == true){
+										MapLocation[] Llocations = new MapLocation[] {new StateLocation(this, 270, 160, R.drawable.destination_icon, R.drawable.destination_icon_selected, "Your are destination around Room 3.81"),
+																						new StateLocation(this, 920, 160, R.drawable.location_icon, R.drawable.location_icon_selected, "You are around Room 3.52")
+																					};
+										map.setLocations(Llocations);
+									}else
+									if (AgHPositionset[1] == true){
+										MapLocation[] Llocations = new MapLocation[] {new StateLocation(this, 700, 160, R.drawable.destination_icon, R.drawable.destination_icon_selected, "Your are destination around Room 3.64"),
+																						new StateLocation(this, 920, 160, R.drawable.location_icon, R.drawable.location_icon_selected, "You are around Room 3.52")
+																					};
+										map.setLocations(Llocations);
+									}else
+									if (AgHPositionset[2] == true){
+										MapLocation[] Llocations = new MapLocation[] {new StateLocation(this, 920, 160, R.drawable.destination_icon, R.drawable.destination_icon_selected, "Your are destination around Room 3.52"),
+																						new StateLocation(this, 920, 160, R.drawable.location_icon, R.drawable.location_icon_selected, "You are around Room 3.52")
+																					};
+										map.setLocations(Llocations);
+									}else
+									if (AgHPositionset[3] == true){
+										MapLocation[] Llocations = new MapLocation[] {new StateLocation(this, 1370, 200, R.drawable.destination_icon, R.drawable.destination_icon_selected, "Your are destination around Room 3.42"),
+																							new StateLocation(this, 920, 160, R.drawable.location_icon, R.drawable.location_icon_selected, "You are around Room 3.52")
+																						};
+										map.setLocations(Llocations);
+									}
+									else
+									{
+										MapLocation[] Llocations = new MapLocation[] {new StateLocation(this, 920, 160, R.drawable.location_icon, R.drawable.location_icon_selected, "You are around Room 3.52")};
+										map.setLocations(Llocations);
+									}
+							  }	else
+								  	Aghortcheck[10] = false;
+							  		Aghortcheck[11] = false;
+							  		Aghortcheck[12] = false;
+							  		Aghortcheck[13] = false;
+							  		Aghortcheck[14] = false;
+						  }
+					  
+					  
+//-----------------Position 3.42-----------------------------------------------------------------------------
+						  	if(Aghortcheck[10] == false && Aghortcheck[11] == false && Aghortcheck[12] == false && Aghortcheck[13] == false && Aghortcheck[14] == false){
+								  
+								  if (   	Ahgsb1.toString().equals("ac:16:2d:e7:e4:d2")	//MUStaffPrivateEquipment	..-91 
+										  ||Ahgsb1.toString().equals("ac:16:2d:e7:e4:f4")	//MUStaffPrivateEquipment	..-65
+										  
+										  ||Ahgsb1.toString().equals("ac:16:2d:e7:e4:f0")	//MUStaff					..-67
+										  
+										  ||Ahgsb1.toString().equals("ac:16:2d:e7:e4:d1")	//MUStudents				..-86
+										  ||Ahgsb1.toString().equals("ac:16:2d:e7:e4:f2")	//MUStudents				..-66
+										  
+										  ||Ahgsb1.toString().equals("ac:16:2d:e7:e4:f1")	//EduRoam					..-65
+										  ||Ahgsb1.toString().equals("ac:16:2d:e7:e4:d3")	//EduRoam					..-88
+
+										  ||Ahgsb1.toString().equals("ac:16:2d:e7:d4:d3")	//studentcity				..-89
+										  ||Ahgsb1.toString().equals("ac:16:2d:e7:e4:f5")	//studentcity				..-66
+
+										  ||Ahgsb1.toString().equals("ac:16:2d:e7:e4:d4")	//inspirefreewifi			..-86
+										  ||Ahgsb1.toString().equals("ac:16:2d:e7:e4:f3")	//inspirefreewifi			..-66
+										  )
+										  {
+									  		Aghortcheck[15] = true;
+										  }
+
+								  if (   	Ahgsb2.toString().equals("ac:16:2d:e7:e4:d2")	//MUStaffPrivateEquipment	..-91 
+										  ||Ahgsb2.toString().equals("ac:16:2d:e7:e4:f4")	//MUStaffPrivateEquipment	..-65
+										  
+										  ||Ahgsb2.toString().equals("ac:16:2d:e7:e4:f0")	//MUStaff					..-67
+										  
+										  ||Ahgsb2.toString().equals("ac:16:2d:e7:e4:d1")	//MUStudents				..-86
+										  ||Ahgsb2.toString().equals("ac:16:2d:e7:e4:f2")	//MUStudents				..-66
+										  
+										  ||Ahgsb2.toString().equals("ac:16:2d:e7:e4:f1")	//EduRoam					..-65
+										  ||Ahgsb2.toString().equals("ac:16:2d:e7:e4:d3")	//EduRoam					..-88
+
+										  ||Ahgsb2.toString().equals("ac:16:2d:e7:d4:d3")	//studentcity				..-89
+										  ||Ahgsb2.toString().equals("ac:16:2d:e7:e4:f5")	//studentcity				..-66
+
+										  ||Ahgsb2.toString().equals("ac:16:2d:e7:e4:d4")	//inspirefreewifi			..-86
+										  ||Ahgsb2.toString().equals("ac:16:2d:e7:e4:f3")	//inspirefreewifi			..-66
+										  )
+										  {
+									  		Aghortcheck[16] = true;
+										  }
+								  
+								  if (   	Ahgsb3.toString().equals("ac:16:2d:e7:e4:d2")	//MUStaffPrivateEquipment	..-91 
+										  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:f4")	//MUStaffPrivateEquipment	..-65
+										  
+										  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:f0")	//MUStaff					..-67
+										  
+										  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:d1")	//MUStudents				..-86
+										  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:f2")	//MUStudents				..-66
+										  
+										  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:f1")	//EduRoam					..-65
+										  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:d3")	//EduRoam					..-88
+
+										  ||Ahgsb3.toString().equals("ac:16:2d:e7:d4:d3")	//studentcity				..-89
+										  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:f5")	//studentcity				..-66
+
+										  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:d4")	//inspirefreewifi			..-86
+										  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:f3")	//inspirefreewifi			..-66
+										  )
+										  {
+									  		Aghortcheck[17] = true;
+										  }
+								  
+								  if (   	Ahgsb4.toString().equals("ac:16:2d:e7:e4:d2")	//MUStaffPrivateEquipment	..-91 
+										  ||Ahgsb4.toString().equals("ac:16:2d:e7:e4:f4")	//MUStaffPrivateEquipment	..-65
+										  
+										  ||Ahgsb4.toString().equals("ac:16:2d:e7:e4:f0")	//MUStaff					..-67
+										  
+										  ||Ahgsb4.toString().equals("ac:16:2d:e7:e4:d1")	//MUStudents				..-86
+										  ||Ahgsb4.toString().equals("ac:16:2d:e7:e4:f2")	//MUStudents				..-66
+										  
+										  ||Ahgsb4.toString().equals("ac:16:2d:e7:e4:f1")	//EduRoam					..-65
+										  ||Ahgsb4.toString().equals("ac:16:2d:e7:e4:d3")	//EduRoam					..-88
+
+										  ||Ahgsb4.toString().equals("ac:16:2d:e7:d4:d3")	//studentcity				..-89
+										  ||Ahgsb4.toString().equals("ac:16:2d:e7:e4:f5")	//studentcity				..-66
+
+										  ||Ahgsb4.toString().equals("ac:16:2d:e7:e4:d4")	//inspirefreewifi			..-86
+										  ||Ahgsb4.toString().equals("ac:16:2d:e7:e4:f3")	//inspirefreewifi			..-66
+										  )
+										  {
+									  		Aghortcheck[18] = true;
+										  }
+								  
+								  if (Ahgsb5.toString().equals("ac:16:2d:e7:e4:d2")			//MUStaffPrivateEquipment	..-91 
+										  ||Ahgsb5.toString().equals("ac:16:2d:e7:e4:f4")	//MUStaffPrivateEquipment	..-65
+										  
+										  ||Ahgsb5.toString().equals("ac:16:2d:e7:e4:f0")	//MUStaff					..-67
+										  
+										  ||Ahgsb5.toString().equals("ac:16:2d:e7:e4:d1")	//MUStudents				..-86
+										  ||Ahgsb5.toString().equals("ac:16:2d:e7:e4:f2")	//MUStudents				..-66
+										  
+										  ||Ahgsb5.toString().equals("ac:16:2d:e7:e4:f1")	//EduRoam					..-65
+										  ||Ahgsb5.toString().equals("ac:16:2d:e7:e4:d3")	//EduRoam					..-88
+
+										  ||Ahgsb5.toString().equals("ac:16:2d:e7:d4:d3")	//studentcity				..-89
+										  ||Ahgsb5.toString().equals("ac:16:2d:e7:e4:f5")	//studentcity				..-66
+
+										  ||Ahgsb5.toString().equals("ac:16:2d:e7:e4:d4")	//inspirefreewifi			..-86
+										  ||Ahgsb5.toString().equals("ac:16:2d:e7:e4:f3")	//inspirefreewifi			..-66
+										  )
+										  {
+									  		Aghortcheck[19] = true;
+										  }
+								  
+								  if(Aghortcheck[15] == true && Aghortcheck[16] == true && Aghortcheck[17] == true && Aghortcheck[18] == true && Aghortcheck[19] == true){
+								  
+									  	allNetWork.setText("You are close to Aghort Level 3 room 3.64" + " " + AgHScanResult1.level);
+									  	//Toast.makeText(getApplicationContext(),"P1",Toast.LENGTH_SHORT).show();
+										
+										if (AgHPositionset[0] == true){
+											MapLocation[] Llocations = new MapLocation[] {new StateLocation(this, 270, 160, R.drawable.destination_icon, R.drawable.destination_icon_selected, "Your are destination Outside Room 3.81"),
+																								new StateLocation(this, 1370, 200, R.drawable.location_icon, R.drawable.location_icon_selected, "You are around Room 3.42")
+																						};
+											map.setLocations(Llocations);
+										}else
+										if (AgHPositionset[1] == true){
+											MapLocation[] Llocations = new MapLocation[] {new StateLocation(this, 700, 160, R.drawable.destination_icon, R.drawable.destination_icon_selected, "Your are destination Outside Room 3.64"),
+																								new StateLocation(this, 1370, 200, R.drawable.location_icon, R.drawable.location_icon_selected, "You are around Room 3.42")
+																						};
+											map.setLocations(Llocations);
+										}else
+										if (AgHPositionset[2] == true){
+											MapLocation[] Llocations = new MapLocation[] {new StateLocation(this, 920, 160, R.drawable.destination_icon, R.drawable.destination_icon_selected, "Your are destination Outside Room 3.52"),
+																								new StateLocation(this, 1370, 200, R.drawable.location_icon, R.drawable.location_icon_selected, "You are around Room 3.42")
+																						};
+											map.setLocations(Llocations);
+										}else
+										if (AgHPositionset[3] == true){
+											MapLocation[] Llocations = new MapLocation[] {new StateLocation(this, 1370, 200, R.drawable.destination_icon, R.drawable.destination_icon_selected, "Your are destination Outside Room 3.42"),
+																								new StateLocation(this, 1370, 200, R.drawable.location_icon, R.drawable.location_icon_selected, "You are around Room 3.42")
+																							};
+											map.setLocations(Llocations);
+										}
+										else
+										{
+											MapLocation[] Llocations = new MapLocation[] {new StateLocation(this, 1370, 200, R.drawable.location_icon, R.drawable.location_icon_selected, "You are around Room 3.42")};
+											map.setLocations(Llocations);
+										}
+								  }	else
+									  	Aghortcheck[15] = false;
+								  		Aghortcheck[16] = false;
+								  		Aghortcheck[17] = false;
+								  		Aghortcheck[18] = false;
+								  		Aghortcheck[19] = false;
+							  }
+						  	else
+						  	{
+						  		Toast.makeText(getApplicationContext(),"Can't found your position",Toast.LENGTH_SHORT).show();
+						  	}
 			}
 		}
-}
+	}

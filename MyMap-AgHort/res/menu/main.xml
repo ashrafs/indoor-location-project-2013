@@ -16,6 +16,26 @@
             <item
                 android:id="@+id/lposition4"
                 android:title="Library Position 4"/>
+            
+            <item
+                android:id="@+id/Hposition1"
+                android:title="HomePosition1"/>
+            <item
+                android:id="@+id/Hposition2"
+                android:title="HomePosition2"/>
+            
+            <item
+                android:id="@+id/Aghort1"
+                android:title="Around room 3.81"/>
+            <item
+                android:id="@+id/Aghort2"
+                android:title="Around room 3.64"/>
+            <item
+                android:id="@+id/Aghort3"
+                android:title="Around room 3.52"/>
+            <item
+                android:id="@+id/Aghort4"
+                android:title="Around room 3.42"/>
 
         </menu>
     </item>
