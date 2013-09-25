@@ -58,7 +58,6 @@ public class MainActivity extends Activity implements SensorEventListener {
 	protected MapView map;
 	
 	// private ImageView image;
-	private StringBuffer sb = new StringBuffer();
 	private StringBuffer hsb1 = new StringBuffer();
 	private StringBuffer hsb2 = new StringBuffer();
 	private StringBuffer hsb3 = new StringBuffer();
@@ -74,6 +73,12 @@ public class MainActivity extends Activity implements SensorEventListener {
 	private StringBuffer Ahgsb3 = new StringBuffer();
 	private StringBuffer Ahgsb4 = new StringBuffer();
 	private StringBuffer Ahgsb5 = new StringBuffer();
+	private StringBuffer RDsb1 = new StringBuffer();
+	private StringBuffer RDsb2 = new StringBuffer();
+	private StringBuffer RDsb3 = new StringBuffer();
+	private StringBuffer RDsb4 = new StringBuffer();
+	private StringBuffer RDsb5 = new StringBuffer();
+	
 
 	
 	private Button TakeButton;
@@ -86,7 +91,8 @@ public class MainActivity extends Activity implements SensorEventListener {
 	
 	private ScanResult AgHScanResult1,AgHScanResult2, AgHScanResult3,AgHScanResult4,AgHScanResult5,
 			HScanResult1,HScanResult2, HScanResult3, HScanResult4, HScanResult5,
-			LScanResult1, LScanResult2, LScanResult3, LScanResult4,LScanResult5;
+			LScanResult1, LScanResult2, LScanResult3, LScanResult4,LScanResult5,
+			RDScanResult1, RDScanResult2, RDScanResult3, RDScanResult4,RDScanResult5;
 	/*
 	boolean Aghortcheck1, Aghortcheck2, Aghortcheck3, Aghortcheck4, Aghortcheck5,
 			Aghortcheck6,Aghortcheck7,Aghortcheck8,Aghortcheck9,Aghortcheck10,
@@ -104,6 +110,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 	boolean[] Homecheck = new boolean[3];
 	boolean[] Lcheck = new boolean[12];
 	boolean[] Aghortcheck = new boolean[20];
+	boolean[] RDcheck = new boolean[5];
 	
 	boolean[] HomePositionset = new boolean[2];
 	boolean[] LPositionset = new boolean[4];
@@ -547,9 +554,10 @@ public class MainActivity extends Activity implements SensorEventListener {
 	public void getAllNetWorkList() {
 
 		// Clear previous Scan record
-		if (sb != null || hsb1 != null || hsb2 != null || hsb3 != null || hsb4 != null || hsb5 != null
+		if (hsb1 != null || hsb2 != null || hsb3 != null || hsb4 != null || hsb5 != null
 				|| lsb1 != null || lsb2 != null || lsb3 != null || lsb4 != null || lsb5 != null 
-				|| Ahgsb1 != null || Ahgsb2 != null || Ahgsb3 != null || Ahgsb4 != null || Ahgsb5 != null) {
+				|| Ahgsb1 != null || Ahgsb2 != null || Ahgsb3 != null || Ahgsb4 != null || Ahgsb5 != null
+				|| RDsb1 != null || RDsb2 != null || RDsb3 != null || RDsb4 != null || RDsb5 != null) {
 			// sb = new StringBuffer();
 			hsb1 = new StringBuffer();
 			hsb2 = new StringBuffer();
@@ -566,6 +574,11 @@ public class MainActivity extends Activity implements SensorEventListener {
 			Ahgsb3 = new StringBuffer();
 			Ahgsb4 = new StringBuffer();
 			Ahgsb5 = new StringBuffer();
+			RDsb1 = new StringBuffer();
+			RDsb2 = new StringBuffer();
+			RDsb3 = new StringBuffer();
+			RDsb4 = new StringBuffer();
+			RDsb5 = new StringBuffer();
 			//allNetWork.setText("");
 			
 		}
@@ -648,7 +661,12 @@ public class MainActivity extends Activity implements SensorEventListener {
 			Ahgsb2 = new StringBuffer();
 			Ahgsb3 = new StringBuffer();
 			Ahgsb4 = new StringBuffer();
-			Ahgsb5 = new StringBuffer();
+			RDsb5 = new StringBuffer();
+			RDsb1 = new StringBuffer();
+			RDsb2 = new StringBuffer();
+			RDsb3 = new StringBuffer();
+			RDsb4 = new StringBuffer();
+			RDsb5 = new StringBuffer();
 
 			// Get Scan Result
 			// mScanResult = list.get(0);
@@ -657,26 +675,31 @@ public class MainActivity extends Activity implements SensorEventListener {
 			HScanResult1 = list.get(0);
 			LScanResult1 = list.get(0);
 			AgHScanResult1 = list.get(0);
+			RDScanResult1 = list.get(0);
 
 			if (list.size() > 1) {
 				HScanResult2 = list.get(1);
 				LScanResult2 = list.get(1);
 				AgHScanResult2 = list.get(1);
+				RDScanResult2 = list.get(1);
 			}
 			if (list.size() > 2) {
 				HScanResult3 = list.get(2);
 				LScanResult3 = list.get(2);
 				AgHScanResult3 = list.get(2);
+				RDScanResult3 = list.get(2);
 			}
 			if (list.size() > 3) {
 				HScanResult4 = list.get(3);
 				LScanResult4 = list.get(3);
 				AgHScanResult4 = list.get(3);
+				RDScanResult4 = list.get(3);
 			}
 			if (list.size() > 4) {
 				HScanResult5 = list.get(4);
 				LScanResult5 = list.get(4);
 				AgHScanResult5 = list.get(4);
+				RDScanResult5 = list.get(4);
 			}
 
 			// Home Use
@@ -690,21 +713,28 @@ public class MainActivity extends Activity implements SensorEventListener {
 			// Aghort Use
 			Ahgsb1 = Ahgsb1.append(AgHScanResult1.BSSID);
 			Ahgsb2 = Ahgsb2.append(AgHScanResult2.BSSID);
+			
+			// RD 1.14 Use
+			RDsb1 = RDsb1.append(AgHScanResult1.BSSID);
+			RDsb2 = RDsb2.append(AgHScanResult2.BSSID);
 
 			if (list.size() > 2) {
 				hsb3 = hsb3.append(LScanResult3.SSID);
 				lsb3 = lsb3.append(LScanResult3.BSSID);
 				Ahgsb3 = Ahgsb3.append(AgHScanResult3.BSSID);
+				RDsb3 = RDsb3.append(RDScanResult3.BSSID);
 			}
 			if (list.size() > 3) {
 				hsb4 = hsb4.append(LScanResult4.SSID);
 				lsb4 = lsb4.append(LScanResult4.BSSID);
 				Ahgsb4 = Ahgsb4.append(AgHScanResult4.BSSID);
+				RDsb4 = RDsb4.append(RDScanResult4.BSSID);
 			}
 			if (list.size() > 4) {
 				hsb5 = hsb5.append(LScanResult5.SSID);
 				lsb5 = lsb5.append(LScanResult5.BSSID);
 				Ahgsb5 = Ahgsb5.append(AgHScanResult5.BSSID);
+				RDsb5 = RDsb5.append(RDScanResult5.BSSID);
 			}
 
 			
@@ -760,6 +790,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 				}
 				else
 						if(Homecheck[0]== true && Homecheck[1]== true && Homecheck[2] == false||Homecheck[1]== true && Homecheck[2]== true && Homecheck[0] == false|| Homecheck[0]== true && Homecheck[2]== true && Homecheck[1] == false)
+						{
 						map = (MapView) findViewById(R.id.map);
 						map.setMapImage(ImageUtil.loadBitmapFromResource(getResources(), R.drawable.homemap));
 						
@@ -785,6 +816,11 @@ public class MainActivity extends Activity implements SensorEventListener {
 						map.setLocations(Hlocations);
 						}
 					}
+						else{
+							Homecheck[0]= false;
+							Homecheck[1]= false;
+							Homecheck[2] = false;
+						}
 			}
 
 			// if (HScanResult1.level <= -78) //-- Greater than or equal to
@@ -1292,32 +1328,39 @@ public class MainActivity extends Activity implements SensorEventListener {
 						  		Lcheck[10] = false;
 						  		Lcheck[11] = false;	  
 					  }
+			}
 			
 /**
  *  Aghort Map			
  */
 
 //-----------------Position 3.81-----------------------------------------------------------------------------
-					  //if (Lcheck[0] == false || Lcheck[1] == false|| Lcheck[2] == false|| Lcheck[3] == false|| Lcheck[4] == false
-					  	//	|| Lcheck[5] == false|| Lcheck[6] == false|| Lcheck[7] == false||Lcheck[8] == false || Lcheck[9] == false 
-					  	//	|| Lcheck[10] == false|| Lcheck[11] == false){
+					  if (Lcheck[0] == false || Lcheck[1] == false|| Lcheck[2] == false|| Lcheck[3] == false|| Lcheck[4] == false
+					  		|| Lcheck[5] == false|| Lcheck[6] == false|| Lcheck[7] == false||Lcheck[8] == false || Lcheck[9] == false 
+					  		|| Lcheck[10] == false|| Lcheck[11] == false){
 					  			
-						  if (Arrays.asList(Lcheck).contains(false)){
+						  //if (Arrays.asList(Lcheck).contains(false)){
+							  map = (MapView) findViewById(R.id.map);
+							  map.setMapImage(ImageUtil.loadBitmapFromResource(getResources(), R.drawable.map3));
 					  
 						  if (Ahgsb1.toString().equals("ac:16:2d:e7:e4:f1")			//EduRoam
 								  ||Ahgsb1.toString().equals("ac:16:2d:e7:e4:53")	//EduRoam
+								  ||Ahgsb1.toString().equals("c8:cb:b8:ec:5a:b1")	//EduRoam
 								  ||Ahgsb1.toString().equals("ac:16:2d:e7:f4:11")	//EduRoam
-								  ||Ahgsb1.toString().equals("ac:16:2d:e7:e4:50")&& AgHScanResult1.level >= -70	//MUStaff
-								  ||Ahgsb1.toString().equals("ac:16:2d:e7:e4:f0")&& AgHScanResult1.level <= -70//MUStaff
-								  ||Ahgsb1.toString().equals("ac:16:2d:e7:f4:10")&& AgHScanResult1.level <= -70	//MUStaff
+								  ||Ahgsb1.toString().equals("ac:16:2d:e7:e4:50")&& AgHScanResult1.level >= -70	//MUStaff		..-87
+								  ||Ahgsb1.toString().equals("ac:16:2d:e7:e4:f0")&& AgHScanResult1.level <= -70//MUStaff		..-80
+								  ||Ahgsb1.toString().equals("ac:16:2d:e7:f4:10")&& AgHScanResult1.level <= -70	//MUStaff	..-84
+								  ||Ahgsb1.toString().equals("c8:cb:b8:ec:5a:b0")	//MUStaff	..-67
 								  ||Ahgsb1.toString().equals("ac:16:2d:e7:e4:f4")	//MUStaffPrivateEquipment
 								  ||Ahgsb1.toString().equals("ac:16:2d:e7:f4:14")	//MUStaffPrivateEquipment
 								  ||Ahgsb1.toString().equals("ac:16:2d:e7:e4:52")	//MUStaffPrivateEquipment
 								  ||Ahgsb1.toString().equals("c8:cb:b8:ec:5a:b4")	//MUStaffPrivateEquipment
 								  ||Ahgsb1.toString().equals("ac:16:2d:e7:d4:b2")	//MUStaffPrivateEquipment
-								  ||Ahgsb1.toString().equals("ac:16:2d:e7:e4:f2")&& AgHScanResult1.level <= -70	//MUStudents
-								  ||Ahgsb1.toString().equals("ac:16:2d:e7:f4:12")&& AgHScanResult1.level <= -70	//MUStudents
-								  ||Ahgsb1.toString().equals("ac:16:2d:e7:e4:51")&& AgHScanResult1.level >= -70	//MUStudents
+								  ||Ahgsb1.toString().equals("ac:16:2d:e7:e4:f2")&& AgHScanResult1.level <= -70	//MUStudents		..-80
+								  ||Ahgsb1.toString().equals("ac:16:2d:e7:f4:12")&& AgHScanResult1.level <= -70	//MUStudents		..-83
+								  ||Ahgsb1.toString().equals("ac:16:2d:e7:e4:51")&& AgHScanResult1.level >= -70	//MUStudents		..-89
+										  ||Ahgsb1.toString().equals("c8:cb:b8:ec:5a:b2")	//MUStudent	..-64
+
 								  ||Ahgsb1.toString().equals("ac:16:2d:e7:e4:f3")	//inspirefreewifi
 								  ||Ahgsb1.toString().equals("ac:16:2d:e7:f4:13")	//inspirefreewifi
 								  ||Ahgsb1.toString().equals("ac:16:2d:e7:e4:54")	//inspirefreewifi
@@ -1325,6 +1368,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 								  ||Ahgsb1.toString().equals("ac:16:2d:e7:e4:f5")	//studentcity
 								  ||Ahgsb1.toString().equals("ac:16:2d:e7:f4:15")	//studentcity
 								  ||Ahgsb1.toString().equals("ac:16:2d:e7:e4:55")	//studentcity
+								  ||Ahgsb1.toString().equals("c8:cb:b8:ec:5a:b5")	//studentcity		..-70
 								  ||Ahgsb1.toString().equals("ac:16:2d:e7:d4:b5")	//studentcity
 								  )
 								  {
@@ -1334,9 +1378,12 @@ public class MainActivity extends Activity implements SensorEventListener {
 						  if (Ahgsb2.toString().equals("ac:16:2d:e7:e4:f1")			//EduRoam
 								  ||Ahgsb2.toString().equals("ac:16:2d:e7:e4:53")	//EduRoam
 								  ||Ahgsb2.toString().equals("ac:16:2d:e7:f4:11")	//EduRoam
+								  ||Ahgsb2.toString().equals("c8:cb:b8:ec:5a:b1")	//EduRoam
 								  ||Ahgsb2.toString().equals("ac:16:2d:e7:e4:50")&& AgHScanResult1.level >= -70	//MUStaff
 								  ||Ahgsb2.toString().equals("ac:16:2d:e7:e4:f0")&& AgHScanResult1.level <= -70//MUStaff
 								  ||Ahgsb2.toString().equals("ac:16:2d:e7:f4:10")&& AgHScanResult1.level <= -70	//MUStaff
+										  ||Ahgsb2.toString().equals("c8:cb:b8:ec:5a:b0")	//MUStaff	..-67
+
 								  ||Ahgsb2.toString().equals("ac:16:2d:e7:e4:f4")	//MUStaffPrivateEquipment
 								  ||Ahgsb2.toString().equals("ac:16:2d:e7:f4:14")	//MUStaffPrivateEquipment
 								  ||Ahgsb2.toString().equals("ac:16:2d:e7:e4:52")	//MUStaffPrivateEquipment
@@ -1345,6 +1392,8 @@ public class MainActivity extends Activity implements SensorEventListener {
 								  ||Ahgsb2.toString().equals("ac:16:2d:e7:e4:f2")&& AgHScanResult1.level <= -70	//MUStudents
 								  ||Ahgsb2.toString().equals("ac:16:2d:e7:f4:12")&& AgHScanResult1.level <= -70	//MUStudents
 								  ||Ahgsb2.toString().equals("ac:16:2d:e7:e4:51")&& AgHScanResult1.level >= -70	//MUStudents
+										  ||Ahgsb2.toString().equals("c8:cb:b8:ec:5a:b2")	//MUStudent	..-64
+
 								  ||Ahgsb2.toString().equals("ac:16:2d:e7:e4:f3")	//inspirefreewifi
 								  ||Ahgsb2.toString().equals("ac:16:2d:e7:f4:13")	//inspirefreewifi
 								  ||Ahgsb2.toString().equals("ac:16:2d:e7:e4:54")	//inspirefreewifi
@@ -1353,6 +1402,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 								  ||Ahgsb2.toString().equals("ac:16:2d:e7:f4:15")	//studentcity
 								  ||Ahgsb2.toString().equals("ac:16:2d:e7:e4:55")	//studentcity
 								  ||Ahgsb2.toString().equals("ac:16:2d:e7:d4:b5")	//studentcity
+								  ||Ahgsb2.toString().equals("c8:cb:b8:ec:5a:b5")	//studentcity		..-70
 								  )
 								  {
 							  		Aghortcheck[1] = true;
@@ -1360,10 +1410,13 @@ public class MainActivity extends Activity implements SensorEventListener {
 						  
 						  if (Ahgsb3.toString().equals("ac:16:2d:e7:e4:f1")			//EduRoam
 								  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:53")	//EduRoam
+								  ||Ahgsb3.toString().equals("c8:cb:b8:ec:5a:b1")	//EduRoam
 								  ||Ahgsb3.toString().equals("ac:16:2d:e7:f4:11")	//EduRoam
 								  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:50")&& AgHScanResult1.level >= -70	//MUStaff
 								  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:f0")&& AgHScanResult1.level <= -70//MUStaff
 								  ||Ahgsb3.toString().equals("ac:16:2d:e7:f4:10")&& AgHScanResult1.level <= -70	//MUStaff
+										  ||Ahgsb3.toString().equals("c8:cb:b8:ec:5a:b0")	//MUStaff	..-67
+
 								  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:f4")	//MUStaffPrivateEquipment
 								  ||Ahgsb3.toString().equals("ac:16:2d:e7:f4:14")	//MUStaffPrivateEquipment
 								  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:52")	//MUStaffPrivateEquipment
@@ -1372,6 +1425,8 @@ public class MainActivity extends Activity implements SensorEventListener {
 								  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:f2")&& AgHScanResult1.level <= -70	//MUStudents
 								  ||Ahgsb3.toString().equals("ac:16:2d:e7:f4:12")&& AgHScanResult1.level <= -70	//MUStudents
 								  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:51")&& AgHScanResult1.level >= -70	//MUStudents
+										  ||Ahgsb3.toString().equals("c8:cb:b8:ec:5a:b2")	//MUStudent	..-64
+
 								  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:f3")	//inspirefreewifi
 								  ||Ahgsb3.toString().equals("ac:16:2d:e7:f4:13")	//inspirefreewifi
 								  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:54")	//inspirefreewifi
@@ -1380,6 +1435,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 								  ||Ahgsb3.toString().equals("ac:16:2d:e7:f4:15")	//studentcity
 								  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:55")	//studentcity
 								  ||Ahgsb3.toString().equals("ac:16:2d:e7:d4:b5")	//studentcity
+								  ||Ahgsb3.toString().equals("c8:cb:b8:ec:5a:b5")	//studentcity		..-70
 								  )
 								  {
 							  		Aghortcheck[2] = true;
@@ -1387,10 +1443,13 @@ public class MainActivity extends Activity implements SensorEventListener {
 						  
 						  if (Ahgsb4.toString().equals("ac:16:2d:e7:e4:f1")			//EduRoam
 								  ||Ahgsb4.toString().equals("ac:16:2d:e7:e4:53")	//EduRoam
+								  ||Ahgsb4.toString().equals("c8:cb:b8:ec:5a:b1")	//EduRoam
 								  ||Ahgsb4.toString().equals("ac:16:2d:e7:f4:11")	//EduRoam
 								  ||Ahgsb4.toString().equals("ac:16:2d:e7:e4:50")&& AgHScanResult1.level >= -70	//MUStaff
 								  ||Ahgsb4.toString().equals("ac:16:2d:e7:e4:f0")&& AgHScanResult1.level <= -70//MUStaff
 								  ||Ahgsb4.toString().equals("ac:16:2d:e7:f4:10")&& AgHScanResult1.level <= -70	//MUStaff
+										  ||Ahgsb4.toString().equals("c8:cb:b8:ec:5a:b0")	//MUStaff	..-67
+
 								  ||Ahgsb4.toString().equals("ac:16:2d:e7:e4:f4")	//MUStaffPrivateEquipment
 								  ||Ahgsb4.toString().equals("ac:16:2d:e7:f4:14")	//MUStaffPrivateEquipment
 								  ||Ahgsb4.toString().equals("ac:16:2d:e7:e4:52")	//MUStaffPrivateEquipment
@@ -1407,6 +1466,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 								  ||Ahgsb4.toString().equals("ac:16:2d:e7:f4:15")	//studentcity
 								  ||Ahgsb4.toString().equals("ac:16:2d:e7:e4:55")	//studentcity
 								  ||Ahgsb4.toString().equals("ac:16:2d:e7:d4:b5")	//studentcity
+								  ||Ahgsb4.toString().equals("c8:cb:b8:ec:5a:b5")	//studentcity		..-70
 								  )
 								  {
 							  		Aghortcheck[3] = true;
@@ -1414,10 +1474,13 @@ public class MainActivity extends Activity implements SensorEventListener {
 						  
 						  if (Ahgsb5.toString().equals("ac:16:2d:e7:e4:f1")			//EduRoam
 								  ||Ahgsb5.toString().equals("ac:16:2d:e7:e4:53")	//EduRoam
+								  ||Ahgsb5.toString().equals("c8:cb:b8:ec:5a:b1")	//EduRoam
 								  ||Ahgsb5.toString().equals("ac:16:2d:e7:f4:11")	//EduRoam
 								  ||Ahgsb5.toString().equals("ac:16:2d:e7:e4:50")&& AgHScanResult1.level >= -70	//MUStaff
 								  ||Ahgsb5.toString().equals("ac:16:2d:e7:e4:f0")&& AgHScanResult1.level <= -70//MUStaff
 								  ||Ahgsb5.toString().equals("ac:16:2d:e7:f4:10")&& AgHScanResult1.level <= -70	//MUStaff
+										  ||Ahgsb5.toString().equals("c8:cb:b8:ec:5a:b0")	//MUStaff	..-67
+
 								  ||Ahgsb5.toString().equals("ac:16:2d:e7:e4:f4")	//MUStaffPrivateEquipment
 								  ||Ahgsb5.toString().equals("ac:16:2d:e7:f4:14")	//MUStaffPrivateEquipment
 								  ||Ahgsb5.toString().equals("ac:16:2d:e7:e4:52")	//MUStaffPrivateEquipment
@@ -1426,6 +1489,8 @@ public class MainActivity extends Activity implements SensorEventListener {
 								  ||Ahgsb5.toString().equals("ac:16:2d:e7:e4:f2")&& AgHScanResult1.level <= -70	//MUStudents
 								  ||Ahgsb5.toString().equals("ac:16:2d:e7:f4:12")&& AgHScanResult1.level <= -70	//MUStudents
 								  ||Ahgsb5.toString().equals("ac:16:2d:e7:e4:51")&& AgHScanResult1.level >= -70	//MUStudents
+										  ||Ahgsb5.toString().equals("c8:cb:b8:ec:5a:b2")	//MUStudent	..-64
+
 								  ||Ahgsb5.toString().equals("ac:16:2d:e7:e4:f3")	//inspirefreewifi
 								  ||Ahgsb5.toString().equals("ac:16:2d:e7:f4:13")	//inspirefreewifi
 								  ||Ahgsb5.toString().equals("ac:16:2d:e7:e4:54")	//inspirefreewifi
@@ -1434,6 +1499,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 								  ||Ahgsb5.toString().equals("ac:16:2d:e7:f4:15")	//studentcity
 								  ||Ahgsb5.toString().equals("ac:16:2d:e7:e4:55")	//studentcity
 								  ||Ahgsb5.toString().equals("ac:16:2d:e7:d4:b5")	//studentcity
+								  ||Ahgsb5.toString().equals("c8:cb:b8:ec:5a:b5")	//studentcity		..-70
 								  )
 								  {
 							  		Aghortcheck[4] = true;
@@ -1485,11 +1551,15 @@ public class MainActivity extends Activity implements SensorEventListener {
 //-----------------Position 3.64-----------------------------------------------------------------------------					  
 						  if(Aghortcheck[0] == false && Aghortcheck[1] == false && Aghortcheck[2] == false && Aghortcheck[3] == false && Aghortcheck[4] == false){
 							  
+							  map = (MapView) findViewById(R.id.map);
+							  map.setMapImage(ImageUtil.loadBitmapFromResource(getResources(), R.drawable.map3));
+							  
 							  if (Ahgsb1.toString().equals("ac:16:2d:e7:f4:14")	//MUStaffPrivateEquipment			..-74 
 									  ||Ahgsb1.toString().equals("ac:16:2d:e7:e4:f4")	//MUStaffPrivateEquipment	..-78
 									  ||Ahgsb1.toString().equals("ac:16:2d:e7:e4:52")	//MUStaffPrivateEquipment	..-85
 									  
 									  ||Ahgsb1.toString().equals("ac:16:2d:e7:f4:10")	//MUStaff					..-74
+									  ||Ahgsb1.toString().equals("ac:16:2d:e7:e4:f0")	//MUStaff					..-78
 									  ||Ahgsb1.toString().equals("ac:16:2d:e7:e4:50")	//MUStaff					..-80
 									  
 									  ||Ahgsb1.toString().equals("ac:16:2d:e7:f4:12")	//MUStudents				..-75
@@ -1498,6 +1568,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 									  
 									  ||Ahgsb1.toString().equals("ac:16:2d:e7:f4:11")	//EduRoam					..-75
 									  ||Ahgsb1.toString().equals("ac:16:2d:e7:e4:53")	//EduRoam					..-79
+									  ||Ahgsb1.toString().equals("ac:16:2d:e7:e4:f1")	//EduRoam					..-78
 
 									  ||Ahgsb1.toString().equals("ac:16:2d:e7:f4:15")	//studentcity				..-74
 									  ||Ahgsb1.toString().equals("ac:16:2d:e7:e4:f5")	//studentcity				..-78
@@ -1516,6 +1587,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 									  ||Ahgsb2.toString().equals("ac:16:2d:e7:e4:52")	//MUStaffPrivateEquipment	..-85
 									  
 									  ||Ahgsb2.toString().equals("ac:16:2d:e7:f4:10")	//MUStaff					..-74
+									  ||Ahgsb2.toString().equals("ac:16:2d:e7:e4:f0")	//MUStaff					..-78
 									  ||Ahgsb2.toString().equals("ac:16:2d:e7:e4:50")	//MUStaff					..-80
 									  
 									  ||Ahgsb2.toString().equals("ac:16:2d:e7:f4:12")	//MUStudents				..-75
@@ -1524,6 +1596,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 									  
 									  ||Ahgsb2.toString().equals("ac:16:2d:e7:f4:11")	//EduRoam					..-75
 									  ||Ahgsb2.toString().equals("ac:16:2d:e7:e4:53")	//EduRoam					..-79
+									  ||Ahgsb2.toString().equals("ac:16:2d:e7:e4:f1")	//EduRoam					..-78
 
 									  ||Ahgsb2.toString().equals("ac:16:2d:e7:f4:15")	//studentcity				..-74
 									  ||Ahgsb2.toString().equals("ac:16:2d:e7:e4:f5")	//studentcity				..-78
@@ -1542,6 +1615,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 									  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:52")	//MUStaffPrivateEquipment	..-85
 									  
 									  ||Ahgsb3.toString().equals("ac:16:2d:e7:f4:10")	//MUStaff					..-74
+									  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:f0")	//MUStaff					..-78
 									  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:50")	//MUStaff					..-80
 									  
 									  ||Ahgsb3.toString().equals("ac:16:2d:e7:f4:12")	//MUStudents				..-75
@@ -1550,6 +1624,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 									  
 									  ||Ahgsb3.toString().equals("ac:16:2d:e7:f4:11")	//EduRoam					..-75
 									  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:53")	//EduRoam					..-79
+									  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:f1")	//EduRoam					..-78
 
 									  ||Ahgsb3.toString().equals("ac:16:2d:e7:f4:15")	//studentcity				..-74
 									  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:f5")	//studentcity				..-78
@@ -1568,6 +1643,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 									  ||Ahgsb4.toString().equals("ac:16:2d:e7:e4:52")	//MUStaffPrivateEquipment	..-85
 									  
 									  ||Ahgsb4.toString().equals("ac:16:2d:e7:f4:10")	//MUStaff					..-74
+									  ||Ahgsb4.toString().equals("ac:16:2d:e7:e4:f0")	//MUStaff					..-78
 									  ||Ahgsb4.toString().equals("ac:16:2d:e7:e4:50")	//MUStaff					..-80
 									  
 									  ||Ahgsb4.toString().equals("ac:16:2d:e7:f4:12")	//MUStudents				..-75
@@ -1576,6 +1652,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 									  
 									  ||Ahgsb4.toString().equals("ac:16:2d:e7:f4:11")	//EduRoam					..-75
 									  ||Ahgsb4.toString().equals("ac:16:2d:e7:e4:53")	//EduRoam					..-79
+									  ||Ahgsb4.toString().equals("ac:16:2d:e7:e4:f1")	//EduRoam					..-78
 
 									  ||Ahgsb4.toString().equals("ac:16:2d:e7:f4:15")	//studentcity				..-74
 									  ||Ahgsb4.toString().equals("ac:16:2d:e7:e4:f5")	//studentcity				..-78
@@ -1594,6 +1671,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 									  ||Ahgsb5.toString().equals("ac:16:2d:e7:e4:52")	//MUStaffPrivateEquipment	..-85
 									  
 									  ||Ahgsb5.toString().equals("ac:16:2d:e7:f4:10")	//MUStaff					..-74
+									  ||Ahgsb5.toString().equals("ac:16:2d:e7:e4:f0")	//MUStaff					..-78
 									  ||Ahgsb5.toString().equals("ac:16:2d:e7:e4:50")	//MUStaff					..-80
 									  
 									  ||Ahgsb5.toString().equals("ac:16:2d:e7:f4:12")	//MUStudents				..-75
@@ -1602,6 +1680,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 									  
 									  ||Ahgsb5.toString().equals("ac:16:2d:e7:f4:11")	//EduRoam					..-75
 									  ||Ahgsb5.toString().equals("ac:16:2d:e7:e4:53")	//EduRoam					..-79
+									  ||Ahgsb5.toString().equals("ac:16:2d:e7:e4:f1")	//EduRoam					..-78
 
 									  ||Ahgsb5.toString().equals("ac:16:2d:e7:f4:15")	//studentcity				..-74
 									  ||Ahgsb5.toString().equals("ac:16:2d:e7:e4:f5")	//studentcity				..-78
@@ -1661,76 +1740,129 @@ public class MainActivity extends Activity implements SensorEventListener {
 //-----------------Position 3.52-----------------------------------------------------------------------------
 						  	if(Aghortcheck[5] == false && Aghortcheck[6] == false && Aghortcheck[7] == false && Aghortcheck[8] == false && Aghortcheck[9] == false){
 							  
-							  if (		Ahgsb1.toString().equals("ac:16:2d:e7:e4:f0")	//MUStaff					..-60
+						  		map = (MapView) findViewById(R.id.map);
+								  map.setMapImage(ImageUtil.loadBitmapFromResource(getResources(), R.drawable.map3));
+								  
+							  if (	Ahgsb1.toString().equals("ac:16:2d:e7:e4:f0")	//MUStaff					..-50
+									  ||Ahgsb1.toString().equals("ac:16:2d:e7:e4:d0")	//MUStaff					..-81
 									  
-									  ||Ahgsb1.toString().equals("ac:16:2d:e7:e4:f2")	//MUStudents				..-60
+									  ||Ahgsb1.toString().equals("ac:16:2d:e7:e4:f4")	//MUStaffPrivateEquipment				..-50
+									  ||Ahgsb1.toString().equals("ac:16:2d:e7:e4:d2")	//MUStaffPrivateEquipment				..-82
+									  ||Ahgsb1.toString().equals("ac:16:2d:e7:e4:52")	//MUStaffPrivateEquipment				..-88
+									  
+									  ||Ahgsb1.toString().equals("ac:16:2d:e7:e4:f2")	//MUStudents				..-50
+									  ||Ahgsb1.toString().equals("ac:16:2d:e7:e4:d1")	//MUStudents				..-81
 									  ||Ahgsb1.toString().equals("ac:16:2d:e7:d4:d2")	//MUStudents				..-91
 									  
-									  ||Ahgsb1.toString().equals("ac:16:2d:e7:e4:f1")	//EduRoam					..-60
-
+									  ||Ahgsb1.toString().equals("ac:16:2d:e7:e4:f1")	//EduRoam					..-50
+									  ||Ahgsb1.toString().equals("ac:16:2d:e7:e4:d3")	//EduRoam					..-82
+									  ||Ahgsb1.toString().equals("ac:16:2d:e7:e4:53")	//EduRoam					..-82
+									  
 									  ||Ahgsb1.toString().equals("ac:16:2d:e7:e4:f5")	//studentcity				..-78
+									  ||Ahgsb1.toString().equals("ac:16:2d:e7:e4:d5")	//studentcity				..-82
 									  
 									  ||Ahgsb1.toString().equals("ac:16:2d:e7:e4:f3")	//inspirefreewifi			..-77
+									  ||Ahgsb1.toString().equals("ac:16:2d:e7:e4:d4")	//inspirefreewifi			..-83
 									  )
 									  {
 								  		Aghortcheck[10] = true;
 									  }
 
-							  if (Ahgsb2.toString().equals("ac:16:2d:e7:e4:f0")	//MUStaff					..-60
+							  if (Ahgsb2.toString().equals("ac:16:2d:e7:e4:f0")	//MUStaff					..-50
+									  ||Ahgsb2.toString().equals("ac:16:2d:e7:e4:d0")	//MUStaff					..-81
 									  
-									  ||Ahgsb2.toString().equals("ac:16:2d:e7:e4:f2")	//MUStudents				..-60
+									  ||Ahgsb2.toString().equals("ac:16:2d:e7:e4:f4")	//MUStaffPrivateEquipment				..-50
+									  ||Ahgsb2.toString().equals("ac:16:2d:e7:e4:d2")	//MUStaffPrivateEquipment				..-82
+									  ||Ahgsb2.toString().equals("ac:16:2d:e7:e4:52")	//MUStaffPrivateEquipment				..-88
+									  
+									  ||Ahgsb2.toString().equals("ac:16:2d:e7:e4:f2")	//MUStudents				..-50
+									  ||Ahgsb2.toString().equals("ac:16:2d:e7:e4:d1")	//MUStudents				..-81
 									  ||Ahgsb2.toString().equals("ac:16:2d:e7:d4:d2")	//MUStudents				..-91
 									  
-									  ||Ahgsb2.toString().equals("ac:16:2d:e7:e4:f1")	//EduRoam					..-60
-
+									  ||Ahgsb2.toString().equals("ac:16:2d:e7:e4:f1")	//EduRoam					..-50
+									  ||Ahgsb2.toString().equals("ac:16:2d:e7:e4:d3")	//EduRoam					..-82
+									  ||Ahgsb2.toString().equals("ac:16:2d:e7:e4:53")	//EduRoam					..-82
+									  
 									  ||Ahgsb2.toString().equals("ac:16:2d:e7:e4:f5")	//studentcity				..-78
+									  ||Ahgsb2.toString().equals("ac:16:2d:e7:e4:d5")	//studentcity				..-82
 									  
 									  ||Ahgsb2.toString().equals("ac:16:2d:e7:e4:f3")	//inspirefreewifi			..-77
+									  ||Ahgsb2.toString().equals("ac:16:2d:e7:e4:d4")	//inspirefreewifi			..-83
 									  )
 									  {
 								  		Aghortcheck[11] = true;
 									  }
 							  
-							  if (Ahgsb3.toString().equals("ac:16:2d:e7:e4:f0")	//MUStaff					..-60
+							  if (Ahgsb3.toString().equals("ac:16:2d:e7:e4:f0")	//MUStaff					..-50
+									  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:d0")	//MUStaff					..-81
 									  
-									  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:f2")	//MUStudents				..-60
+									  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:f4")	//MUStaffPrivateEquipment				..-50
+									  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:d2")	//MUStaffPrivateEquipment				..-82
+									  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:52")	//MUStaffPrivateEquipment				..-88
+									  
+									  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:f2")	//MUStudents				..-50
+									  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:d1")	//MUStudents				..-81
 									  ||Ahgsb3.toString().equals("ac:16:2d:e7:d4:d2")	//MUStudents				..-91
 									  
-									  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:f1")	//EduRoam					..-60
-
+									  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:f1")	//EduRoam					..-50
+									  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:d3")	//EduRoam					..-82
+									  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:53")	//EduRoam					..-82
+									  
 									  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:f5")	//studentcity				..-78
+									  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:d5")	//studentcity				..-82
 									  
 									  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:f3")	//inspirefreewifi			..-77
+									  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:d4")	//inspirefreewifi			..-83
 									  )
 									  {
 								  		Aghortcheck[12] = true;
 									  }
 							  
-							  if (Ahgsb4.toString().equals("ac:16:2d:e7:e4:f0")	//MUStaff					..-60
+							  if (Ahgsb3.toString().equals("ac:16:2d:e7:e4:f0")	//MUStaff					..-50
+									  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:d0")	//MUStaff					..-81
 									  
-									  ||Ahgsb4.toString().equals("ac:16:2d:e7:e4:f2")	//MUStudents				..-60
-									  ||Ahgsb4.toString().equals("ac:16:2d:e7:d4:d2")	//MUStudents				..-91
+									  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:f4")	//MUStaffPrivateEquipment				..-50
+									  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:d2")	//MUStaffPrivateEquipment				..-82
+									  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:52")	//MUStaffPrivateEquipment				..-88
 									  
-									  ||Ahgsb4.toString().equals("ac:16:2d:e7:e4:f1")	//EduRoam					..-60
-
-									  ||Ahgsb4.toString().equals("ac:16:2d:e7:e4:f5")	//studentcity				..-78
+									  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:f2")	//MUStudents				..-50
+									  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:d1")	//MUStudents				..-81
+									  ||Ahgsb3.toString().equals("ac:16:2d:e7:d4:d2")	//MUStudents				..-91
 									  
-									  ||Ahgsb4.toString().equals("ac:16:2d:e7:e4:f3")	//inspirefreewifi			..-77
+									  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:f1")	//EduRoam					..-50
+									  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:d3")	//EduRoam					..-82
+									  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:53")	//EduRoam					..-82
+									  
+									  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:f5")	//studentcity				..-78
+									  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:d5")	//studentcity				..-82
+									  
+									  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:f3")	//inspirefreewifi			..-77
+									  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:d4")	//inspirefreewifi			..-83
 									  )
 									  {
 								  		Aghortcheck[13] = true;
 									  }
 							  
-							  if (Ahgsb5.toString().equals("ac:16:2d:e7:e4:f0")	//MUStaff					..-60
+							  if (Ahgsb3.toString().equals("ac:16:2d:e7:e4:f0")	//MUStaff					..-50
+									  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:d0")	//MUStaff					..-81
 									  
-									  ||Ahgsb5.toString().equals("ac:16:2d:e7:e4:f2")	//MUStudents				..-60
-									  ||Ahgsb5.toString().equals("ac:16:2d:e7:d4:d2")	//MUStudents				..-91
+									  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:f4")	//MUStaffPrivateEquipment				..-50
+									  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:d2")	//MUStaffPrivateEquipment				..-82
+									  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:52")	//MUStaffPrivateEquipment				..-88
 									  
-									  ||Ahgsb5.toString().equals("ac:16:2d:e7:e4:f1")	//EduRoam					..-60
-
-									  ||Ahgsb5.toString().equals("ac:16:2d:e7:e4:f5")	//studentcity				..-78
+									  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:f2")	//MUStudents				..-50
+									  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:d1")	//MUStudents				..-81
+									  ||Ahgsb3.toString().equals("ac:16:2d:e7:d4:d2")	//MUStudents				..-91
 									  
-									  ||Ahgsb5.toString().equals("ac:16:2d:e7:e4:f3")	//inspirefreewifi			..-77
+									  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:f1")	//EduRoam					..-50
+									  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:d3")	//EduRoam					..-82
+									  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:53")	//EduRoam					..-82
+									  
+									  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:f5")	//studentcity				..-78
+									  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:d5")	//studentcity				..-82
+									  
+									  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:f3")	//inspirefreewifi			..-77
+									  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:d4")	//inspirefreewifi			..-83
 									  )
 									  {
 								  		Aghortcheck[14] = true;
@@ -1782,84 +1914,111 @@ public class MainActivity extends Activity implements SensorEventListener {
 //-----------------Position 3.42-----------------------------------------------------------------------------
 						  	if(Aghortcheck[10] == false && Aghortcheck[11] == false && Aghortcheck[12] == false && Aghortcheck[13] == false && Aghortcheck[14] == false){
 								  
-								  if (   	Ahgsb1.toString().equals("ac:16:2d:e7:e4:d2")	//MUStaffPrivateEquipment	..-91 
+						  			map = (MapView) findViewById(R.id.map);
+								  map.setMapImage(ImageUtil.loadBitmapFromResource(getResources(), R.drawable.map3));
+								  
+								  if (   	Ahgsb1.toString().equals("ac:16:2d:e7:e4:d2")			//MUStaffPrivateEquipment	..-91 
 										  ||Ahgsb1.toString().equals("ac:16:2d:e7:e4:f4")	//MUStaffPrivateEquipment	..-65
+										   ||Ahgsb1.toString().equals("c8:cb:b8:ec:75:54")	//MUStaffPrivateEquipment	..-56
 										  
 										  ||Ahgsb1.toString().equals("ac:16:2d:e7:e4:f0")	//MUStaff					..-67
+										  ||Ahgsb1.toString().equals("c8:cb:b8:ec:75:50")	//MUStaff					..-56
 										  
 										  ||Ahgsb1.toString().equals("ac:16:2d:e7:e4:d1")	//MUStudents				..-86
 										  ||Ahgsb1.toString().equals("ac:16:2d:e7:e4:f2")	//MUStudents				..-66
+										  ||Ahgsb1.toString().equals("c8:cb:b8:ec:75:52")	//MUStudents				..-57
 										  
 										  ||Ahgsb1.toString().equals("ac:16:2d:e7:e4:f1")	//EduRoam					..-65
 										  ||Ahgsb1.toString().equals("ac:16:2d:e7:e4:d3")	//EduRoam					..-88
+										  ||Ahgsb1.toString().equals("c8:cb:b8:ec:75:51")	//EduRoam					..-57
 
 										  ||Ahgsb1.toString().equals("ac:16:2d:e7:d4:d3")	//studentcity				..-89
 										  ||Ahgsb1.toString().equals("ac:16:2d:e7:e4:f5")	//studentcity				..-66
+										  ||Ahgsb1.toString().equals("c8:cb:b8:ec:75:55")	//studentcity				..-57
 
 										  ||Ahgsb1.toString().equals("ac:16:2d:e7:e4:d4")	//inspirefreewifi			..-86
+										  ||Ahgsb1.toString().equals("c8:cb:b8:ec:75:53")	//inspirefreewifi			..-57
 										  ||Ahgsb1.toString().equals("ac:16:2d:e7:e4:f3")	//inspirefreewifi			..-66
 										  )
 										  {
 									  		Aghortcheck[15] = true;
 										  }
 
-								  if (   	Ahgsb2.toString().equals("ac:16:2d:e7:e4:d2")	//MUStaffPrivateEquipment	..-91 
+								  if (   	Ahgsb2.toString().equals("ac:16:2d:e7:e4:d2")			//MUStaffPrivateEquipment	..-91 
 										  ||Ahgsb2.toString().equals("ac:16:2d:e7:e4:f4")	//MUStaffPrivateEquipment	..-65
+										   ||Ahgsb2.toString().equals("c8:cb:b8:ec:75:54")	//MUStaffPrivateEquipment	..-56
 										  
 										  ||Ahgsb2.toString().equals("ac:16:2d:e7:e4:f0")	//MUStaff					..-67
+										  ||Ahgsb2.toString().equals("c8:cb:b8:ec:75:50")	//MUStaff					..-56
 										  
 										  ||Ahgsb2.toString().equals("ac:16:2d:e7:e4:d1")	//MUStudents				..-86
 										  ||Ahgsb2.toString().equals("ac:16:2d:e7:e4:f2")	//MUStudents				..-66
+										  ||Ahgsb2.toString().equals("c8:cb:b8:ec:75:52")	//MUStudents				..-57
 										  
 										  ||Ahgsb2.toString().equals("ac:16:2d:e7:e4:f1")	//EduRoam					..-65
 										  ||Ahgsb2.toString().equals("ac:16:2d:e7:e4:d3")	//EduRoam					..-88
+										  ||Ahgsb2.toString().equals("c8:cb:b8:ec:75:51")	//EduRoam					..-57
 
 										  ||Ahgsb2.toString().equals("ac:16:2d:e7:d4:d3")	//studentcity				..-89
 										  ||Ahgsb2.toString().equals("ac:16:2d:e7:e4:f5")	//studentcity				..-66
+										  ||Ahgsb2.toString().equals("c8:cb:b8:ec:75:55")	//studentcity				..-57
 
 										  ||Ahgsb2.toString().equals("ac:16:2d:e7:e4:d4")	//inspirefreewifi			..-86
+										  ||Ahgsb2.toString().equals("c8:cb:b8:ec:75:53")	//inspirefreewifi			..-57
 										  ||Ahgsb2.toString().equals("ac:16:2d:e7:e4:f3")	//inspirefreewifi			..-66
 										  )
 										  {
 									  		Aghortcheck[16] = true;
 										  }
 								  
-								  if (   	Ahgsb3.toString().equals("ac:16:2d:e7:e4:d2")	//MUStaffPrivateEquipment	..-91 
+								  if (   Ahgsb3.toString().equals("ac:16:2d:e7:e4:d2")			//MUStaffPrivateEquipment	..-91 
 										  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:f4")	//MUStaffPrivateEquipment	..-65
+										   ||Ahgsb3.toString().equals("c8:cb:b8:ec:75:54")	//MUStaffPrivateEquipment	..-56
 										  
 										  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:f0")	//MUStaff					..-67
+										  ||Ahgsb3.toString().equals("c8:cb:b8:ec:75:50")	//MUStaff					..-56
 										  
 										  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:d1")	//MUStudents				..-86
 										  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:f2")	//MUStudents				..-66
+										  ||Ahgsb3.toString().equals("c8:cb:b8:ec:75:52")	//MUStudents				..-57
 										  
 										  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:f1")	//EduRoam					..-65
 										  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:d3")	//EduRoam					..-88
+										  ||Ahgsb3.toString().equals("c8:cb:b8:ec:75:51")	//EduRoam					..-57
 
 										  ||Ahgsb3.toString().equals("ac:16:2d:e7:d4:d3")	//studentcity				..-89
 										  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:f5")	//studentcity				..-66
+										  ||Ahgsb3.toString().equals("c8:cb:b8:ec:75:55")	//studentcity				..-57
 
 										  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:d4")	//inspirefreewifi			..-86
+										  ||Ahgsb3.toString().equals("c8:cb:b8:ec:75:53")	//inspirefreewifi			..-57
 										  ||Ahgsb3.toString().equals("ac:16:2d:e7:e4:f3")	//inspirefreewifi			..-66
 										  )
 										  {
 									  		Aghortcheck[17] = true;
 										  }
 								  
-								  if (   	Ahgsb4.toString().equals("ac:16:2d:e7:e4:d2")	//MUStaffPrivateEquipment	..-91 
+								  if (   	Ahgsb4.toString().equals("ac:16:2d:e7:e4:d2")			//MUStaffPrivateEquipment	..-91 
 										  ||Ahgsb4.toString().equals("ac:16:2d:e7:e4:f4")	//MUStaffPrivateEquipment	..-65
+										   ||Ahgsb4.toString().equals("c8:cb:b8:ec:75:54")	//MUStaffPrivateEquipment	..-56
 										  
 										  ||Ahgsb4.toString().equals("ac:16:2d:e7:e4:f0")	//MUStaff					..-67
-										  
+										  ||Ahgsb4.toString().equals("c8:cb:b8:ec:75:50")	//MUStaff					..-56
+										 
 										  ||Ahgsb4.toString().equals("ac:16:2d:e7:e4:d1")	//MUStudents				..-86
 										  ||Ahgsb4.toString().equals("ac:16:2d:e7:e4:f2")	//MUStudents				..-66
+										  ||Ahgsb4.toString().equals("c8:cb:b8:ec:75:52")	//MUStudents				..-57
 										  
 										  ||Ahgsb4.toString().equals("ac:16:2d:e7:e4:f1")	//EduRoam					..-65
 										  ||Ahgsb4.toString().equals("ac:16:2d:e7:e4:d3")	//EduRoam					..-88
+										  ||Ahgsb4.toString().equals("c8:cb:b8:ec:75:51")	//EduRoam					..-57
 
 										  ||Ahgsb4.toString().equals("ac:16:2d:e7:d4:d3")	//studentcity				..-89
 										  ||Ahgsb4.toString().equals("ac:16:2d:e7:e4:f5")	//studentcity				..-66
+										  ||Ahgsb4.toString().equals("c8:cb:b8:ec:75:55")	//studentcity				..-57
 
 										  ||Ahgsb4.toString().equals("ac:16:2d:e7:e4:d4")	//inspirefreewifi			..-86
+										  ||Ahgsb4.toString().equals("c8:cb:b8:ec:75:53")	//inspirefreewifi			..-57
 										  ||Ahgsb4.toString().equals("ac:16:2d:e7:e4:f3")	//inspirefreewifi			..-66
 										  )
 										  {
@@ -1868,19 +2027,25 @@ public class MainActivity extends Activity implements SensorEventListener {
 								  
 								  if (Ahgsb5.toString().equals("ac:16:2d:e7:e4:d2")			//MUStaffPrivateEquipment	..-91 
 										  ||Ahgsb5.toString().equals("ac:16:2d:e7:e4:f4")	//MUStaffPrivateEquipment	..-65
+										   ||Ahgsb5.toString().equals("c8:cb:b8:ec:75:54")	//MUStaffPrivateEquipment	..-56
 										  
 										  ||Ahgsb5.toString().equals("ac:16:2d:e7:e4:f0")	//MUStaff					..-67
+										  ||Ahgsb5.toString().equals("c8:cb:b8:ec:75:50")	//MUStaff					..-56
 										  
 										  ||Ahgsb5.toString().equals("ac:16:2d:e7:e4:d1")	//MUStudents				..-86
 										  ||Ahgsb5.toString().equals("ac:16:2d:e7:e4:f2")	//MUStudents				..-66
+										  ||Ahgsb5.toString().equals("c8:cb:b8:ec:75:52")	//MUStudents				..-57
 										  
 										  ||Ahgsb5.toString().equals("ac:16:2d:e7:e4:f1")	//EduRoam					..-65
 										  ||Ahgsb5.toString().equals("ac:16:2d:e7:e4:d3")	//EduRoam					..-88
+										  ||Ahgsb5.toString().equals("c8:cb:b8:ec:75:51")	//EduRoam					..-57
 
 										  ||Ahgsb5.toString().equals("ac:16:2d:e7:d4:d3")	//studentcity				..-89
 										  ||Ahgsb5.toString().equals("ac:16:2d:e7:e4:f5")	//studentcity				..-66
+										  ||Ahgsb5.toString().equals("c8:cb:b8:ec:75:55")	//studentcity				..-57
 
 										  ||Ahgsb5.toString().equals("ac:16:2d:e7:e4:d4")	//inspirefreewifi			..-86
+										  ||Ahgsb5.toString().equals("c8:cb:b8:ec:75:53")	//inspirefreewifi			..-57
 										  ||Ahgsb5.toString().equals("ac:16:2d:e7:e4:f3")	//inspirefreewifi			..-66
 										  )
 										  {
@@ -1889,7 +2054,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 								  
 								  if(Aghortcheck[15] == true && Aghortcheck[16] == true && Aghortcheck[17] == true && Aghortcheck[18] == true && Aghortcheck[19] == true){
 								  
-									  	allNetWork.setText("You are close to Aghort Level 3 room 3.64" + " " + AgHScanResult1.level);
+									  	allNetWork.setText("You are close to Aghort Level 3 room 3.42" + " " + AgHScanResult1.level);
 									  	//Toast.makeText(getApplicationContext(),"P1",Toast.LENGTH_SHORT).show();
 										
 										if (AgHPositionset[0] == true){
@@ -1928,10 +2093,208 @@ public class MainActivity extends Activity implements SensorEventListener {
 								  		Aghortcheck[18] = false;
 								  		Aghortcheck[19] = false;
 							  }
-						  	else
-						  	{
-						  		Toast.makeText(getApplicationContext(),"Can't found your position",Toast.LENGTH_SHORT).show();
-						  	}
+							
+
+/**
+ *  For Room RD1.14 Use
+ */
+//-----------------Position 3.42-----------------------------------------------------------------------------
+
+								if(Aghortcheck[15] == false &&	Aghortcheck[16] == false &&	Aghortcheck[17] == false &&	Aghortcheck[18] == false && Aghortcheck[19] == false )
+								{
+									if (	RDsb1.toString().equals("c8:cb:b8:f3:a6:b0")	//MUStaff						..-55
+											||RDsb1.toString().equals("c8:cb:b8:f3:a5:f0")	//MUStaff						..-83
+											||RDsb1.toString().equals("b4:b5:2f:41:a1:b0")	//MUStaff						..-83
+											||RDsb1.toString().equals("c8:cb:b8:f3:a6:30")	//MUStaff						..-84
+									 											
+											  ||RDsb1.toString().equals("c8:cb:b8:f3:a6:b2")	//MUStaffPrivateEquipment	..-51
+											  ||RDsb1.toString().equals("c8:cb:b8:f3:a5:f2")	//MUStaffPrivateEquipment	..-82
+											  ||RDsb1.toString().equals("b4:b5:2f:41:a1:b2")	//MUStaffPrivateEquipment	..-82
+											  ||RDsb1.toString().equals("c8:cb:b8:f3:a6:32")	//MUStaffPrivateEquipment	..-92
+											  											  
+											  ||RDsb1.toString().equals("c8:cb:b8:f3:a6:b1")	//MUStudents				..-54
+											  ||RDsb1.toString().equals("c8:cb:b8:f3:a5:f1")	//MUStudents				..-80
+											  ||RDsb1.toString().equals("b4:b5:2f:41:a1:b1")	//MUStudents				..-81
+											  ||RDsb1.toString().equals("c8:cb:b8:f3:a6:31")	//MUStudents				..-83
+											  
+											  ||RDsb1.toString().equals("c8:cb:b8:f3:a6:b3")	//EduRoam					..-59
+											  ||RDsb1.toString().equals("c8:cb:b8:f3:a5:f3")	//EduRoam					..-80
+											  ||RDsb1.toString().equals("b4:b5:2f:41:a1:b3")	//EduRoam					..-82
+											  ||RDsb1.toString().equals("c8:cb:b8:f3:a6:33")	//EduRoam					..-84
+											  
+											  ||RDsb1.toString().equals("c8:cb:b8:f3:a6:b5")	//studentcity				..-53
+											  ||RDsb1.toString().equals("c8:cb:b8:f3:a5:f5")	//studentcity				..-81
+											  ||RDsb1.toString().equals("b4:b5:2f:41:a1:b5")	//studentcity				..-82
+											  ||RDsb1.toString().equals("c8:cb:b8:f3:a6:35")	//studentcity				..-92
+										  
+											  ||RDsb1.toString().equals("c8:cb:b8:f3:a6:b4")	//inspirefreewifi			..-58
+											  ||RDsb1.toString().equals("c8:cb:b8:f3:a5:f4")	//inspirefreewifi			..-81
+											  ||RDsb1.toString().equals("b4:b5:2f:41:a1:b4")	//inspirefreewifi			..-81
+											  ||RDsb1.toString().equals("c8:cb:b8:f3:a6:34")	//inspirefreewifi			..-89
+	  
+										)
+											  {
+										  		RDcheck[0] = true;
+											  }
+									
+									if (	RDsb2.toString().equals("c8:cb:b8:f3:a6:b0")	//MUStaff						..-55
+											||RDsb2.toString().equals("c8:cb:b8:f3:a5:f0")	//MUStaff						..-83
+											||RDsb2.toString().equals("b4:b5:2f:41:a1:b0")	//MUStaff						..-83
+											||RDsb2.toString().equals("c8:cb:b8:f3:a6:30")	//MUStaff						..-84
+									 										
+											  ||RDsb2.toString().equals("c8:cb:b8:f3:a6:b2")	//MUStaffPrivateEquipment	..-51
+											  ||RDsb2.toString().equals("c8:cb:b8:f3:a5:f2")	//MUStaffPrivateEquipment	..-82
+											  ||RDsb2.toString().equals("b4:b5:2f:41:a1:b2")	//MUStaffPrivateEquipment	..-82
+											  ||RDsb2.toString().equals("c8:cb:b8:f3:a6:32")	//MUStaffPrivateEquipment	..-92
+											  										  
+											  ||RDsb2.toString().equals("c8:cb:b8:f3:a6:b1")	//MUStudents				..-54
+											  ||RDsb2.toString().equals("c8:cb:b8:f3:a5:f1")	//MUStudents				..-80
+											  ||RDsb2.toString().equals("b4:b5:2f:41:a1:b1")	//MUStudents				..-81
+											  ||RDsb2.toString().equals("c8:cb:b8:f3:a6:31")	//MUStudents				..-83
+											 
+											  ||RDsb2.toString().equals("c8:cb:b8:f3:a6:b3")	//EduRoam					..-59
+											  ||RDsb2.toString().equals("c8:cb:b8:f3:a5:f3")	//EduRoam					..-80
+											  ||RDsb2.toString().equals("b4:b5:2f:41:a1:b3")	//EduRoam					..-82
+											  ||RDsb2.toString().equals("c8:cb:b8:f3:a6:33")	//EduRoam					..-84
+											  
+											  ||RDsb2.toString().equals("c8:cb:b8:f3:a6:b5")	//studentcity				..-53
+											  ||RDsb2.toString().equals("c8:cb:b8:f3:a5:f5")	//studentcity				..-81
+											  ||RDsb2.toString().equals("b4:b5:2f:41:a1:b5")	//studentcity				..-82
+											  ||RDsb2.toString().equals("c8:cb:b8:f3:a6:35")	//studentcity				..-92
+										 
+											  ||RDsb2.toString().equals("c8:cb:b8:f3:a6:b4")	//inspirefreewifi			..-58
+											  ||RDsb2.toString().equals("c8:cb:b8:f3:a5:f4")	//inspirefreewifi			..-81
+											  ||RDsb2.toString().equals("b4:b5:2f:41:a1:b4")	//inspirefreewifi			..-81
+											  ||RDsb2.toString().equals("c8:cb:b8:f3:a6:34")	//inspirefreewifi			..-89
+	  
+										)
+											  {
+										  		RDcheck[1] = true;
+											  }
+									
+									if (	RDsb3.toString().equals("c8:cb:b8:f3:a6:b0")	//MUStaff						..-55
+											||RDsb3.toString().equals("c8:cb:b8:f3:a5:f0")	//MUStaff						..-83
+											||RDsb3.toString().equals("b4:b5:2f:41:a1:b0")	//MUStaff						..-83
+											||RDsb3.toString().equals("c8:cb:b8:f3:a6:30")	//MUStaff						..-84
+									 											
+											  ||RDsb3.toString().equals("c8:cb:b8:f3:a6:b2")	//MUStaffPrivateEquipment	..-51
+											  ||RDsb3.toString().equals("c8:cb:b8:f3:a5:f2")	//MUStaffPrivateEquipment	..-82
+											  ||RDsb3.toString().equals("b4:b5:2f:41:a1:b2")	//MUStaffPrivateEquipment	..-82
+											  ||RDsb3.toString().equals("c8:cb:b8:f3:a6:32")	//MUStaffPrivateEquipment	..-92
+											  										  
+											  ||RDsb3.toString().equals("c8:cb:b8:f3:a6:b1")	//MUStudents				..-54
+											  ||RDsb3.toString().equals("c8:cb:b8:f3:a5:f1")	//MUStudents				..-80
+											  ||RDsb3.toString().equals("b4:b5:2f:41:a1:b1")	//MUStudents				..-81
+											  ||RDsb3.toString().equals("c8:cb:b8:f3:a6:31")	//MUStudents				..-83
+											  
+											  ||RDsb3.toString().equals("c8:cb:b8:f3:a6:b3")	//EduRoam					..-59
+											  ||RDsb3.toString().equals("c8:cb:b8:f3:a5:f3")	//EduRoam					..-80
+											  ||RDsb3.toString().equals("b4:b5:2f:41:a1:b3")	//EduRoam					..-82
+											  ||RDsb3.toString().equals("c8:cb:b8:f3:a6:33")	//EduRoam					..-84
+											  
+											  ||RDsb3.toString().equals("c8:cb:b8:f3:a6:b5")	//studentcity				..-53
+											  ||RDsb3.toString().equals("c8:cb:b8:f3:a5:f5")	//studentcity				..-81
+											  ||RDsb3.toString().equals("b4:b5:2f:41:a1:b5")	//studentcity				..-82
+											  ||RDsb3.toString().equals("c8:cb:b8:f3:a6:35")	//studentcity				..-92
+										 
+											  ||RDsb3.toString().equals("c8:cb:b8:f3:a6:b4")	//inspirefreewifi			..-58
+											  ||RDsb3.toString().equals("c8:cb:b8:f3:a5:f4")	//inspirefreewifi			..-81
+											  ||RDsb3.toString().equals("b4:b5:2f:41:a1:b4")	//inspirefreewifi			..-81
+											  ||RDsb3.toString().equals("c8:cb:b8:f3:a6:34")	//inspirefreewifi			..-89
+	  
+										)
+											  {
+										  		RDcheck[2] = true;
+											  }
+									
+									if (	RDsb4.toString().equals("c8:cb:b8:f3:a6:b0")	//MUStaff						..-55
+											||RDsb4.toString().equals("c8:cb:b8:f3:a5:f0")	//MUStaff						..-83
+											||RDsb4.toString().equals("b4:b5:2f:41:a1:b0")	//MUStaff						..-83
+											||RDsb4.toString().equals("c8:cb:b8:f3:a6:30")	//MUStaff						..-84
+									 											
+											  ||RDsb4.toString().equals("c8:cb:b8:f3:a6:b2")	//MUStaffPrivateEquipment	..-51
+											  ||RDsb4.toString().equals("c8:cb:b8:f3:a5:f2")	//MUStaffPrivateEquipment	..-82
+											  ||RDsb4.toString().equals("b4:b5:2f:41:a1:b2")	//MUStaffPrivateEquipment	..-82
+											  ||RDsb4.toString().equals("c8:cb:b8:f3:a6:32")	//MUStaffPrivateEquipment	..-92
+											  										  
+											  ||RDsb4.toString().equals("c8:cb:b8:f3:a6:b1")	//MUStudents				..-54
+											  ||RDsb4.toString().equals("c8:cb:b8:f3:a5:f1")	//MUStudents				..-80
+											  ||RDsb4.toString().equals("b4:b5:2f:41:a1:b1")	//MUStudents				..-81
+											  ||RDsb4.toString().equals("c8:cb:b8:f3:a6:31")	//MUStudents				..-83
+											  
+											  ||RDsb4.toString().equals("c8:cb:b8:f3:a6:b3")	//EduRoam					..-59
+											  ||RDsb4.toString().equals("c8:cb:b8:f3:a5:f3")	//EduRoam					..-80
+											  ||RDsb4.toString().equals("b4:b5:2f:41:a1:b3")	//EduRoam					..-82
+											  ||RDsb4.toString().equals("c8:cb:b8:f3:a6:33")	//EduRoam					..-84
+											 
+											  ||RDsb4.toString().equals("c8:cb:b8:f3:a6:b5")	//studentcity				..-53
+											  ||RDsb4.toString().equals("c8:cb:b8:f3:a5:f5")	//studentcity				..-81
+											  ||RDsb4.toString().equals("b4:b5:2f:41:a1:b5")	//studentcity				..-82
+											  ||RDsb4.toString().equals("c8:cb:b8:f3:a6:35")	//studentcity				..-92
+										 
+											  ||RDsb4.toString().equals("c8:cb:b8:f3:a6:b4")	//inspirefreewifi			..-58
+											  ||RDsb4.toString().equals("c8:cb:b8:f3:a5:f4")	//inspirefreewifi			..-81
+											  ||RDsb4.toString().equals("b4:b5:2f:41:a1:b4")	//inspirefreewifi			..-81
+											  ||RDsb4.toString().equals("c8:cb:b8:f3:a6:34")	//inspirefreewifi			..-89
+	  
+										)
+											  {
+										  		RDcheck[3] = true;
+											  }
+									
+									if (	RDsb5.toString().equals("c8:cb:b8:f3:a6:b0")	//MUStaff						..-55
+											||RDsb5.toString().equals("c8:cb:b8:f3:a5:f0")	//MUStaff						..-83
+											||RDsb5.toString().equals("b4:b5:2f:41:a1:b0")	//MUStaff						..-83
+											||RDsb5.toString().equals("c8:cb:b8:f3:a6:30")	//MUStaff						..-84
+									 											
+											  ||RDsb5.toString().equals("c8:cb:b8:f3:a6:b2")	//MUStaffPrivateEquipment	..-51
+											  ||RDsb5.toString().equals("c8:cb:b8:f3:a5:f2")	//MUStaffPrivateEquipment	..-82
+											  ||RDsb5.toString().equals("b4:b5:2f:41:a1:b2")	//MUStaffPrivateEquipment	..-82
+											  ||RDsb5.toString().equals("c8:cb:b8:f3:a6:32")	//MUStaffPrivateEquipment	..-92
+											  											  
+											  ||RDsb5.toString().equals("c8:cb:b8:f3:a6:b1")	//MUStudents				..-54
+											  ||RDsb5.toString().equals("c8:cb:b8:f3:a5:f1")	//MUStudents				..-80
+											  ||RDsb5.toString().equals("b4:b5:2f:41:a1:b1")	//MUStudents				..-81
+											  ||RDsb5.toString().equals("c8:cb:b8:f3:a6:31")	//MUStudents				..-83
+											  
+											  ||RDsb5.toString().equals("c8:cb:b8:f3:a6:b3")	//EduRoam					..-59
+											  ||RDsb5.toString().equals("c8:cb:b8:f3:a5:f3")	//EduRoam					..-80
+											  ||RDsb5.toString().equals("b4:b5:2f:41:a1:b3")	//EduRoam					..-82
+											  ||RDsb5.toString().equals("c8:cb:b8:f3:a6:33")	//EduRoam					..-84
+											  
+											  ||RDsb5.toString().equals("c8:cb:b8:f3:a6:b5")	//studentcity				..-53
+											  ||RDsb5.toString().equals("c8:cb:b8:f3:a5:f5")	//studentcity				..-81
+											  ||RDsb5.toString().equals("b4:b5:2f:41:a1:b5")	//studentcity				..-82
+											  ||RDsb5.toString().equals("c8:cb:b8:f3:a6:35")	//studentcity				..-92
+										  
+											  ||RDsb5.toString().equals("c8:cb:b8:f3:a6:b4")	//inspirefreewifi			..-58
+											  ||RDsb5.toString().equals("c8:cb:b8:f3:a5:f4")	//inspirefreewifi			..-81
+											  ||RDsb5.toString().equals("b4:b5:2f:41:a1:b4")	//inspirefreewifi			..-81
+											  ||RDsb5.toString().equals("c8:cb:b8:f3:a6:34")	//inspirefreewifi			..-89
+	  
+										)
+											  {
+										  		RDcheck[4] = true;
+											  }
+									
+									if(RDcheck[0] == true && RDcheck[1] == true && RDcheck[2] == true && RDcheck[3] == true && RDcheck[4] == true){
+										  
+									  	allNetWork.setText("You are close to Riddit Complex room RD1.14" + " " + RDScanResult1.level);
+
+								}else
+								{
+									RDcheck[0] = false;
+									RDcheck[1] = false;
+									RDcheck[2] = false;
+									RDcheck[3] = false;
+									RDcheck[4] = false;
+								}
+								
+									if (RDcheck[0]== false && RDcheck[1] == false && RDcheck[2] == false && RDcheck[3] == false && RDcheck[4] == false)
+								{
+								Toast.makeText(getApplicationContext(),"Can't found your position",Toast.LENGTH_SHORT).show();
+								}
+					}
+				}	
 			}
-		}
-	}
+}
