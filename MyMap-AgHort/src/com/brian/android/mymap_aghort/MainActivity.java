@@ -753,7 +753,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 					Homecheck[0] = true;
 					//HcheckL1 = true;
 					// allNetWork.setText(hsb1.toString());
-					// Toast.makeText(getApplicationContext(),hsb1.toString(),Toast.LENGTH_SHORT).show();
+					 Toast.makeText(getApplicationContext(),hsb1.toString(),Toast.LENGTH_SHORT).show();
 				}
 				if (hsb2.toString().equals("vodafone0BF3")
 						|| hsb1.toString().equals("NETGEAR_18")
@@ -761,7 +761,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 					Homecheck[1] = true;
 					//HcheckL2 = true;
 					// allNetWork.setText(hsb2.toString());
-					// Toast.makeText(getApplicationContext(),hsb2.toString(),Toast.LENGTH_SHORT).show();
+					 Toast.makeText(getApplicationContext(),hsb2.toString(),Toast.LENGTH_SHORT).show();
 				}
 				if (hsb3.toString().equals("vodafone0BF3")
 						|| hsb3.toString().equals("NETGEAR_18")
@@ -769,7 +769,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 					Homecheck[2] = true;
 					//HcheckL3 = true;
 					// allNetWork.setText(hsb2.toString());
-					// Toast.makeText(getApplicationContext(),hsb2.toString(),Toast.LENGTH_SHORT).show();
+					 Toast.makeText(getApplicationContext(),hsb2.toString(),Toast.LENGTH_SHORT).show();
 				}
 				
 
@@ -812,17 +812,21 @@ public class MainActivity extends Activity implements SensorEventListener {
 								map.setLocations(locations8);
 						}
 						else{
+						map = (MapView) findViewById(R.id.map);
+						map.setMapImage(ImageUtil.loadBitmapFromResource(getResources(), R.drawable.homemap));
 						MapLocation[] Hlocations = new MapLocation[] {new StateLocation(this, 700, 700, R.drawable.location_icon, R.drawable.location_icon_selected, "Home1")};
 						map.setLocations(Hlocations);
+						Homecheck[0]= true;
+						Homecheck[1]= true;
+						Homecheck[2] = true;
 						}
-					}
-						else{
+					}else{
 							Homecheck[0]= false;
 							Homecheck[1]= false;
 							Homecheck[2] = false;
 						}
 			}
-
+/*
 			// if (HScanResult1.level <= -78) //-- Greater than or equal to
 			// -79dB
 			if (HScanResult1.level <= -78) {
@@ -882,13 +886,17 @@ public class MainActivity extends Activity implements SensorEventListener {
 						}
 					
 					else{
+					map.setMapImage(ImageUtil.loadBitmapFromResource(getResources(), R.drawable.homemap));
 					MapLocation[] Hlocations = new MapLocation[] {new StateLocation(this, 200, 200, R.drawable.location_icon, R.drawable.location_icon_selected, "My position")};
 					map.setLocations(Hlocations);
+					Homecheck[0] = true;
+					Homecheck[1] = true;
+					Homecheck[2] = true;
 					}
 				}
 
 			}
-			
+			*/
 			// -------------------------------------------------------------------------------------------------------------//
 
 			// City Library test
@@ -1328,6 +1336,11 @@ public class MainActivity extends Activity implements SensorEventListener {
 						  		Lcheck[10] = false;
 						  		Lcheck[11] = false;	  
 					  }
+			}
+			
+			else{
+				Toast.makeText(getApplicationContext(),"You are at Home",Toast.LENGTH_SHORT).show();
+			}
 			}
 			
 /**
@@ -2106,31 +2119,41 @@ public class MainActivity extends Activity implements SensorEventListener {
 											||RDsb1.toString().equals("c8:cb:b8:f3:a5:f0")	//MUStaff						..-83
 											||RDsb1.toString().equals("b4:b5:2f:41:a1:b0")	//MUStaff						..-83
 											||RDsb1.toString().equals("c8:cb:b8:f3:a6:30")	//MUStaff						..-84
+											||RDsb1.toString().equals("a0:48:1c:39:d9:10")	//MUStaff						..-57
+											||RDsb1.toString().equals("c8:cb:b8:f3:a6:b0")	//MUStaff						..-72
+											
 									 											
 											  ||RDsb1.toString().equals("c8:cb:b8:f3:a6:b2")	//MUStaffPrivateEquipment	..-51
 											  ||RDsb1.toString().equals("c8:cb:b8:f3:a5:f2")	//MUStaffPrivateEquipment	..-82
 											  ||RDsb1.toString().equals("b4:b5:2f:41:a1:b2")	//MUStaffPrivateEquipment	..-82
 											  ||RDsb1.toString().equals("c8:cb:b8:f3:a6:32")	//MUStaffPrivateEquipment	..-92
+											  ||RDsb1.toString().equals("a0:48:1c:39:d9:12")	//MUStaffPrivateEquipment	..-57
+
 											  											  
 											  ||RDsb1.toString().equals("c8:cb:b8:f3:a6:b1")	//MUStudents				..-54
 											  ||RDsb1.toString().equals("c8:cb:b8:f3:a5:f1")	//MUStudents				..-80
 											  ||RDsb1.toString().equals("b4:b5:2f:41:a1:b1")	//MUStudents				..-81
 											  ||RDsb1.toString().equals("c8:cb:b8:f3:a6:31")	//MUStudents				..-83
+											  ||RDsb1.toString().equals("a0:48:1c:39:d9:11")	//MUStudents				..-57
 											  
 											  ||RDsb1.toString().equals("c8:cb:b8:f3:a6:b3")	//EduRoam					..-59
 											  ||RDsb1.toString().equals("c8:cb:b8:f3:a5:f3")	//EduRoam					..-80
 											  ||RDsb1.toString().equals("b4:b5:2f:41:a1:b3")	//EduRoam					..-82
 											  ||RDsb1.toString().equals("c8:cb:b8:f3:a6:33")	//EduRoam					..-84
+											  ||RDsb1.toString().equals("a0:48:1c:39:d9:13")	//EduRoam					..-56
+
 											  
 											  ||RDsb1.toString().equals("c8:cb:b8:f3:a6:b5")	//studentcity				..-53
 											  ||RDsb1.toString().equals("c8:cb:b8:f3:a5:f5")	//studentcity				..-81
 											  ||RDsb1.toString().equals("b4:b5:2f:41:a1:b5")	//studentcity				..-82
 											  ||RDsb1.toString().equals("c8:cb:b8:f3:a6:35")	//studentcity				..-92
+											  ||RDsb1.toString().equals("a0:48:1c:39:d9:15")	//studentcity				..-57
 										  
 											  ||RDsb1.toString().equals("c8:cb:b8:f3:a6:b4")	//inspirefreewifi			..-58
 											  ||RDsb1.toString().equals("c8:cb:b8:f3:a5:f4")	//inspirefreewifi			..-81
 											  ||RDsb1.toString().equals("b4:b5:2f:41:a1:b4")	//inspirefreewifi			..-81
 											  ||RDsb1.toString().equals("c8:cb:b8:f3:a6:34")	//inspirefreewifi			..-89
+											  ||RDsb1.toString().equals("a0:48:1c:39:d9:14")	//inspirefreewifi			..-58
 	  
 										)
 											  {
@@ -2141,31 +2164,38 @@ public class MainActivity extends Activity implements SensorEventListener {
 											||RDsb2.toString().equals("c8:cb:b8:f3:a5:f0")	//MUStaff						..-83
 											||RDsb2.toString().equals("b4:b5:2f:41:a1:b0")	//MUStaff						..-83
 											||RDsb2.toString().equals("c8:cb:b8:f3:a6:30")	//MUStaff						..-84
+											||RDsb2.toString().equals("a0:48:1c:39:d9:10")	//MUStaff						..-57
+											||RDsb2.toString().equals("c8:cb:b8:f3:a6:b0")	//MUStaff						..-72
 									 										
 											  ||RDsb2.toString().equals("c8:cb:b8:f3:a6:b2")	//MUStaffPrivateEquipment	..-51
 											  ||RDsb2.toString().equals("c8:cb:b8:f3:a5:f2")	//MUStaffPrivateEquipment	..-82
 											  ||RDsb2.toString().equals("b4:b5:2f:41:a1:b2")	//MUStaffPrivateEquipment	..-82
 											  ||RDsb2.toString().equals("c8:cb:b8:f3:a6:32")	//MUStaffPrivateEquipment	..-92
-											  										  
+											  ||RDsb2.toString().equals("a0:48:1c:39:d9:12")	//MUStaffPrivateEquipment	..-57
+											  											  
 											  ||RDsb2.toString().equals("c8:cb:b8:f3:a6:b1")	//MUStudents				..-54
 											  ||RDsb2.toString().equals("c8:cb:b8:f3:a5:f1")	//MUStudents				..-80
 											  ||RDsb2.toString().equals("b4:b5:2f:41:a1:b1")	//MUStudents				..-81
 											  ||RDsb2.toString().equals("c8:cb:b8:f3:a6:31")	//MUStudents				..-83
-											 
+											  ||RDsb2.toString().equals("a0:48:1c:39:d9:11")	//MUStudents				..-57
+											  
 											  ||RDsb2.toString().equals("c8:cb:b8:f3:a6:b3")	//EduRoam					..-59
 											  ||RDsb2.toString().equals("c8:cb:b8:f3:a5:f3")	//EduRoam					..-80
 											  ||RDsb2.toString().equals("b4:b5:2f:41:a1:b3")	//EduRoam					..-82
 											  ||RDsb2.toString().equals("c8:cb:b8:f3:a6:33")	//EduRoam					..-84
-											  
+											  ||RDsb2.toString().equals("a0:48:1c:39:d9:13")	//EduRoam					..-56
+											 
 											  ||RDsb2.toString().equals("c8:cb:b8:f3:a6:b5")	//studentcity				..-53
 											  ||RDsb2.toString().equals("c8:cb:b8:f3:a5:f5")	//studentcity				..-81
 											  ||RDsb2.toString().equals("b4:b5:2f:41:a1:b5")	//studentcity				..-82
 											  ||RDsb2.toString().equals("c8:cb:b8:f3:a6:35")	//studentcity				..-92
-										 
+											  ||RDsb2.toString().equals("a0:48:1c:39:d9:15")	//studentcity				..-57
+										  
 											  ||RDsb2.toString().equals("c8:cb:b8:f3:a6:b4")	//inspirefreewifi			..-58
 											  ||RDsb2.toString().equals("c8:cb:b8:f3:a5:f4")	//inspirefreewifi			..-81
 											  ||RDsb2.toString().equals("b4:b5:2f:41:a1:b4")	//inspirefreewifi			..-81
 											  ||RDsb2.toString().equals("c8:cb:b8:f3:a6:34")	//inspirefreewifi			..-89
+											  ||RDsb2.toString().equals("a0:48:1c:39:d9:14")	//inspirefreewifi			..-58
 	  
 										)
 											  {
@@ -2176,31 +2206,38 @@ public class MainActivity extends Activity implements SensorEventListener {
 											||RDsb3.toString().equals("c8:cb:b8:f3:a5:f0")	//MUStaff						..-83
 											||RDsb3.toString().equals("b4:b5:2f:41:a1:b0")	//MUStaff						..-83
 											||RDsb3.toString().equals("c8:cb:b8:f3:a6:30")	//MUStaff						..-84
-									 											
+											||RDsb3.toString().equals("a0:48:1c:39:d9:10")	//MUStaff						..-57
+											||RDsb3.toString().equals("c8:cb:b8:f3:a6:b0")	//MUStaff						..-72
+									 										
 											  ||RDsb3.toString().equals("c8:cb:b8:f3:a6:b2")	//MUStaffPrivateEquipment	..-51
 											  ||RDsb3.toString().equals("c8:cb:b8:f3:a5:f2")	//MUStaffPrivateEquipment	..-82
 											  ||RDsb3.toString().equals("b4:b5:2f:41:a1:b2")	//MUStaffPrivateEquipment	..-82
 											  ||RDsb3.toString().equals("c8:cb:b8:f3:a6:32")	//MUStaffPrivateEquipment	..-92
-											  										  
+											  ||RDsb3.toString().equals("a0:48:1c:39:d9:12")	//MUStaffPrivateEquipment	..-57
+											 									  
 											  ||RDsb3.toString().equals("c8:cb:b8:f3:a6:b1")	//MUStudents				..-54
 											  ||RDsb3.toString().equals("c8:cb:b8:f3:a5:f1")	//MUStudents				..-80
 											  ||RDsb3.toString().equals("b4:b5:2f:41:a1:b1")	//MUStudents				..-81
 											  ||RDsb3.toString().equals("c8:cb:b8:f3:a6:31")	//MUStudents				..-83
+											  ||RDsb3.toString().equals("a0:48:1c:39:d9:11")	//MUStudents				..-57
 											  
 											  ||RDsb3.toString().equals("c8:cb:b8:f3:a6:b3")	//EduRoam					..-59
 											  ||RDsb3.toString().equals("c8:cb:b8:f3:a5:f3")	//EduRoam					..-80
 											  ||RDsb3.toString().equals("b4:b5:2f:41:a1:b3")	//EduRoam					..-82
 											  ||RDsb3.toString().equals("c8:cb:b8:f3:a6:33")	//EduRoam					..-84
+											  ||RDsb3.toString().equals("a0:48:1c:39:d9:13")	//EduRoam					..-56
 											  
 											  ||RDsb3.toString().equals("c8:cb:b8:f3:a6:b5")	//studentcity				..-53
 											  ||RDsb3.toString().equals("c8:cb:b8:f3:a5:f5")	//studentcity				..-81
 											  ||RDsb3.toString().equals("b4:b5:2f:41:a1:b5")	//studentcity				..-82
 											  ||RDsb3.toString().equals("c8:cb:b8:f3:a6:35")	//studentcity				..-92
-										 
+											  ||RDsb3.toString().equals("a0:48:1c:39:d9:15")	//studentcity				..-57
+										  
 											  ||RDsb3.toString().equals("c8:cb:b8:f3:a6:b4")	//inspirefreewifi			..-58
 											  ||RDsb3.toString().equals("c8:cb:b8:f3:a5:f4")	//inspirefreewifi			..-81
 											  ||RDsb3.toString().equals("b4:b5:2f:41:a1:b4")	//inspirefreewifi			..-81
 											  ||RDsb3.toString().equals("c8:cb:b8:f3:a6:34")	//inspirefreewifi			..-89
+											  ||RDsb3.toString().equals("a0:48:1c:39:d9:14")	//inspirefreewifi			..-58
 	  
 										)
 											  {
@@ -2211,31 +2248,38 @@ public class MainActivity extends Activity implements SensorEventListener {
 											||RDsb4.toString().equals("c8:cb:b8:f3:a5:f0")	//MUStaff						..-83
 											||RDsb4.toString().equals("b4:b5:2f:41:a1:b0")	//MUStaff						..-83
 											||RDsb4.toString().equals("c8:cb:b8:f3:a6:30")	//MUStaff						..-84
-									 											
+											||RDsb4.toString().equals("a0:48:1c:39:d9:10")	//MUStaff						..-57
+											||RDsb4.toString().equals("c8:cb:b8:f3:a6:b0")	//MUStaff						..-72
+									 										
 											  ||RDsb4.toString().equals("c8:cb:b8:f3:a6:b2")	//MUStaffPrivateEquipment	..-51
 											  ||RDsb4.toString().equals("c8:cb:b8:f3:a5:f2")	//MUStaffPrivateEquipment	..-82
 											  ||RDsb4.toString().equals("b4:b5:2f:41:a1:b2")	//MUStaffPrivateEquipment	..-82
 											  ||RDsb4.toString().equals("c8:cb:b8:f3:a6:32")	//MUStaffPrivateEquipment	..-92
+											  ||RDsb4.toString().equals("a0:48:1c:39:d9:12")	//MUStaffPrivateEquipment	..-57
 											  										  
 											  ||RDsb4.toString().equals("c8:cb:b8:f3:a6:b1")	//MUStudents				..-54
 											  ||RDsb4.toString().equals("c8:cb:b8:f3:a5:f1")	//MUStudents				..-80
 											  ||RDsb4.toString().equals("b4:b5:2f:41:a1:b1")	//MUStudents				..-81
 											  ||RDsb4.toString().equals("c8:cb:b8:f3:a6:31")	//MUStudents				..-83
+											  ||RDsb4.toString().equals("a0:48:1c:39:d9:11")	//MUStudents				..-57
 											  
 											  ||RDsb4.toString().equals("c8:cb:b8:f3:a6:b3")	//EduRoam					..-59
 											  ||RDsb4.toString().equals("c8:cb:b8:f3:a5:f3")	//EduRoam					..-80
 											  ||RDsb4.toString().equals("b4:b5:2f:41:a1:b3")	//EduRoam					..-82
 											  ||RDsb4.toString().equals("c8:cb:b8:f3:a6:33")	//EduRoam					..-84
-											 
+											  ||RDsb4.toString().equals("a0:48:1c:39:d9:13")	//EduRoam					..-56
+											  
 											  ||RDsb4.toString().equals("c8:cb:b8:f3:a6:b5")	//studentcity				..-53
 											  ||RDsb4.toString().equals("c8:cb:b8:f3:a5:f5")	//studentcity				..-81
 											  ||RDsb4.toString().equals("b4:b5:2f:41:a1:b5")	//studentcity				..-82
 											  ||RDsb4.toString().equals("c8:cb:b8:f3:a6:35")	//studentcity				..-92
-										 
+											  ||RDsb4.toString().equals("a0:48:1c:39:d9:15")	//studentcity				..-57
+										  
 											  ||RDsb4.toString().equals("c8:cb:b8:f3:a6:b4")	//inspirefreewifi			..-58
 											  ||RDsb4.toString().equals("c8:cb:b8:f3:a5:f4")	//inspirefreewifi			..-81
 											  ||RDsb4.toString().equals("b4:b5:2f:41:a1:b4")	//inspirefreewifi			..-81
 											  ||RDsb4.toString().equals("c8:cb:b8:f3:a6:34")	//inspirefreewifi			..-89
+											  ||RDsb4.toString().equals("a0:48:1c:39:d9:14")	//inspirefreewifi			..-58
 	  
 										)
 											  {
@@ -2246,38 +2290,50 @@ public class MainActivity extends Activity implements SensorEventListener {
 											||RDsb5.toString().equals("c8:cb:b8:f3:a5:f0")	//MUStaff						..-83
 											||RDsb5.toString().equals("b4:b5:2f:41:a1:b0")	//MUStaff						..-83
 											||RDsb5.toString().equals("c8:cb:b8:f3:a6:30")	//MUStaff						..-84
+											||RDsb5.toString().equals("a0:48:1c:39:d9:10")	//MUStaff						..-57
+											||RDsb5.toString().equals("c8:cb:b8:f3:a6:b0")	//MUStaff						..-72
 									 											
 											  ||RDsb5.toString().equals("c8:cb:b8:f3:a6:b2")	//MUStaffPrivateEquipment	..-51
 											  ||RDsb5.toString().equals("c8:cb:b8:f3:a5:f2")	//MUStaffPrivateEquipment	..-82
 											  ||RDsb5.toString().equals("b4:b5:2f:41:a1:b2")	//MUStaffPrivateEquipment	..-82
 											  ||RDsb5.toString().equals("c8:cb:b8:f3:a6:32")	//MUStaffPrivateEquipment	..-92
+											  ||RDsb5.toString().equals("a0:48:1c:39:d9:12")	//MUStaffPrivateEquipment	..-57
 											  											  
 											  ||RDsb5.toString().equals("c8:cb:b8:f3:a6:b1")	//MUStudents				..-54
 											  ||RDsb5.toString().equals("c8:cb:b8:f3:a5:f1")	//MUStudents				..-80
 											  ||RDsb5.toString().equals("b4:b5:2f:41:a1:b1")	//MUStudents				..-81
 											  ||RDsb5.toString().equals("c8:cb:b8:f3:a6:31")	//MUStudents				..-83
-											  
+											  ||RDsb5.toString().equals("a0:48:1c:39:d9:11")	//MUStudents				..-57
+											 
 											  ||RDsb5.toString().equals("c8:cb:b8:f3:a6:b3")	//EduRoam					..-59
 											  ||RDsb5.toString().equals("c8:cb:b8:f3:a5:f3")	//EduRoam					..-80
 											  ||RDsb5.toString().equals("b4:b5:2f:41:a1:b3")	//EduRoam					..-82
 											  ||RDsb5.toString().equals("c8:cb:b8:f3:a6:33")	//EduRoam					..-84
+											  ||RDsb5.toString().equals("a0:48:1c:39:d9:13")	//EduRoam					..-56
 											  
 											  ||RDsb5.toString().equals("c8:cb:b8:f3:a6:b5")	//studentcity				..-53
 											  ||RDsb5.toString().equals("c8:cb:b8:f3:a5:f5")	//studentcity				..-81
 											  ||RDsb5.toString().equals("b4:b5:2f:41:a1:b5")	//studentcity				..-82
 											  ||RDsb5.toString().equals("c8:cb:b8:f3:a6:35")	//studentcity				..-92
+											  ||RDsb5.toString().equals("a0:48:1c:39:d9:15")	//studentcity				..-57
 										  
 											  ||RDsb5.toString().equals("c8:cb:b8:f3:a6:b4")	//inspirefreewifi			..-58
 											  ||RDsb5.toString().equals("c8:cb:b8:f3:a5:f4")	//inspirefreewifi			..-81
 											  ||RDsb5.toString().equals("b4:b5:2f:41:a1:b4")	//inspirefreewifi			..-81
 											  ||RDsb5.toString().equals("c8:cb:b8:f3:a6:34")	//inspirefreewifi			..-89
+											  ||RDsb5.toString().equals("a0:48:1c:39:d9:14")	//inspirefreewifi			..-58
 	  
 										)
 											  {
 										  		RDcheck[4] = true;
 											  }
 									
-									if(RDcheck[0] == true && RDcheck[1] == true && RDcheck[2] == true && RDcheck[3] == true && RDcheck[4] == true){
+									if(RDcheck[0] == true && RDcheck[1] == true && RDcheck[2] == true && RDcheck[3] == true && RDcheck[4] == true 
+											|| RDcheck[0] == false && RDcheck[1] == true && RDcheck[2] == true && RDcheck[3]== true && RDcheck[4] == true
+											|| RDcheck[0] == true && RDcheck[1] == false && RDcheck[2] == true && RDcheck[3]== true && RDcheck[4] == true
+											|| RDcheck[0] == true && RDcheck[1] == true && RDcheck[2] == false && RDcheck[3]== true && RDcheck[4] == true
+											|| RDcheck[0] == true && RDcheck[1] == true && RDcheck[2] == true && RDcheck[3]== false && RDcheck[4] == true
+											|| RDcheck[0] == true && RDcheck[1] == true && RDcheck[2] == true && RDcheck[3]== true && RDcheck[4] == false){
 										  
 									  	allNetWork.setText("You are close to Riddit Complex room RD1.14" + " " + RDScanResult1.level);
 
@@ -2289,12 +2345,6 @@ public class MainActivity extends Activity implements SensorEventListener {
 									RDcheck[3] = false;
 									RDcheck[4] = false;
 								}
-								
-									if (RDcheck[0]== false && RDcheck[1] == false && RDcheck[2] == false && RDcheck[3] == false && RDcheck[4] == false)
-								{
-								Toast.makeText(getApplicationContext(),"Can't found your position",Toast.LENGTH_SHORT).show();
-								}
 					}
 				}	
 			}
-}
