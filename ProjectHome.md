@@ -1,0 +1,1 @@
+The project will development a system which use Wi-Fi as the main resource for indoor navigation. The target building is the Ag Hort A level 3.
